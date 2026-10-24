@@ -7,6 +7,8 @@ import com.nmims.songstudio.data.SongChoice
 /** Provider-independent contract. Suraj can pass this prompt through a backend API. */
 object LyricPrompts {
     fun draft(topic: Topic, category: String, choice: SongChoice): String {
+        if (topic.title == "Rolle's Theorem" && category == "Bhajan")
+            return RolleLesson.bhajanDraft
         if (topic.title == "Rolle's Theorem" && category == "Hindi")
             return RolleLesson.hindiDraft
         val language = when (category) { "Hindi" -> "hi"; "Bhajan" -> "bhajan"; else -> "en" }

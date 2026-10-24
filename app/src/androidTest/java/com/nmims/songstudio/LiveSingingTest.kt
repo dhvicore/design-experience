@@ -26,8 +26,8 @@ class LiveSingingTest {
         val references = SingingClient.melodies()
         assertEquals(84, references.getValue(choice.id).bpm)
         val adapted = SingingClient.adapt(topic, "Bhajan", choice, LyricPrompts.draft(topic, "Bhajan", choice), true)
-        assertTrue(adapted.lyrics.contains("avkalan"))
-        assertTrue(adapted.lyrics.contains("samaan"))
+        assertTrue(adapted.lyrics.contains("अवकलज"))
+        assertTrue(adapted.lyrics.contains("समान"))
         val generated = SingingClient.generate(context, "live-rolle-raghupati-demo", topic, "Bhajan", choice, adapted.lyrics, "Moderate", true) { }
         assertEquals("reference_cover", generated.mode)
         assertTrue(generated.audio.length() > 10000)

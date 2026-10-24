@@ -2,6 +2,27 @@ package com.nmims.songstudio.generation
 
 /** Curated theorem content. Musical phrasing must be checked against the supplied chorus. */
 object RolleLesson {
+    val bhajanDraft = """
+        [Intro]
+        ॐ विद्याप्रकाशाय नमः।
+        हे गणितदेव, सुनो विनती मेरी,
+        ज्ञान की ज्योति जगाओ।
+
+        [Verse]
+        बंद अंतराल ए से बी पर,
+        फलन हमारा सतत रहे।
+        भीतर हर एक बिंदु पर,
+        उसका अवकलज मौजूद रहे।
+        दोनों सिरों के मान बराबर,
+        तीनों शर्तें साथ रहें।
+
+        [Chorus]
+        ए और बी के बीच कहीं सी,
+        उस पर अवकलज शून्य मिले।
+        स्पर्श रेखा क्षैतिज होगी,
+        गुरु कृपा से ज्ञान खिले।
+    """.trimIndent()
+
     val hindiDraft = """
         [Verse]
         बंद अंतराल ए से बी पर,

@@ -5,6 +5,7 @@ import shutil
 import time
 import urllib.parse
 import urllib.request
+import urllib.error
 import ssl
 from uuid import uuid4
 from pathlib import Path
@@ -32,7 +33,16 @@ def open_request(request, timeout=30):
         context = ssl.create_default_context(cafile=certifi.where())
     except ImportError:
         context = ssl.create_default_context()
-    return urllib.request.urlopen(request, timeout=timeout, context=context)
+    try:
+        return urllib.request.urlopen(request, timeout=timeout, context=context)
+    except urllib.error.HTTPError as exc:
+        if exc.code in (401, 403):
+            raise RuntimeError("The Colab connection was rejected. Rerun Colab cell 4, download the fresh song-service.env and replace server/.env. Do not share the API key.") from None
+        if exc.code in (502, 503, 504, 530):
+            raise RuntimeError("The Colab singing service is offline. Keep the runtime open; if the model stopped, rerun cell 2 and wait for MODEL READY. Then rerun cell 4 and replace server/.env with the fresh connection file.") from None
+        raise
+    except (urllib.error.URLError, TimeoutError):
+        raise RuntimeError("Cannot reach the configured Colab address. Check your internet connection, keep Colab open, rerun cell 4 and download the fresh song-service.env. Replace server/.env, then retry. Your lyrics are unchanged.") from None
 
 
 def call(path, data, melody=None):

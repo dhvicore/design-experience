@@ -46,7 +46,7 @@ class MusicChoicesTest {
         val hindi = LyricPrompts.draft(topic, "Hindi", MusicChoices.options(data, topic, "Hindi").first())
         val bhajan = LyricPrompts.draft(topic, "Bhajan", MusicChoices.options(data, topic, "Bhajan").first())
         assertNotEquals(hindi, bhajan)
-        assertTrue(bhajan.contains("Om vidya-prakashaya namah"))
+        assertTrue(bhajan.contains("ॐ विद्याप्रकाशाय नमः"))
         data.topics.forEach { t -> MusicChoices.categories.forEach { c ->
             assertTrue(LyricPrompts.draft(t, c, MusicChoices.options(data, t, c).first()).contains("[Chorus]"))
         } }

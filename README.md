@@ -56,7 +56,7 @@ networking and a production-hosted backend are not configured.
 - With **Follow melody**, the bridge fits lyric phrase boundaries to syllable budgets,
   repeats the musical cycle for longer lessons, and sends actual guide audio with
   the lyrics to the model's cover endpoint. The Rolle/Raghupati demo uses a curated
-  six-phrase Hindi educational verse. Other topics use estimated metrical reflow,
+  six-phrase Hindi educational verse in Devanagari with a devotional invocation. Other topics use estimated metrical reflow,
   not semantic AI rewriting or precise phoneme-to-note alignment.
 - Generated recordings are normalized to approximately -16 LUFS with a -1.5 dB
   true-peak target. Cached server recordings are normalized on reuse, without another
@@ -228,3 +228,14 @@ the emulator removes device-local accounts; email prefill is not account recover
 
 Login distinguishes a missing local account from an incorrect password. Passwords
 remain case-sensitive. No password reset or authentication bypass is added.
+
+### Expired Colab connection
+
+If generation reports an unreachable Colab address, keep the runtime connected and
+rerun cell 4 to download fresh `song-service.env`; replace `server/.env` with it.
+If the model process stopped, rerun cell 2 first and wait for MODEL READY. Cell 4
+now verifies the authenticated local model API and replaces its previous tunnel
+process when rerun. Existing notebook tabs need the updated cell 4 code after a
+GitHub update. The Mac bridge reads `.env` on requests; no APK rebuild is needed.
+Never share the API key. A working bridge health check alone does not prove Colab
+is reachable. The UI now gives recovery instructions instead of a raw DNS error.

@@ -5,13 +5,23 @@ for section labels; the curated Rolle demo has explicit musical phrase wording.
 """
 import re
 
+# Devanagari text gives the Hindi singing model explicit pronunciation.
+# Roman hints are used only for approximate meter estimates; they are not sung.
 ROLLE_RAGHUPATI = [
-    "A se B tak sada satat rahe yeh apna function",
-    "Bheetar avkalan ho har ek bindu par",
+    "बंद अंतराल ए से बी पर सतत रहे यह फलन",
+    "भीतर हर बिंदु पर अवकलज हो",
+    "दोनों सिरों पर मान सदा समान हो",
+    "बीच कहीं सी पर ढलान शून्य",
+    "ॐ विद्या प्रकाशाय नमः, शुभ रोल नियम गाएँ",
+    "क्षैतिज स्पर्श रेखा मिले, ज्ञान की जय हो",
+]
+ROLLE_PRONUNCIATION = [
+    "Band antaral A se B par satat rahe yeh falan",
+    "Bheetar har bindu par avkalaj ho",
     "Dono siron par maan sada samaan ho",
     "Beech kahin C par dhalan shunya",
     "Om vidya prakashaya namah, shubh Rolle niyam gaayein",
-    "Ek flat tangent mile, ganit ki jai ho",
+    "Kshaitij sparsh rekha mile, gyaan ki jai ho",
 ]
 
 
@@ -36,6 +46,8 @@ def repeats_for(lyrics, profile, language="en"):
     if not budgets:
         return 1
     words = re.sub(r"\[[^\]]+\]", " ", lyrics).split()
+    if " ".join(words) == " ".join(ROLLE_RAGHUPATI):
+        return 1
     total = sum(syllables(word, language) for word in words)
     # Repeat the musical cycle instead of squeezing an entire lesson into one verse.
     max_repeats = max(1, min(3, int(150 / max(1, profile.get("duration_seconds", 50)))))
@@ -80,8 +92,9 @@ def fit(lyrics, profile, topic="", category="", language="en"):
             lines.append(" ".join(words[start:end]))
             start = end
         method = "meter_partition"
+    spoken_lines = ROLLE_PRONUNCIATION if method == "curated_demo" else lines
     report = [{"target": target, "estimated": sum(syllables(w, language) for w in line.split())}
-              for line, target in zip(lines, budgets)]
+              for line, target in zip(spoken_lines, budgets)]
     split = max(1, len(lines) // 2)
     text = "[Verse]\n" + "\n".join(lines[:split]) + "\n\n[Chorus]\n" + "\n".join(lines[split:])
     return {"lyrics": text, "method": method, "lines": report,

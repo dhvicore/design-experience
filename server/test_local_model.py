@@ -3,6 +3,7 @@ import io
 import json
 import tempfile
 import unittest
+import urllib.error
 import wave
 from pathlib import Path
 from unittest.mock import patch
@@ -56,6 +57,14 @@ class LocalModelTest(unittest.TestCase):
                 self.assertEqual(1.0, body["audio_cover_strength"])
                 self.assertNotIn("key_scale", body)
                 self.assertEqual(melody, call.call_args_list[0].args[2])
+
+    def test_expired_connection_has_actionable_message_without_endpoint_or_key(self):
+        request = local_model.urllib.request.Request("https://expired.example/query_result", headers={"Authorization": "Bearer private-key"})
+        with patch.object(local_model.urllib.request, "urlopen", side_effect=urllib.error.URLError("DNS failed for expired.example")):
+            with self.assertRaisesRegex(RuntimeError, "rerun cell 4") as error:
+                local_model.open_request(request)
+        self.assertNotIn("expired.example", str(error.exception))
+        self.assertNotIn("private-key", str(error.exception))
 
     def test_reference_melody_is_uploaded_for_cover(self):
         with tempfile.TemporaryDirectory() as directory:
