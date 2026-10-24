@@ -30,7 +30,7 @@ fun SongPlayer(file: File, revision: Int) {
         p.setAudioAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).build())
         p.setOnPreparedListener { ready = true; duration = it.duration.toFloat().coerceAtLeast(1f) }
         p.setOnCompletionListener { playing = false; position = duration }
-        p.setOnErrorListener { _, _, _ -> ready = false; playing = false; error = "This recording cannot be played. Import a different audio file."; true }
+        p.setOnErrorListener { _, _, _ -> ready = false; playing = false; error = "This audio could not be played. Try generating the song again."; true }
         runCatching { p.setDataSource(file.absolutePath); p.prepareAsync() }
             .onFailure { error = "The audio file cannot be opened." }
         val observer = LifecycleEventObserver { _, event ->
@@ -44,9 +44,9 @@ fun SongPlayer(file: File, revision: Int) {
     }
     fun time(ms: Float): String { val seconds = ms.toInt() / 1000; return "%d:%02d".format(seconds / 60, seconds % 60) }
     Panel(Lime) {
-        Text("YOUR IMPORTED RECORDING", style = MaterialTheme.typography.labelSmall)
+        Text("YOUR GENERATED SONG", style = MaterialTheme.typography.labelSmall)
         Text("Ready to listen", style = MaterialTheme.typography.titleLarge)
-        Text("Plays the audio file you selected. Import does not generate music or change its lyrics or melody.", style = MaterialTheme.typography.bodySmall)
+        Text("Vocals and music created from your educational lyrics.", style = MaterialTheme.typography.bodySmall)
         if (error.isNotBlank()) Text(error, color = MaterialTheme.colorScheme.error)
         Slider(value = position.coerceIn(0f, duration), onValueChange = { position = it; player?.seekTo(it.toInt()) }, valueRange = 0f..duration, enabled = ready)
         Text("${time(position)} / ${time(duration)}")

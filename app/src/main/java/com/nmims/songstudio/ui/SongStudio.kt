@@ -18,29 +18,37 @@ import com.nmims.songstudio.auth.Student
 import com.nmims.songstudio.generation.LyricPrompts
 import com.nmims.songstudio.playback.AudioFiles
 import com.nmims.songstudio.playback.SongPlayer
+import com.nmims.songstudio.data.MusicChoices
+import com.nmims.songstudio.generation.SingingClient
+import kotlinx.coroutines.launch
 
 @Composable
-fun SongStudio(student: Student, onLogout: () -> Unit, importRevision: Int = 0,
-    importBusy: Boolean = false, importError: String = "", onImportAudio: (String) -> Unit = {}) = StudioTheme {
+fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
     val context = LocalContext.current
     val data = remember { Curriculum(context) }
     var page by rememberSaveable { mutableIntStateOf(1) }
     var unit by rememberSaveable { mutableStateOf("Unit 1") }
     var topicId by rememberSaveable { mutableIntStateOf(0) }
-    var language by rememberSaveable { mutableStateOf("en") }
-    var collection by rememberSaveable { mutableStateOf("en") }
-    var styleId by rememberSaveable { mutableStateOf(data.styles("en").first().id) }
-    var songIndex by rememberSaveable { mutableIntStateOf(0) }
+    var category by rememberSaveable { mutableStateOf("Hindi") }
+    var showAllSongs by rememberSaveable { mutableStateOf(false) }
+    var selectedSongId by rememberSaveable { mutableStateOf("") }
+    var busy by remember { mutableStateOf(false) }
+    var generationStatus by remember { mutableStateOf("") }
+    var generationError by remember { mutableStateOf("") }
+    var audioRevision by remember { mutableIntStateOf(0) }
+    val scope = rememberCoroutineScope()
     var focus by rememberSaveable { mutableStateOf("Understand the concept and remember the formula") }
     var tempo by rememberSaveable { mutableStateOf("Moderate") }
     var lyrics by rememberSaveable { mutableStateOf("") }
     var notice by remember { mutableStateOf("") }
     val topic = data.topics.first { it.id == topicId }
-    val styles = data.styles(collection)
-    val style = styles.firstOrNull { it.id == styleId } ?: styles.first()
-    val reference = style.songs[songIndex.coerceIn(style.songs.indices)]
+    val choices = MusicChoices.options(data, topic, category, showAllSongs)
+    val choice = choices.firstOrNull { it.id == selectedSongId } ?: choices.first()
+    val reference = choice.song
+    val style = choice.style
+    val language = if (category in listOf("Hindi", "Bhajan")) "hi" else "en"
     val titles = listOf("Welcome", "Your classroom", "Make it yours", "Write the words", "Bring it to life")
-    BackHandler(page > 1) { page--; notice = "" }
+    BackHandler(page > 1) { if (!busy) { page--; notice = "" } }
 
     Surface(Modifier.fillMaxSize(), color = Paper) {
         Column(Modifier.safeDrawingPadding().verticalScroll(rememberScrollState())
@@ -64,10 +72,10 @@ fun SongStudio(student: Student, onLogout: () -> Unit, importRevision: Int = 0,
                     }
                     Select("Subject", "Calculus", listOf("Calculus")) { }
                     Select("Chapter / unit", unit, data.units.keys.toList(), { "${it}: ${data.units[it]}" }) { chosen ->
-                        unit = chosen; topicId = data.topics.first { it.unit == chosen }.id; lyrics = ""
+                        unit = chosen; topicId = data.topics.first { it.unit == chosen }.id; lyrics = ""; selectedSongId = ""; showAllSongs = false
                     }
                     val topics = data.topics.filter { it.unit == unit }
-                    Select("Topic", topicId, topics.map { it.id }, { id -> topics.first { it.id == id }.title }) { topicId = it; lyrics = "" }
+                    Select("Topic", topicId, topics.map { it.id }, { id -> topics.first { it.id == id }.title }) { topicId = it; lyrics = ""; selectedSongId = ""; showAllSongs = false }
                     Panel(Lavender) {
                         Text(topic.title, style = MaterialTheme.typography.titleLarge)
                         Text(topic.concept)
@@ -78,22 +86,26 @@ fun SongStudio(student: Student, onLogout: () -> Unit, importRevision: Int = 0,
                 2 -> {
                     Text("Your topic.\nYour kind of music.", style = MaterialTheme.typography.headlineLarge)
                     Text("${topic.unit} / ${topic.title}", style = MaterialTheme.typography.bodyMedium)
-                    Select("Language", language, data.languages.keys.toList(), { data.languages.getValue(it) }) {
-                        language = it; lyrics = ""
+                    Text("Choose your music", style = MaterialTheme.typography.titleLarge)
+                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        MusicChoices.categories.forEach { option ->
+                            FilterChip(selected = category == option, onClick = {
+                                category = option; selectedSongId = ""; showAllSongs = false; lyrics = ""
+                            }, label = { Text(option) })
+                        }
                     }
-                    Select("Music collection", collection, data.collections.keys.toList(), { data.collections.getValue(it) }) {
-                        collection = it; styleId = data.styles(it).first().id; songIndex = 0; lyrics = ""
+                    Select("Song suggestions for this topic", choice.id, choices.map { it.id }, { id -> choices.first { it.id == id }.song.title }) {
+                        selectedSongId = it; lyrics = ""; generationError = ""
                     }
-                    Select("Music style", style.id, styles.map { it.id }, { id -> styles.first { it.id == id }.name }) {
-                        styleId = it; songIndex = 0; lyrics = ""
+                    TextButton(onClick = { showAllSongs = !showAllSongs; selectedSongId = ""; lyrics = "" }) {
+                        Text(if (showAllSongs) "Show topic recommendations" else "Browse all $category songs")
                     }
-                    Select("Reference song", songIndex, style.songs.indices.toList(), { style.songs[it].title }) { songIndex = it; lyrics = "" }
                     Panel(Lavender) {
                         Text(reference.title, style = MaterialTheme.typography.titleLarge)
                         Text(reference.artist)
-                        Text("${reference.mood} · reference tempo ${reference.bpm} BPM")
+                        Text("${reference.mood} · target tempo ${reference.bpm} BPM")
                         Text(style.instruments)
-                        Text("Selected song melody requested. Playback will be available only when a supported singing service returns that adaptation.", style = MaterialTheme.typography.bodySmall)
+                        Text("${if (category == "Bhajan") "Hindi / Sanskrit devotional lyrics" else data.languages[language]} · ${style.name}")
                     }
                     Select("Tempo", tempo, listOf("Slow", "Moderate", "Upbeat")) { tempo = it }
                     OutlinedTextField(focus, { focus = it }, label = { Text("What do you want to learn?") }, minLines = 2, modifier = Modifier.fillMaxWidth())
@@ -101,12 +113,12 @@ fun SongStudio(student: Student, onLogout: () -> Unit, importRevision: Int = 0,
                 }
                 3 -> {
                     Text("Make the lesson\nlyrical.", style = MaterialTheme.typography.headlineLarge)
-                    Text("${topic.title} / ${data.languages[language]} / ${style.name}")
+                    Text("${topic.title} / ${data.languages[language]} / $category / ${reference.title}")
                     Panel(Lime) {
                         Text("START WITH YOUR EXISTING WORK", style = MaterialTheme.typography.labelSmall)
-                        Text("Create a lyric draft from the selected topic and review its meaning before turning it into music.")
+                        Text("Create an original draft from the topic facts, with phrasing and a refrain for your selected music. Hindi and Bhajan produce different language and lyric forms.")
                     }
-                    Button(onClick = { lyrics = LyricPrompts.draft(topic, language); notice = "Draft prepared from the existing Calculus dataset. Review before synthesis." }, modifier = Modifier.fillMaxWidth()) {
+                    Button(onClick = { lyrics = LyricPrompts.draft(topic, category, choice); notice = "Lyric draft adapted for ${reference.title}. Review the academic meaning before singing." }, modifier = Modifier.fillMaxWidth()) {
                         Text(if (lyrics.isBlank()) "Generate lyric draft" else "Regenerate lyric draft")
                     }
                     OutlinedTextField(lyrics, { lyrics = it }, label = { Text("Your lyrics — editable") }, minLines = 10, modifier = Modifier.fillMaxWidth())
@@ -120,22 +132,37 @@ fun SongStudio(student: Student, onLogout: () -> Unit, importRevision: Int = 0,
                         Text(topic.title, style = MaterialTheme.typography.titleLarge)
                         Text("Requested melody: ${reference.title} — ${reference.artist}")
                         Text("${data.languages[language]} · ${style.name} · $tempo")
-                        Text("Import your finished educational song to listen here. Automatic music generation is not connected yet.")
+                        Text("Generate vocals and music here, then listen in the app.")
                     }
-                    val audioKey = listOf(student.id, topic.id, language, collection, style.id, reference.title, tempo, focus, lyrics).joinToString("\u0000")
-                    val audioFile = remember(audioKey, importRevision) { AudioFiles.file(context, audioKey) }
-                    if (audioFile.exists()) SongPlayer(audioFile, importRevision)
-                    Button(onClick = { onImportAudio(audioKey) }, enabled = !importBusy, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (importBusy) "Importing song…" else if (audioFile.exists()) "Replace audio file" else "Import song audio")
+                    val audioKey = listOf(student.id, topic.id, category, reference.title, tempo, focus, lyrics).joinToString("\u0000")
+                    val audioFile = remember(audioKey, audioRevision) { AudioFiles.file(context, audioKey) }
+                    if (audioFile.exists()) {
+                        val mode = runCatching { audioFile.resolveSibling(audioFile.name + ".mode").readText() }.getOrDefault("original_melody")
+                        Text(if (mode == "reference_cover") "Generated using a supplied melody reference" else "AI-generated original melody in the selected style", style = MaterialTheme.typography.bodySmall)
+                        SongPlayer(audioFile, audioRevision)
                     }
-                    Text("Choose a downloaded MP3, WAV or M4A of your educational song. It stays on this device and can be played offline.", style = MaterialTheme.typography.bodySmall)
-                    if (importError.isNotBlank()) Text(importError, color = MaterialTheme.colorScheme.error)
-                    OutlinedButton(onClick = { notice = ""; page = 3 }, modifier = Modifier.fillMaxWidth()) { Text("Edit lyrics") }
-                    OutlinedButton(onClick = { notice = ""; page = 1 }, modifier = Modifier.fillMaxWidth()) { Text("Choose another topic") }
+                    if (busy) {
+                        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                        Text(generationStatus.ifBlank { "Connecting to the singing model…" })
+                    }
+                    Button(enabled = !busy, onClick = {
+                        busy = true; generationError = ""; generationStatus = "Connecting to the singing model…"
+                        scope.launch {
+                            try {
+                                SingingClient.generate(context.applicationContext, audioKey, topic, category, choice, lyrics, tempo) { generationStatus = it }
+                                audioRevision++; generationStatus = "Your song is ready. Press Play song."
+                            } catch (e: Exception) { generationError = e.message ?: "Could not generate the song. Please retry." }
+                            finally { busy = false }
+                        }
+                    }, modifier = Modifier.fillMaxWidth()) { Text(if (busy) "Creating your song…" else "Generate song") }
+                    Text("Exact tune matching needs the selected song's melody dataset. Until supplied, generation creates an original melody in that musical style.", style = MaterialTheme.typography.bodySmall)
+                    if (generationError.isNotBlank()) Text(generationError, color = MaterialTheme.colorScheme.error)
+                    OutlinedButton(enabled = !busy, onClick = { notice = ""; page = 3 }, modifier = Modifier.fillMaxWidth()) { Text("Edit lyrics") }
+                    OutlinedButton(enabled = !busy, onClick = { notice = ""; page = 1 }, modifier = Modifier.fillMaxWidth()) { Text("Choose another topic") }
                 }
             }
             if (notice.isNotEmpty()) Text(notice, color = MaterialTheme.colorScheme.primary)
-            if (page > 1) TextButton(onClick = { page--; notice = "" }) { Text("← Back") }
+            if (page > 1) TextButton(enabled = !busy, onClick = { page--; notice = "" }) { Text("← Back") }
             HorizontalDivider()
             Text("MUSIC-BASED LEARNING / CALCULUS EDITION", style = MaterialTheme.typography.labelSmall)
             Spacer(Modifier.height(12.dp))

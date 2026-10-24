@@ -1,111 +1,127 @@
 # Syllabus Song Studio — Android
 
-Kotlin / Jetpack Compose app based on the original Calculus prototype.
-Shared repository: https://github.com/dhvicore/design-experience
+Kotlin / Jetpack Compose app with the complete 38-topic Calculus dataset.
+Repository: https://github.com/dhvicore/design-experience
 
-Open this folder in Android Studio, sync Gradle, choose `app` and Run.
+## Start the singing engine with Colab
 
-## Current functionality
+1. Open [the GPU notebook](https://colab.research.google.com/github/dhvicore/design-experience/blob/main/notebooks/Calculus_Singing_GPU.ipynb).
+2. Choose **Runtime → Change runtime type → T4 GPU**.
+3. Run cells 1 and 2. Dependencies and several GB of weights download on the first run.
+4. Run cell 3. It must produce a real sung Calculus clip and an audio player. If it
+   errors, resolve that error before claiming the app's generation is working.
+5. Run cell 4. It starts a temporary API-key-protected service and downloads
+   `song-service.env`. Move that file into `server/` and rename it **`.env`**.
+   Do not share its contents or commit it. The existing `.gitignore` excludes it.
+6. On the Mac, double-click `server/Start Music Server.command`; keep its terminal
+   and the Colab runtime open. The bridge binds only to the Mac's loopback address.
+7. Run the Android app on the emulator. Log in, select a topic, choose music,
+   create/review lyrics and press **Generate song**. After completion, press Play.
 
-- Signup and login with device-local SQLite accounts, normalized email addresses,
-  unique-account validation and salted PBKDF2-HMAC-SHA256 password hashes.
-- Signup returns to login. Passwords and login tokens are not saved in UI state.
-- The session ends when the app backgrounds; reopening requires login. Rotation
-  and the explicitly launched system audio picker preserve the current session.
-  Logout is available in the header.
-- Calculus: all 38 topics across five units (9 / 5 / 5 / 8 / 11), with concepts,
-  formulas and existing multilingual lyric drafts from the prototype.
-- Independent lyric-language and music-collection choices: Hollywood/English,
-  Bollywood/Hindi, Marathi, Gujarati and Sanskrit/devotional.
-- Existing genre and song catalog, including pop, rock, hip-hop, romantic, bhajan
-  and regional styles; an added lo-fi style uses the collection's reference list.
-- Multiple reference songs per style, student learning focus and tempo selection.
-- Editable local syllabus-based lyric drafts. This is not a live LLM response.
+The bridge reads `.env` on requests, so a new Colab endpoint can be configured
+without rebuilding the APK. The endpoint changes when the temporary tunnel is
+restarted. If Colab stops, new generation stops; completed app audio is kept offline.
 
-## Working audio import and playback
+This is an emulator demo: Android talks to the Mac at `10.0.2.2:8787`, and the Mac
+calls the GPU API over HTTPS. No student account details are sent to the GPU;
+only curriculum lyrics and musical parameters are submitted. Physical-device
+networking and a production-hosted backend are not configured.
 
-On the song screen choose **Import song audio**, select a finished MP3/WAV/M4A,
-then press **Play song**. Playback supports pause, seek and replay. Files are
-validated before import, copied to app-private storage (50 MB maximum), and kept
-for the current user/topic/music choices and lyric version. Reopening the same
-selection can play the imported recording offline. Importing does not generate or
-verify the recording's melody/lyrics. No example recordings are bundled.
+## What is implemented
 
-## Audio generation is not connected
+- Persistent device-local signup/login with salted PBKDF2 password hashes, email
+  validation and duplicate-account checks. Backgrounding ends the session; rotation
+  preserves it. There is no SAP/portal authentication or cross-device account sync.
+- **Calculus Units 1–5: 38 topics**, distributed 9 / 5 / 5 / 8 / 11, using the source
+  explanations, formulas and multilingual lyric content from the Python prototype.
+- Exactly four initial music choices: **Hindi, English, Bhajan, Lo-fi**.
+- Four recommendations vary by topic; **Browse all songs** expands the category's
+  catalog. Bollywood includes Chikni Chameli and Chammak Challo.
+- Lyric drafts change language/form, phrase grouping and refrain with category and
+  song selection. They are locally assembled from syllabus lyrics, not a live LLM.
+  Bhajan uses devotional Hindi with a Sanskrit invocation. Subject owners still
+  need to review source translations and mathematical assumptions.
+- The app submits real generation jobs, polls progress, downloads completed audio,
+  and plays it with pause/seek/replay. Failure is shown as failure, not fake success.
+- The old import screen, prompt-copy controls, Twinkle recordings and example-song
+  playback have been removed.
 
-The user currently has a Suno website account, with no configured API connection.
-There is no working automatic singing service in this app yet. The synthesis screen
-states this; it must not present prepared recordings as newly generated songs.
-The old Twinkle-based recordings and external example playback have been removed
-at the user's request. There are no prompt-copy or manual-Suno handoff buttons.
+## Important generation distinction
 
-Requested exact-song adaptations require a usable authorized melody source and a
-singing provider that supports that conditioning. A song title, YouTube listing or
-style prompt does not itself create an exact-melody adaptation. Provider access,
-capabilities and permitted inputs need verification before connecting synthesis.
+**Exact famous-song melodies are not supplied by their titles.** Without melody
+reference data, the model creates an **original melody in the requested style**;
+that mode is explicitly labelled in the app. Changing phrase grouping does not
+prove an exact tune fit. The supplied-reference cover path also needs listening
+and alignment checks before it can be described as faithful to a selected tune.
 
-Remaining features: real provider-backed lyrics and audio generation, saved
-library browsing, cloud accounts if desired, and verified
-branch/year/semester mappings. SAP portal authentication is excluded for now.
-Device-local accounts do not verify NMIMS affiliation or sync between devices.
+To add a melody dataset, place an authorized reference WAV in `server/melodies/`
+using the song ID filename, e.g. `chikni-chameli.wav`. This is developer setup,
+not a student import step. The adapter uploads it as source audio for cover mode.
+MIDI/hummed references must first be rendered/prepared as an appropriate WAV.
+Do not upload arbitrary YouTube recordings or train on music without the needed rights.
 
-## Reused data
+The model is ACE-Step 1.5, run from its official source. This project uses pretrained
+inference; it does not train a new singing model. The public hosted demos failed
+with GPU/quota errors during our checks; the Colab notebook is the selected route.
+The notebook was syntax-checked locally. Live Colab model startup, generation quality
+and the final app-to-Colab audio round trip require the user's active GPU runtime.
 
-- `../prototype/studio/topics.json` → `app/src/main/assets/topics.json`
-- `../prototype/studio/catalog.json` → `app/src/main/assets/song_catalog.json`
-- Android filters the dataset to the 38 Calculus topics. No other subject syllabus
-  is invented. Original Biology example remains in the source asset only.
-- `python3 tools/import_prototype.py` refreshes and validates these assets from the
-  sibling prototype folder. It does not import any sample audio.
-- The English Rolle's draft explicitly adds continuity on the closed interval and
-  differentiability inside it. All source translations/content need subject review.
-
-## Team ownership
+## Source and ownership
 
 Kotlin source root: `app/src/main/java/com/nmims/songstudio/`.
 
-| Person | Responsibility / starting files |
+| Person | Responsibility / files |
 |---|---|
-| Dhvani | UI/UX, customization and lyrics: `ui/`, `generation/LyricPrompts.kt` |
-| Suraj | Real lyric/singing provider integration and request state: `generation/` |
-| Aditri | Login/profile/session: `auth/`, authentication part of `MainActivity.kt` |
-| Krishhma | Academic selection and curriculum database: `data/`, assets, academic screens |
-| Aman | `playback/`: working file import and player; extend with library/history and provider outputs |
+| Dhvani | UI/UX and customization: `ui/`, `data/MusicChoices.kt`; lyric drafting: `generation/LyricPrompts.kt` |
+| Suraj | Singing integration: `generation/SingingClient.kt`, `server/`, Colab notebook; improve real lyric generation/alignment with Dhvani |
+| Aditri | Signup/login/profile/session: `auth/`, `MainActivity.kt` |
+| Krishhma | Academic selections and curriculum database: `data/Curriculum.kt`, assets, academic UI |
+| Aman | Playback and audio persistence: `playback/`; extend with saved-library/history browsing |
 
-All five supply and validate their own subject data, keywords/formulas, song
-selections and topic mappings. Integration, tests, screenshots and documentation
-are shared responsibilities. Coordinate changes to the initial `ui/SongStudio.kt`
-navigation shell; extract feature screens into separate files as work proceeds.
+All five supply and validate their own subject datasets, keywords/formulas, song
+selections and topic mappings. Integration, screenshots and testing are shared.
+Coordinate edits to `ui/SongStudio.kt` and extract module screens as work expands.
 
-## GitHub workflow
+## Reusing the existing prototype
 
-1. Invite all four teammates. Everyone clones the same repository.
-2. Branch from the latest `main`: `feature/ui-lyrics`, `feature/song-synthesis`,
-   `feature/login-profile`, `feature/academic-data`, `feature/player-library`.
-3. Make small changes, build/test, commit and push your branch, then open a PR.
-4. A teammate reviews before merging. Update your branch from `main` regularly.
+`tools/import_prototype.py` validates and refreshes `topics.json` and
+`song_catalog.json` from the sibling original `prototype/` folder. It imports no
+sample audio. Only Calculus is exposed; other subjects await the team's real data.
+Branch/year/semester mappings must likewise come from the verified curriculum.
 
-Do not upload API keys, personal account databases or machine configuration.
-`.gitignore` excludes build outputs, IDE metadata, local SDK paths and credentials.
+## Build and tests
 
-## Build and verification
-
-Use Android Studio's bundled JDK and SDK 36, with the included Gradle wrapper.
-The first sync may need internet for dependencies.
+Open this repository folder in Android Studio and sync. SDK 36 and Android Studio's
+JDK work with the included Gradle wrapper.
 
 ```sh
 ./gradlew :app:assembleDebug :app:lintDebug
 ./gradlew :app:connectedDebugAndroidTest
+cd server
+python3 -m unittest test_local_model -v
 ```
 
-Emulator tests cover persistent account login, wrong/unknown passwords, duplicate
-accounts, invalid signup inputs, logout on backgrounding, session preservation on
-rotation, all five Calculus units and multiple music choices. Audio tests verify
-import persistence, invalid-file rejection, playback progress, pause and seek using
-a generated test signal (not an educational song). Test accounts use a
-separate temporary test database and do not modify the real account database.
+Emulator tests cover persistent accounts, invalid login/signup, background logout,
+rotation, all Calculus units, music recommendations, lyric variations and native
+playback. Audio playback tests use a generated test signal, not a produced song.
+Python adapter tests mock the GPU service to check authentication headers, job
+polling, error handling and reference uploads. These are not proof of live model
+output or exact melody fidelity; the Colab singing test supplies that evidence.
+
+## GitHub workflow
+
+Clone the same repository, branch from updated `main`, build/test a small change,
+then push your feature branch and open a PR for teammate review. Branches:
+`feature/ui-lyrics`, `feature/song-synthesis`, `feature/login-profile`,
+`feature/academic-data`, `feature/player-library`.
+
+Keep API keys, local account data, generated audio, model weights and SDK paths out
+of GitHub. Generated files, `.env`, virtual environments and build outputs are ignored.
 
 ## References
 
+- https://github.com/ace-step/ACE-Step-1.5
+- https://github.com/ace-step/ACE-Step-1.5/blob/main/docs/en/API.md
+- https://github.com/ace-step/ACE-Step-1.5/blob/main/docs/en/INSTALL.md
+- https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/
 - https://developer.android.com/develop/ui/compose/documentation
-- https://platform.suno.com/

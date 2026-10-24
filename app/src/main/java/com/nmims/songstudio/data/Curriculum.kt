@@ -27,7 +27,7 @@ class Curriculum(context: Context) {
         (0 until rows.length()).map { i ->
             val t = rows.getJSONObject(i)
             val fields = mapOf("en" to "lyrics_en", "hi" to "lyrics_hi", "mr" to "lyrics_mr",
-                "gu" to "lyrics_gu", "sa" to "lyrics_bhajan_sa")
+                "gu" to "lyrics_gu", "sa" to "lyrics_bhajan_sa", "bhajan" to "lyrics_bhajan")
             Topic(i, t.getString("unit"), t.getString("topic"), t.getString("concept"),
                 t.getString("formula"), fields.mapValues { (_, field) ->
                     val lines = t.optJSONArray(field) ?: JSONArray()

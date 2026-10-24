@@ -8,3 +8,7 @@ local.properties
 *.jks
 *.keystore
 .env
+server/.venv/
+server/generated/
+server/melodies/
+**/__pycache__/
