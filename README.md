@@ -8,6 +8,9 @@ Repository: https://github.com/dhvicore/design-experience
 1. Open [the GPU notebook](https://colab.research.google.com/github/dhvicore/design-experience/blob/main/notebooks/Calculus_Singing_GPU.ipynb).
 2. Choose **Runtime → Change runtime type → T4 GPU**.
 3. Run cells 1 and 2. Dependencies and several GB of weights download on the first run.
+   Cell 2 sets Matplotlib to `Agg` and enables float32 for the T4 run. The pinned
+   upstream loader needs the notebook's small, opt-in precision patch to honor
+   `ACESTEP_DTYPE`; its error hint alone does not implement that environment flag.
 4. Run cell 3. It must produce a real sung Calculus clip and an audio player. If it
    errors, resolve that error before claiming the app's generation is working.
 5. Run cell 4. It starts a temporary API-key-protected service and downloads
