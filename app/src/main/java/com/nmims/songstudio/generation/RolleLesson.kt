@@ -2,7 +2,7 @@ package com.nmims.songstudio.generation
 
 /** Curated theorem content. Musical phrasing must be checked against the supplied chorus. */
 object RolleLesson {
-    val hindiDanceDraft = """
+    val hindiDraft = """
         [Verse]
         बंद अंतराल ए से बी पर,
         फलन हमारा सतत रहे।

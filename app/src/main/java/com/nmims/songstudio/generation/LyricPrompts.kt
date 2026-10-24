@@ -7,8 +7,8 @@ import com.nmims.songstudio.data.SongChoice
 /** Provider-independent contract. Suraj can pass this prompt through a backend API. */
 object LyricPrompts {
     fun draft(topic: Topic, category: String, choice: SongChoice): String {
-        if (topic.title == "Rolle's Theorem" && category == "Hindi" && choice.id == "kala-chashma")
-            return RolleLesson.hindiDanceDraft
+        if (topic.title == "Rolle's Theorem" && category == "Hindi")
+            return RolleLesson.hindiDraft
         val language = when (category) { "Hindi" -> "hi"; "Bhajan" -> "bhajan"; else -> "en" }
         val source = topic.lyrics[language].orEmpty().lines().filter { it.isNotBlank() }
         val seed = choice.song.title.fold(0) { sum, c -> (sum * 31 + c.code).and(Int.MAX_VALUE) }

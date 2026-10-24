@@ -144,7 +144,7 @@ JDK work with the included Gradle wrapper.
 
 ```sh
 ./gradlew :app:assembleDebug :app:lintDebug
-./gradlew :app:connectedDebugAndroidTest
+tools/run_emulator_tests.sh
 cd server
 python3 -m unittest discover -v
 ```
@@ -185,9 +185,11 @@ of GitHub. Generated files, `.env`, virtual environments and build outputs are i
 - https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/
 - https://developer.android.com/develop/ui/compose/documentation
 
-## First Bollywood melody test: Rolle’s Theorem
+## Rolle’s Theorem and selected song references
 
-Choose Calculus → Unit 1 → Rolle’s Theorem → Hindi → Kala Chashma.
+Choose Calculus → Unit 1 → Rolle’s Theorem → choose a category → choose a song.
+Hindi, English, Bhajan and Lo-fi are a separate category screen before the song list.
+Kala Chashma is an example in the Hindi catalog, not a fixed choice for this topic.
 The prepared Hindi draft states continuity on the closed interval, differentiability
 inside, equal endpoint values, and the existence of an interior zero derivative.
 This is educational source text, not a verified fit to the Kala Chashma chorus.
@@ -214,3 +216,15 @@ and review the lyrics before generating the song. Colab uses the source audio fo
 cover conditioning. Listening and revision are required to check melody and words;
 this is not a guarantee of exact chorus matching. An existing Suno Rolle song can
 be a separate quality baseline, but it is not Kala Chashma unless its melody matches.
+
+### Preserve the demo account while testing
+
+Use `tools/run_emulator_tests.sh` to build and install both APKs with `adb install -r`,
+then run instrumentation. It never uninstalls the app or clears its data. The default
+Gradle connected-test runner used during earlier development was configured with
+`uninstall_after_test: true`, which can remove local accounts. Normal Android Studio
+Run / in-place APK updates retain accounts. Uninstalling, clearing app data or wiping
+the emulator removes device-local accounts; email prefill is not account recovery.
+
+Login distinguishes a missing local account from an incorrect password. Passwords
+remain case-sensitive. No password reset or authentication bypass is added.

@@ -53,7 +53,8 @@ class AccountStore(context: Context, databaseName: String = "student_accounts.db
             val salt = if (exists) Base64.decode(rows.getString(rows.getColumnIndexOrThrow("salt")), Base64.NO_WRAP) else ByteArray(16)
             val expected = if (exists) Base64.decode(rows.getString(rows.getColumnIndexOrThrow("password_hash")), Base64.NO_WRAP) else ByteArray(32)
             val valid = MessageDigest.isEqual(hash(password, salt), expected)
-            require(exists && valid) { "Email or password is incorrect." }
+            require(exists) { "No account with this email is saved on this device. Please sign up first." }
+            require(valid) { "Password is incorrect for this saved account. Passwords are case-sensitive; use Show to check your entry." }
             rememberEmail(normalized)
             return Student(rows.getLong(rows.getColumnIndexOrThrow("id")),
                 rows.getString(rows.getColumnIndexOrThrow("name")), rows.getString(rows.getColumnIndexOrThrow("email")))

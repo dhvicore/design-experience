@@ -32,6 +32,7 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
     var unit by rememberSaveable { mutableStateOf("Unit 1") }
     var topicId by rememberSaveable { mutableIntStateOf(0) }
     var category by rememberSaveable { mutableStateOf("Hindi") }
+    var choosingSong by rememberSaveable { mutableStateOf(false) }
     var showAllSongs by rememberSaveable { mutableStateOf(false) }
     var selectedSongId by rememberSaveable { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
@@ -60,7 +61,11 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
     val useReference = preferReference && melody != null
     val language = if (category in listOf("Hindi", "Bhajan")) "hi" else "en"
     val titles = listOf("Welcome", "Your classroom", "Make it yours", "Write the words", "Bring it to life")
-    BackHandler(page > 1) { if (!busy) { page--; notice = "" } }
+    fun goBack() {
+        if (page == 2 && choosingSong) choosingSong = false else page--
+        notice = ""
+    }
+    BackHandler(page > 1) { if (!busy) goBack() }
 
     Surface(Modifier.fillMaxSize(), color = Paper) {
         Column(Modifier.safeDrawingPadding().verticalScroll(rememberScrollState())
@@ -93,19 +98,31 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
                         Text(topic.concept)
                         Text(topic.formula, fontWeight = FontWeight.SemiBold)
                     }
-                    Button(onClick = { page = 2 }, modifier = Modifier.fillMaxWidth()) { Text("Choose your sound →") }
+                    Button(onClick = { choosingSong = false; page = 2 }, modifier = Modifier.fillMaxWidth()) { Text("Choose your sound →") }
                 }
                 2 -> {
-                    Text("Your topic.\nYour kind of music.", style = MaterialTheme.typography.headlineLarge)
+                    Text(if (choosingSong) "Choose a $category song." else "Choose your music category.", style = MaterialTheme.typography.headlineLarge)
                     Text("${topic.unit} / ${topic.title}", style = MaterialTheme.typography.bodyMedium)
-                    Text("Choose your music", style = MaterialTheme.typography.titleLarge)
-                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    if (!choosingSong) {
+                        Text("First choose a category. Then choose one of its songs.")
                         MusicChoices.categories.forEach { option ->
-                            FilterChip(selected = category == option, onClick = {
-                                category = option; selectedSongId = ""; showAllSongs = false; lyrics = ""
-                            }, label = { Text(option) })
+                            OutlinedButton(onClick = {
+                                category = option; selectedSongId = ""; showAllSongs = false
+                                lyrics = ""; generationError = ""; choosingSong = true
+                            }, modifier = Modifier.fillMaxWidth(), contentPadding = PaddingValues(20.dp)) {
+                                Column(Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                    Text(option, style = MaterialTheme.typography.titleLarge)
+                                    Text(when (option) {
+                                        "Hindi" -> "Bollywood / Hindi songs · Hindi lyrics"
+                                        "English" -> "English songs · English lyrics"
+                                        "Bhajan" -> "Devotional songs · Hindi / Sanskrit phrases"
+                                        else -> "Relaxed music · English lyrics"
+                                    }, style = MaterialTheme.typography.bodySmall)
+                                }
+                            }
                         }
-                    }
+                    } else {
+                        TextButton(onClick = { choosingSong = false }) { Text("← Change category ($category)") }
                     Select("Song suggestions for this topic", choice.id, choices.map { it.id }, { id -> choices.first { it.id == id }.song.title }) {
                         selectedSongId = it; lyrics = ""; generationError = ""
                     }
@@ -136,6 +153,7 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
                     if (!useReference) Select("Tempo", tempo, listOf("Slow", "Moderate", "Upbeat")) { tempo = it }
                     OutlinedTextField(focus, { focus = it }, label = { Text("What do you want to learn?") }, minLines = 2, modifier = Modifier.fillMaxWidth())
                     Button(onClick = { notice = ""; page = 3 }, modifier = Modifier.fillMaxWidth()) { Text("Continue to lyrics →") }
+                    }
                 }
                 3 -> {
                     Text("Make the lesson\nlyrical.", style = MaterialTheme.typography.headlineLarge)
@@ -205,7 +223,7 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
                 }
             }
             if (notice.isNotEmpty()) Text(notice, color = MaterialTheme.colorScheme.primary)
-            if (page > 1) TextButton(enabled = !busy, onClick = { page--; notice = "" }) { Text("← Back") }
+            if (page > 1) TextButton(enabled = !busy, onClick = { goBack() }) { Text("← Back") }
             HorizontalDivider()
             Text("MUSIC-BASED LEARNING / CALCULUS EDITION", style = MaterialTheme.typography.labelSmall)
             Spacer(Modifier.height(12.dp))
