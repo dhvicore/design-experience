@@ -1,6 +1,7 @@
 package com.nmims.songstudio.ui
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -180,6 +181,7 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
                         val mode = runCatching { audioFile.resolveSibling(audioFile.name + ".mode").readText() }.getOrDefault("original_melody")
                         Text(if (mode == "reference_cover") "Generated using a supplied melody reference" else "AI-generated original melody in the selected style", style = MaterialTheme.typography.bodySmall)
                         SongPlayer(audioFile, audioRevision)
+                        LyricsPanel(lyrics)
                     }
                     if (busy) {
                         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
@@ -197,6 +199,7 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
                     }, modifier = Modifier.fillMaxWidth()) { Text(if (busy) "Creating your song…" else "Generate song") }
                     Text(if (useReference) "The singing model receives the melody audio and your fitted lyrics. Melody fidelity and pronunciation can vary." else "An original melody will be composed. To follow a specific tune, its melody reference must be in the library.", style = MaterialTheme.typography.bodySmall)
                     if (generationError.isNotBlank()) Text(generationError, color = MaterialTheme.colorScheme.error)
+                    if (!audioFile.exists()) LyricsPanel(lyrics)
                     OutlinedButton(enabled = !busy, onClick = { notice = ""; page = 3 }, modifier = Modifier.fillMaxWidth()) { Text("Edit lyrics") }
                     OutlinedButton(enabled = !busy, onClick = { notice = ""; page = 1 }, modifier = Modifier.fillMaxWidth()) { Text("Choose another topic") }
                 }
@@ -206,6 +209,18 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
             HorizontalDivider()
             Text("MUSIC-BASED LEARNING / CALCULUS EDITION", style = MaterialTheme.typography.labelSmall)
             Spacer(Modifier.height(12.dp))
+        }
+    }
+}
+
+@Composable
+private fun LyricsPanel(lyrics: String) {
+    Panel(Lavender) {
+        Text("YOUR LYRICS", style = MaterialTheme.typography.labelSmall)
+        Text("Read along", style = MaterialTheme.typography.titleLarge)
+        Text("Your prepared lyrics. Line highlighting is not synced to the audio yet.", style = MaterialTheme.typography.bodySmall)
+        SelectionContainer {
+            Text(lyrics, style = MaterialTheme.typography.bodyLarge)
         }
     }
 }

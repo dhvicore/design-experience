@@ -63,6 +63,9 @@ networking and a production-hosted backend are not configured.
   GPU job. The player shows device media volume and offers an increase-volume button;
   the activity routes hardware volume keys to music. Already downloaded app files
   receive the normalized server copy when Generate song is pressed again.
+- The final song screen displays the full prepared lyrics beneath the player,
+  preserving line breaks and section labels. Text is selectable and scrolls with
+  the page; there is no timed highlighting or automatic line tracking yet.
 - The app submits real generation jobs, polls progress, downloads completed audio,
   and plays it with pause/seek/replay. Failure is shown as failure, not fake success.
 - The old import screen, prompt-copy controls, Twinkle recordings and example-song
