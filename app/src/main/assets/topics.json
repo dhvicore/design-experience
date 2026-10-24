@@ -1,0 +1,1841 @@
+[
+  {
+    "unit": "Unit 1",
+    "topic": "Rolle's Theorem",
+    "mood": "Upbeat",
+    "formula": "f(a)=f(b) ⇒ ∃ c∈(a,b), f'(c)=0",
+    "concept": "A continuous, differentiable curve that starts and ends at equal heights must have a flat tangent somewhere between.",
+    "style_en": "Synth-Pop / Indie Pop",
+    "style_hi": "Bollywood Commercial Pop",
+    "ref_en": "Dua Lipa – ‘Levitating’",
+    "ref_hi": "Badshah & Neha Kakkar – ‘Kar Gayi Chull’",
+    "lyrics_en": [
+      "Start at a, you end at b, and the heights are the same,",
+      "f of a equals f of b — that's the opening frame.",
+      "Somewhere in the middle there's a point we call c,",
+      "where the tangent lies flat — f dash c is zero, you see!"
+    ],
+    "lyrics_hi": [
+      "a pe shuru, b pe end, dono height ek samaan,",
+      "f(a) barabar f(b) — yahi shart ka bayaan.",
+      "beech mein ek point aaya, usko bolo c,",
+      "tangent bilkul flat — f dash c zero, dekh zaraa!"
+    ],
+    "lyrics_bhajan": [
+      "He ganit-dev, suno vinti meri,",
+      "a aur b pe height ek — kirpa teri,",
+      "beech mein ek point c vidhaata ne banaaya,",
+      "f dash c zero — tangent flat, dhanya maaya."
+    ],
+    "lyrics_mr": [
+      "a var suru, b var end, doghanchi height samaan,",
+      "f(a) barobar f(b) — hich aahe shart chi khoon.",
+      "madhe kuthe tari ek point, tyala mhana c,",
+      "tangent agadi flat — f dash c zero, bagha re!"
+    ],
+    "lyrics_gu": [
+      "a par shuru, b par end, banne ni height samaan,",
+      "f(a) barabar f(b) — aaj chhe shart nu bayaan.",
+      "vacche kyaank ek point aavyo, ene kaho c,",
+      "tangent tadan flat — f dash c zero, jo ne tu!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om ganita-devaaya namaha, shrnu me vinatim,",
+      "a cha b samaana-uchche, vande gurum param,",
+      "madhye kaschit binduhu c, budhaaha vadanti hi,",
+      "f dash c shunyam — tangent samatalam, jaya!"
+    ]
+  },
+  {
+    "unit": "Unit 1",
+    "topic": "Lagrange's Mean Value Theorem",
+    "mood": "Upbeat",
+    "formula": "f'(c) = [f(b) − f(a)] / (b − a)",
+    "concept": "Somewhere the instantaneous slope equals the average rate of change — tangent parallel to the secant.",
+    "style_en": "Upbeat Dance-Pop",
+    "style_hi": "Filmi Dance Beat",
+    "ref_en": "David Guetta ft. Sia – ‘Titanium’",
+    "ref_hi": "Arijit/Pritam – ‘Ilahi (Remix)’",
+    "lyrics_en": [
+      "Average rate, now meet the slope at c,",
+      "f dash c equals f of b minus f of a over b minus a.",
+      "Tangent parallel to the line through the ends,",
+      "LMVT is the rule that never bends!"
+    ],
+    "lyrics_hi": [
+      "average rate se milti hai slope point c pe,",
+      "f dash c barabar f(b) minus f(a) over b minus a.",
+      "secant ke parallel wahi tangent ki line,",
+      "LMVT ka rule, sab kuch fine!"
+    ],
+    "lyrics_bhajan": [
+      "Sumiran karo, dhal rahi hai shaam,",
+      "average rate a se b — lo prabhu ka naam,",
+      "kahin point c pe slope wahi aaye,",
+      "tangent secant ke sang — bhakt gun gaaye."
+    ],
+    "lyrics_mr": [
+      "average rate ne milte slope point c var,",
+      "f dash c barobar f(b) minus f(a) over b minus a.",
+      "secant la parallel techi tangent chi line,",
+      "LMVT cha niyam — sagle agadi fine!"
+    ],
+    "lyrics_gu": [
+      "average rate thi male chhe slope point c par,",
+      "f dash c barabar f(b) minus f(a) over b minus a.",
+      "secant ne parallel teji tangent ni line,",
+      "LMVT no niyam — badhu j fine!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om jnaana-jyotishe namaha, sumaran karomi,",
+      "average rate a-to-b, prabhum namaami,",
+      "kutrachit binduhu c, tatra slope samaana,",
+      "tangent secant saha — jaya jaya gaana!"
+    ]
+  },
+  {
+    "unit": "Unit 1",
+    "topic": "Cauchy's Mean Value Theorem",
+    "mood": "Rap",
+    "formula": "[f(b)−f(a)]/[g(b)−g(a)] = f'(c)/g'(c)",
+    "concept": "Two functions compared by ratio — the bridge to L'Hôpital's rule.",
+    "style_en": "Fast-Paced Rap / Trap",
+    "style_hi": "Gully Rap / Street Tap",
+    "ref_en": "Eminem – ‘Lose Yourself’",
+    "ref_hi": "Divine & Naezy – ‘Mere Gully Mein’",
+    "lyrics_en": [
+      "Two functions racing, compare the pace,",
+      "f dash c over g dash c — ratio in its place.",
+      "Net change over net change, equal they'll be,",
+      "building up the bridge to L'Hopital, see!"
+    ],
+    "lyrics_hi": [
+      "do functions ki race, ratio se tol,",
+      "f dash c over g dash c, yahi hai bol.",
+      "net change ka ratio barabar rahe,",
+      "L'Hopital tak ka pul yahi kahe!"
+    ],
+    "lyrics_bhajan": [
+      "Do functions f aur g, prabhu ki leela,",
+      "change by change ka bhed, mann sheetal keela,",
+      "point c pe f dash by g dash barabar,",
+      "Cauchy ka theorem — gaao sab milkar."
+    ],
+    "lyrics_mr": [
+      "don functions chi shardat, ratio ne tola,",
+      "f dash c over g dash c — hech aahe bola.",
+      "net change cha ratio sarkha rahto,",
+      "L'Hopital paryant cha pul hach sangto!"
+    ],
+    "lyrics_gu": [
+      "be functions ni race, ratio thi tolo,",
+      "f dash c over g dash c — aaj chhe bolo.",
+      "net change no ratio sarkho rahe,",
+      "L'Hopital sudhi no pul aaj kahe!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om vidyaa-devyai namaha, shrnu stutim,",
+      "dve functione f cha g, leelaa-vilaasinim,",
+      "c binduau f dash by g dash samaana,",
+      "Cauchy-prameya — jaya jaya gaana!"
+    ]
+  },
+  {
+    "unit": "Unit 1",
+    "topic": "Convergence of Sequences",
+    "mood": "Calm",
+    "formula": "lim aₙ = L ⇔ ∀ε>0 ∃N, n>N ⇒ |aₙ−L|<ε",
+    "concept": "Terms settle toward a limit L: past a threshold N they stay within any distance ε.",
+    "style_en": "Lo-Fi Chillhop / Synthwave",
+    "style_hi": "Semi-Classical Lo-Fi",
+    "ref_en": "Post Malone & Swae Lee – ‘Sunflower’",
+    "ref_hi": "Mohit Chauhan – ‘Tum Se Hi (Lo-Fi)’",
+    "lyrics_en": [
+      "Numbers drifting one by one, taking their time,",
+      "settling soft toward a limit, finding their line.",
+      "Past a threshold N, the terms stay within epsilon — home,",
+      "bounded and monotone, no more to roam."
+    ],
+    "lyrics_hi": [
+      "numbers dheere dheere limit ki ore,",
+      "lim a-n barabar L, settle hote more.",
+      "N ke baad, terms epsilon ke andar rahe,",
+      "bounded aur monotone — converge yeh kahe."
+    ],
+    "lyrics_bhajan": [
+      "He antaryaami, terms chalein L ki or,",
+      "epsilon ke andar — thaam lo meri dor,",
+      "N ke baad har term paas hi rahe,",
+      "yahi convergence — saadhu-sant kahe."
+    ],
+    "lyrics_mr": [
+      "numbers halu halu limit kade,",
+      "lim a-n barobar L, settle hotat gade.",
+      "N nantar, terms epsilon madhe rahtat,",
+      "bounded ani monotone — converge he mhantat."
+    ],
+    "lyrics_gu": [
+      "numbers dheere dheere limit taraf,",
+      "lim a-n barabar L, settle thata saraf.",
+      "N pachhi, terms epsilon ma rahe,",
+      "bounded ane monotone — converge e kahe."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om antaryaamine namaha, shrnu me,",
+      "terms gacchanti L prati, epsilon madhye,",
+      "N parataha sarve terms samiipe,",
+      "iti convergence — vande satatam, shubham."
+    ]
+  },
+  {
+    "unit": "Unit 1",
+    "topic": "Convergence of Infinite Series",
+    "mood": "Upbeat",
+    "formula": "ratio L=lim|aₙ₊₁/aₙ| (L<1 conv, L>1 div)",
+    "concept": "Infinite sums tested with D'Alembert's ratio test and Cauchy's root test.",
+    "style_en": "Electro-Swing / EDM",
+    "style_hi": "Punjabi Bhangra Fusion",
+    "ref_en": "Avicii – ‘Wake Me Up’",
+    "ref_hi": "Badshah – ‘DJ Waley Babu’",
+    "lyrics_en": [
+      "Partial sums are climbing, do they stay or fly?",
+      "Run the ratio test to see if it's a lie.",
+      "L less than one they converge, greater than one goodbye,",
+      "Cauchy's root test checking as the terms go by."
+    ],
+    "lyrics_hi": [
+      "partial sums chadhein, rukein ya udein?",
+      "ratio test lagao, sach keh dein.",
+      "L one se kam converge, one se zyada bye,",
+      "Cauchy root test bhi parakh le, try!"
+    ],
+    "lyrics_bhajan": [
+      "Anant jod ka sumiran din-raat,",
+      "ratio test lagaao — suno prabhu ki baat,",
+      "L ek se kam ho to sum thahar jaaye,",
+      "convergence ka vardaan bhakt ko mil jaaye."
+    ],
+    "lyrics_mr": [
+      "partial sums chadhtat, thamtat ki udtat?",
+      "ratio test lava, satya sangun taktat.",
+      "L ekahun kami converge, ekahun jast bye,",
+      "Cauchy root test ne hi tapasun ghe, try!"
+    ],
+    "lyrics_gu": [
+      "partial sums chadhe, athave ude ke rahe?",
+      "ratio test lagaavo, sachu kahe.",
+      "L ek thi ochho converge, ek thi vadhu bye,",
+      "Cauchy root test thi y chakaso, try!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om ananta-raashaye namaha, bhaje,",
+      "ratio test kuru, shrnu prabho vachanam,",
+      "L ekasmaat nyoon — sum sthiram bhavati,",
+      "convergence varam — jaya jaya satatam!"
+    ]
+  },
+  {
+    "unit": "Unit 1",
+    "topic": "Taylor's Series Expansion",
+    "mood": "Smooth",
+    "formula": "f(x)=Σ f⁽ⁿ⁾(a)(x−a)ⁿ / n!",
+    "concept": "Any smooth function expands into an infinite polynomial around a point a.",
+    "style_en": "Neo-Soul / Motown R&B",
+    "style_hi": "Bollywood Retro Funk",
+    "ref_en": "Mark Ronson ft. Bruno Mars – ‘Uptown Funk’",
+    "ref_hi": "Benny Dayal – ‘Badtameez Dil’",
+    "lyrics_en": [
+      "Expand around a, term on term they grow,",
+      "f of a plus f dash a times x minus a, let it flow.",
+      "Successive derivatives stacking the sum,",
+      "Taylor's polynomial till the series is done."
+    ],
+    "lyrics_hi": [
+      "point a ke aas paas, term pe term,",
+      "f(a) plus f dash a into x minus a badhta firm.",
+      "derivatives ki layer, sum banti jaaye,",
+      "Taylor ki series, dhun gungunaaye."
+    ],
+    "lyrics_bhajan": [
+      "Point a pe baitho, dhyaan lagaao,",
+      "har derivative ko n factorial se bhaao,",
+      "x minus a ki power n — jodte chalo,",
+      "Taylor ka saar — bhajan mein dhalo."
+    ],
+    "lyrics_mr": [
+      "point a chya aajubajula, term var term,",
+      "f(a) plus f dash a into x minus a vadhta firm.",
+      "derivatives chya layer, sum banat jaate,",
+      "Taylor chi series, dhun gungunat jaate."
+    ],
+    "lyrics_gu": [
+      "point a ni aaspaas, term par term,",
+      "f(a) plus f dash a into x minus a vadhe firm.",
+      "derivatives na layer, sum banti jaay,",
+      "Taylor ni series, dhun gungunaay."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om jnaana-nidhaye namaha, dhyaanam,",
+      "binduau a, pratyeka derivative n factorial,",
+      "x minus a power n — yogam karomi,",
+      "Taylor-shreni saaram — bhaje namaami."
+    ]
+  },
+  {
+    "unit": "Unit 1",
+    "topic": "Maclaurin's Series Expansion",
+    "mood": "Smooth",
+    "formula": "f(x)=f(0)+f'(0)x+f''(0)x²/2!+…",
+    "concept": "Taylor's series centred at the origin a = 0 — the standard eˣ, sin, cos expansions.",
+    "style_en": "Acoustic Guitar Folk",
+    "style_hi": "Soft Hindi Acoustic",
+    "ref_en": "Coldplay – ‘The Scientist’",
+    "ref_hi": "A.R. Rahman – ‘Kun Faya Kun’",
+    "lyrics_en": [
+      "Same as Taylor but we center at zero,",
+      "unplug the guitar, let the simple be the hero.",
+      "e to the x equals one plus x plus x squared over two,",
+      "Maclaurin keeps it honest, keeps it true."
+    ],
+    "lyrics_hi": [
+      "Taylor hi hai par center zero pe,",
+      "simple si dhun, acoustic saaye pe.",
+      "e to the x barabar one plus x plus x squared over two,",
+      "Maclaurin saaf-suthra, dil mein basa le."
+    ],
+    "lyrics_bhajan": [
+      "a shunya pe rakho, origin hai dhaam,",
+      "f zero, f dash zero — lo iska naam,",
+      "e, sin, cos sab yahin se khilen,",
+      "Maclaurin ki mahima — bhakton ko milen."
+    ],
+    "lyrics_mr": [
+      "Taylor ch aahe pan center zero var,",
+      "saadhi dhun, acoustic saavlit sundar.",
+      "e to the x barobar one plus x plus x squared over two,",
+      "Maclaurin swachh-nital, manaat basaav tu."
+    ],
+    "lyrics_gu": [
+      "Taylor j chhe pan center zero par,",
+      "saadi dhun, acoustic chhaanya sundar.",
+      "e to the x barabar one plus x plus x squared over two,",
+      "Maclaurin chokhkhu, dil ma vasaavi lo tu."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om aadi-binduave namaha, origin dhaam,",
+      "f zero, f dash zero — grhnaami naam,",
+      "e, sin, cos — atraiva prakaashante,",
+      "Maclaurin-mahimaa — bhaktaaha gaayante."
+    ]
+  },
+  {
+    "unit": "Unit 1",
+    "topic": "Indeterminate Forms",
+    "mood": "Upbeat",
+    "formula": "0/0, ∞/∞, 0·∞, ∞−∞, 0⁰, 1^∞",
+    "concept": "Limits whose direct value is undefined — need algebra or logs first.",
+    "style_en": "Funk-Pop",
+    "style_hi": "Desi Pop",
+    "ref_en": "Dua Lipa – ‘Levitating’",
+    "ref_hi": "Benny Dayal – ‘Badtameez Dil’",
+    "lyrics_en": [
+      "Zero over zero, infinity fight,",
+      "the form's a disguise, it won't give you the light.",
+      "Factor it, log it, rationalize the frame,",
+      "reveal the true limit — that's the funky game."
+    ],
+    "lyrics_hi": [
+      "zero bata zero, infinity ki jung,",
+      "form dhoka deti, na mile rang.",
+      "factor karo, log karo, rationalize zaraa,",
+      "asli limit nikaalo — funky adaa!"
+    ],
+    "lyrics_bhajan": [
+      "Zero by zero, anant by anant,",
+      "seedha uttar na mile — suno vrttant,",
+      "pehle algebra ya log lagaao,",
+      "indeterminate ka parda hataao."
+    ],
+    "lyrics_mr": [
+      "zero bhagile zero, infinity chi ladhai,",
+      "form fasavte, rang kahi na milai.",
+      "factor kara, log kara, rationalize kara,",
+      "khari limit kadha — funky ada dhara!"
+    ],
+    "lyrics_gu": [
+      "zero bhagya zero, infinity ni jang,",
+      "form chhetre, male nahi rang.",
+      "factor karo, log karo, rationalize karo,",
+      "saachi limit kaadho — funky ada dharo!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om satya-devaaya namaha, shrnu,",
+      "zero by zero, ananta by ananta tanu,",
+      "prathamam algebra athava log kuru,",
+      "indeterminate aavaranam — apaniya, guru!"
+    ]
+  },
+  {
+    "unit": "Unit 1",
+    "topic": "L'Hospital's Rule",
+    "mood": "Upbeat",
+    "formula": "lim f(x)/g(x) = lim f'(x)/g'(x)",
+    "concept": "For 0/0 or ∞/∞, the ratio of limits equals the ratio of derivatives.",
+    "style_en": "Energetic EDM / Club Pop",
+    "style_hi": "High-Energy Bollywood Beat",
+    "ref_en": "David Guetta ft. Sia – ‘Titanium’",
+    "ref_hi": "Badshah – ‘DJ Waley Babu’",
+    "lyrics_en": [
+      "Stuck on zero over zero? Don't you stall,",
+      "derivative on top and bottom, take them all.",
+      "Still indeterminate? Run it once more,",
+      "L'Hopital's the banger that settles the score!"
+    ],
+    "lyrics_hi": [
+      "zero over zero pe atke? mat ghabra,",
+      "upar neeche derivative, le le saara.",
+      "phir bhi indeterminate? dobaara chala,",
+      "L'Hopital banger, hisaab chuka!"
+    ],
+    "lyrics_bhajan": [
+      "Zero by zero mein mat ghabraao,",
+      "oopar neeche dono ka derivative laao,",
+      "ratio of limits — derivative ki jodi,",
+      "L'Hospital ka naam — bhakti thodi-thodi."
+    ],
+    "lyrics_mr": [
+      "zero over zero var adakla? ghabru nako,",
+      "var-khali derivative, sagla ghe to.",
+      "tari indeterminate? punha chalav,",
+      "L'Hopital banger — hishob chukav!"
+    ],
+    "lyrics_gu": [
+      "zero over zero par atakya? gabaraao nahi,",
+      "upar niche derivative, lai lo sahi.",
+      "to y indeterminate? farithi chalaavo,",
+      "L'Hopital banger — hisaab chukaavo!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om buddhi-devyai namaha, maa bhaihi,",
+      "zero over zero — upari adhaha derivative lehi,",
+      "ratio of limits — derivative yugalam,",
+      "L'Hospital naama — bhaje subhagam."
+    ]
+  },
+  {
+    "unit": "Unit 2",
+    "topic": "Limits & Continuity of Several Variables",
+    "mood": "Calm",
+    "formula": "lim(x,y)→(a,b) f = L along EVERY path",
+    "concept": "A multivariable limit exists only if every path gives the same value L.",
+    "style_en": "Ambient Chill / Soft Piano",
+    "style_hi": "Sitara-Chill / Acoustic",
+    "ref_en": "Post Malone & Swae Lee – ‘Sunflower’",
+    "ref_hi": "Anuv Jain – ‘Baarishein’",
+    "lyrics_en": [
+      "Every path to a-b must agree,",
+      "approach from all sides for the limit to be.",
+      "One value L, no matter the way —",
+      "that's continuity on a 3D display."
+    ],
+    "lyrics_hi": [
+      "har raaste se a-b tak pahucho,",
+      "sabhi directions se ek hi value soocho.",
+      "ek hi L, chaahe raah koi bhi ho,",
+      "3D surface pe continuity, slow-mo!"
+    ],
+    "lyrics_bhajan": [
+      "Har raah se aao (x,y) us thaam,",
+      "sab path ek hi L — poora ho kaam,",
+      "do raah do uttar to limit kho jaaye,",
+      "yahi continuity — man samajh paaye."
+    ],
+    "lyrics_mr": [
+      "pratyek vatene a-b paryant pohcha,",
+      "sarv directions madhun ekach value bagha.",
+      "ekach L, vaat konti hi aso,",
+      "3D surface var continuity, slow-mo baso!"
+    ],
+    "lyrics_gu": [
+      "darek raste a-b sudhi pahoncho,",
+      "badhi directions thi ek j value jovo.",
+      "ek j L, raste koi pan hoy,",
+      "3D surface par continuity, slow-mo joy!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om sarvaga-devaaya namaha, aagaccha,",
+      "sarva-maargaihi (x,y) prati, pashya svaccha,",
+      "ekaha eva L — maargaha ko api astu,",
+      "continuity-marma — vande, shubha-vastu."
+    ]
+  },
+  {
+    "unit": "Unit 2",
+    "topic": "Partial Differentiation & Higher Partials",
+    "mood": "Rap",
+    "formula": "∂f/∂x ; Clairaut: ∂²f/∂x∂y = ∂²f/∂y∂x",
+    "concept": "Differentiate one variable holding others constant; mixed partials are equal when continuous.",
+    "style_en": "Trap Beat / Hip-Hop",
+    "style_hi": "Desi Hip-Hop",
+    "ref_en": "Travis Scott – ‘SICKO MODE’",
+    "ref_hi": "Raftaar – ‘Swag Se Swagat’",
+    "lyrics_en": [
+      "Hold y still, differentiate x alone,",
+      "partial f partial x — one variable, own the zone.",
+      "Mixed partials equal, Clairaut makes it known,",
+      "f x y equals f y x, full grown."
+    ],
+    "lyrics_hi": [
+      "y ko sthir rakho, x pe differentiate,",
+      "partial f partial x — ek variable, concentrate.",
+      "mixed partials barabar, Clairaut kahe,",
+      "f x y barabar f y x rahe."
+    ],
+    "lyrics_bhajan": [
+      "Ek variable chalo, baaki sthir rakho,",
+      "partial derivative ka prabhu-naam japo,",
+      "mixed partial x-y, y-x barabar,",
+      "Clairaut ki kripa — gaao nirantar."
+    ],
+    "lyrics_mr": [
+      "y sthir theva, x var differentiate,",
+      "partial f partial x — ek variable, concentrate.",
+      "mixed partials barobar, Clairaut sangto,",
+      "f x y barobar f y x rahto."
+    ],
+    "lyrics_gu": [
+      "y ne sthir raakho, x par differentiate,",
+      "partial f partial x — ek variable, concentrate.",
+      "mixed partials barabar, Clairaut kahe,",
+      "f x y barabar f y x rahe."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, ekaikam chalam, sthiram cha anyat,",
+      "partial derivative — japaami nityam shaantam,",
+      "mixed partial x-y, y-x samaanam,",
+      "Clairaut-kripaa — gaayaami anantam."
+    ]
+  },
+  {
+    "unit": "Unit 2",
+    "topic": "Taylor's Theorem for Two Variables",
+    "mood": "Calm",
+    "formula": "f(a+h,b+k)=f+[h f_x+k f_y]+½[…]",
+    "concept": "Expand a 2-variable surface: tangent plane, then curvature from second partials.",
+    "style_en": "Orchestral Pop",
+    "style_hi": "Bollywood Fusion",
+    "ref_en": "OneRepublic – ‘Counting Stars’",
+    "ref_hi": "Shankar-Ehsaan-Loy – ‘Zinda’",
+    "lyrics_en": [
+      "Tangent plane rising, approximate it true,",
+      "h times f x plus k times f y, the first-order view.",
+      "Then curve the surface with the second-order sound,",
+      "multi-variable Taylor spinning all around."
+    ],
+    "lyrics_hi": [
+      "tangent plane se surface ko chhuo,",
+      "h into f x plus k into f y, first order suno.",
+      "phir second order se curve ko ghoomao,",
+      "do variable ka Taylor, dhun mein jhoomao."
+    ],
+    "lyrics_bhajan": [
+      "Do variable ki surface, a-b pe tiko,",
+      "h f_x aur k f_y — pehla pad liko,",
+      "aadha second partial — curvature samaao,",
+      "Taylor do-var ka — bhajan mein gaao."
+    ],
+    "lyrics_mr": [
+      "tangent plane ne surface la sparsh kara,",
+      "h into f x plus k into f y, first order dhara.",
+      "mag second order ne curve la ghumva,",
+      "don variable cha Taylor, dhunit jhulva."
+    ],
+    "lyrics_gu": [
+      "tangent plane thi surface ne sparsho,",
+      "h into f x plus k into f y, first order dharo.",
+      "pachhi second order thi curve ne ghumaavo,",
+      "be variable no Taylor, dhun ma jhumaavo."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, dvi-chala surface, a-b sthitam,",
+      "h f_x cha k f_y — prathamam padam likhitam,",
+      "ardha second partial — curvature grhnaami,",
+      "dvi-vara Taylor — bhaje namaami."
+    ]
+  },
+  {
+    "unit": "Unit 2",
+    "topic": "Maxima & Minima of Two Variables",
+    "mood": "Upbeat",
+    "formula": "D = rt − s² ; r=f_xx, s=f_xy, t=f_yy",
+    "concept": "Critical points where fₓ=f_y=0, classified by the Hessian discriminant D.",
+    "style_en": "Synth-Pop / EDM",
+    "style_hi": "Bollywood Dance Beat",
+    "ref_en": "Avicii – ‘Wake Me Up’",
+    "ref_hi": "Arijit/Pritam – ‘Ilahi (Remix)’",
+    "lyrics_en": [
+      "f x equals zero, f y equals zero, the critical sign,",
+      "now test it with the Hessian, draw the line.",
+      "D equals r t minus s squared tells you the fate:",
+      "peak, or valley, or a saddle — calculate!"
+    ],
+    "lyrics_hi": [
+      "f x zero, f y zero, critical sign,",
+      "Hessian se test karo, kheencho line.",
+      "D barabar r t minus s squared bataaye naseeb,",
+      "peak, valley ya saddle — kareeb!"
+    ],
+    "lyrics_bhajan": [
+      "f_x f_y dono zero — critical sthaan,",
+      "D barabar r t minus s square ka gyaan,",
+      "D positive r positive to minima paao,",
+      "maxima-minima ka rahasya samjhaao."
+    ],
+    "lyrics_mr": [
+      "f x zero, f y zero, critical sign,",
+      "Hessian ne test kara, odha line.",
+      "D barobar r t minus s squared sangte nasheeb,",
+      "peak, valley ki saddle — javal kareeb!"
+    ],
+    "lyrics_gu": [
+      "f x zero, f y zero, critical sign,",
+      "Hessian thi test karo, kheencho line.",
+      "D barabar r t minus s squared kahe nasib,",
+      "peak, valley ke saddle — najik kareeb!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, f_x f_y shunyam — critical sthaanam,",
+      "D samaanam r t minus s square jnaanam,",
+      "D positive r positive — minima labhyate,",
+      "maxima-minima rahasyam — gaayate, bhajyate."
+    ]
+  },
+  {
+    "unit": "Unit 2",
+    "topic": "Lagrange's Method of Multipliers",
+    "mood": "Rap",
+    "formula": "∇f = λ ∇g  (subject to g=0)",
+    "concept": "Optimize under a constraint by setting gradients parallel via multiplier λ.",
+    "style_en": "Fast Rap / Old School Hip-Hop",
+    "style_hi": "Street Rap",
+    "ref_en": "Eminem – ‘Lose Yourself’",
+    "ref_hi": "Divine & Naezy – ‘Mere Gully Mein’",
+    "lyrics_en": [
+      "Constraint on the path, you can't break the wall,",
+      "set the gradients parallel, answer the call.",
+      "grad f equals lambda grad g, lock the flow,",
+      "constrained optimum — that's the way to go."
+    ],
+    "lyrics_hi": [
+      "constraint ki deewar, tod na sako,",
+      "gradients parallel, jawaab pao.",
+      "grad f barabar lambda grad g, flow ko baandho,",
+      "constrained optimum — raasta saadho."
+    ],
+    "lyrics_bhajan": [
+      "Constraint g zero — prabhu ki maryaada,",
+      "grad f barabar lambda grad g — yahi vaada,",
+      "dono gradient ek disha mein jaaye,",
+      "Lagrange multiplier — bhakt sukh paaye."
+    ],
+    "lyrics_mr": [
+      "constraint chi bhint, todata yet nahi,",
+      "gradients parallel, uttar milel pahi.",
+      "grad f barobar lambda grad g, flow la bandha,",
+      "constrained optimum — vaat shodha ani sadha."
+    ],
+    "lyrics_gu": [
+      "constraint ni deewaal, todi na shako,",
+      "gradients parallel, jawaab melvo.",
+      "grad f barabar lambda grad g, flow ne baandho,",
+      "constrained optimum — rasto saadho."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, constraint g shunyam — maryaadaa prabhoho,",
+      "grad f samaanam lambda grad g — satyam aho,",
+      "ubhau gradient eka-dishi gacchataha,",
+      "Lagrange multiplier — bhaktaha sukham labhataha."
+    ]
+  },
+  {
+    "unit": "Unit 3",
+    "topic": "Volume of Solid of Revolution",
+    "mood": "Upbeat",
+    "formula": "V = π ∫ₐᵇ [f(x)]² dx",
+    "concept": "Spin a 2D region about an axis to sweep out a 3D volume (disk / washer).",
+    "style_en": "Tropical House / Electro",
+    "style_hi": "Bollywood EDM",
+    "ref_en": "David Guetta ft. Sia – ‘Titanium’",
+    "ref_hi": "Badshah – ‘DJ Waley Babu’",
+    "lyrics_en": [
+      "Spin the curve around the line, watch it grow,",
+      "disks stacking up in a 3D show.",
+      "V equals pi integral f of x squared d x, the beat spins,",
+      "volume of revolution — that's how it begins."
+    ],
+    "lyrics_hi": [
+      "curve ko axis ke gird ghumao,",
+      "disks jama ke 3D dikhao.",
+      "V barabar pi integral f of x squared d x, beat spin,",
+      "volume of revolution — ab begin!"
+    ],
+    "lyrics_bhajan": [
+      "Curve ko ghumaao axis ke chaaro or,",
+      "pi integral f square — pakdo yeh dor,",
+      "disk pe disk jude, volume ban jaaye,",
+      "solid of revolution — man harshaaye."
+    ],
+    "lyrics_mr": [
+      "curve la axis chya bhovti firva,",
+      "disks jamvun 3D dakhva.",
+      "V barobar pi integral f of x squared d x, beat spin,",
+      "volume of revolution — aata begin!"
+    ],
+    "lyrics_gu": [
+      "curve ne axis ni aaspaas ghumaavo,",
+      "disks bhega kari 3D batavo.",
+      "V barabar pi integral f of x squared d x, beat spin,",
+      "volume of revolution — have begin!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, curve bhramaya axis parito,",
+      "pi integral f square — grhnaami drdham ato,",
+      "disk upari disk — volume bhavati,",
+      "solid of revolution — manas tushyati."
+    ]
+  },
+  {
+    "unit": "Unit 3",
+    "topic": "Area of Surface of Revolution",
+    "mood": "Upbeat",
+    "formula": "S = 2π ∫ f(x) √(1 + [f'(x)]²) dx",
+    "concept": "Wrap a curve's arc around an axis to get the lateral surface area.",
+    "style_en": "Indie Pop / Dance",
+    "style_hi": "Desi Pop Beat",
+    "ref_en": "Avicii – ‘Wake Me Up’",
+    "ref_hi": "Arijit/Pritam – ‘Ilahi (Remix)’",
+    "lyrics_en": [
+      "Wrap the arc around, the bands of the shell,",
+      "slant length d s does the job so well.",
+      "S equals two pi integral y root one plus y dash squared d x,",
+      "surface of revolution, catchy and complex."
+    ],
+    "lyrics_hi": [
+      "arc ko lapet do, shell ke band,",
+      "slant length d s kaam karein grand.",
+      "S barabar two pi integral y root one plus y dash squared d x,",
+      "surface of revolution — catchy complex!"
+    ],
+    "lyrics_bhajan": [
+      "Arc ko lapeto axis ke paas,",
+      "do pi integral f, root one-plus-f-dash-square saath,",
+      "surface ka kshetrafal yahi se aaye,",
+      "revolution ki mahima — sab gun gaaye."
+    ],
+    "lyrics_mr": [
+      "arc la gundala, shell chya band,",
+      "slant length d s karte kaam grand.",
+      "S barobar two pi integral y root one plus y dash squared d x,",
+      "surface of revolution — catchy complex!"
+    ],
+    "lyrics_gu": [
+      "arc ne vinto, shell na band,",
+      "slant length d s kaam kare grand.",
+      "S barabar two pi integral y root one plus y dash squared d x,",
+      "surface of revolution — catchy complex!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, arc vestaya axis samipe,",
+      "two pi integral f, root one plus f dash square sahite,",
+      "surface kshetram — atraiva aayaati,",
+      "revolution-mahimaa — sarve gaayanti."
+    ]
+  },
+  {
+    "unit": "Unit 3",
+    "topic": "Improper Integrals",
+    "mood": "Calm",
+    "formula": "∫ₐ^∞ f dx = lim(t→∞) ∫ₐᵗ f dx",
+    "concept": "Integration over infinite bounds or through an asymptote, taken as a limit.",
+    "style_en": "Synthwave / Lo-Fi",
+    "style_hi": "Sufi Pop",
+    "ref_en": "Lofi Girl – ‘Chillhop Beats’",
+    "ref_hi": "Anuv Jain – ‘Baarishein’",
+    "lyrics_en": [
+      "Bounds at infinity, the melody drifts,",
+      "a limit takes the stand as the boundary shifts.",
+      "Integral a to infinity equals the limit of a to t,",
+      "finite means converge, else diverge, you see."
+    ],
+    "lyrics_hi": [
+      "infinity pe bounds, dhun bahe,",
+      "limit sambhaale jab boundary dhahe.",
+      "Integral a to infinity barabar limit a to t,",
+      "finite toh converge, warna diverge, dekh le."
+    ],
+    "lyrics_bhajan": [
+      "Seema anant tak, ya asymptote paar,",
+      "limit t anant — lo prabhu aadhaar,",
+      "integral a se t, phir t ko bhejo door,",
+      "improper ka uttar mile — bhakti bharpoor."
+    ],
+    "lyrics_mr": [
+      "infinity var bounds, dhun vahate,",
+      "limit sambhalte jevha boundary dhasalte.",
+      "Integral a to infinity barobar limit a to t,",
+      "finite tar converge, nahitar diverge, bagh te."
+    ],
+    "lyrics_gu": [
+      "infinity par bounds, dhun vahe,",
+      "limit sambhaale jyare boundary dhase.",
+      "Integral a to infinity barabar limit a to t,",
+      "finite to converge, nahi to diverge, jo te."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, seema anantam, athava asymptote,",
+      "limit t ananta — grhnaami prabho note,",
+      "integral a to t, punaha t dooram,",
+      "improper uttaram — bhakti-bharpooram, param."
+    ]
+  },
+  {
+    "unit": "Unit 3",
+    "topic": "Beta Function",
+    "mood": "Smooth",
+    "formula": "B(m,n) = ∫₀¹ x^{m−1}(1−x)^{n−1} dx",
+    "concept": "Euler's first integral — symmetric, links trig integrals and factorials.",
+    "style_en": "Chill R&B / Neo-Soul",
+    "style_hi": "Hindi R&B-Fusion",
+    "ref_en": "Bruno Mars – ‘Treasure’",
+    "ref_hi": "Vishal Dadlani – ‘Desi Girl’",
+    "lyrics_en": [
+      "Euler's first integral, zero to one glide,",
+      "B m n equals integral zero to one, x to m minus one, one minus x to n minus one.",
+      "Symmetric and soulful, B m n equals B n m,",
+      "R and B of the integrals, flowing like a gem."
+    ],
+    "lyrics_hi": [
+      "Euler ka pehla integral, zero se one,",
+      "B m n barabar integral zero to one, x to m minus one, one minus x to n minus one.",
+      "symmetric soulful, B m n barabar B n m,",
+      "integrals ka R and B, bahta gem!"
+    ],
+    "lyrics_bhajan": [
+      "Zero se ek tak, Euler ki daya,",
+      "x power m-minus-one, one-minus-x ki chhaya,",
+      "power n-minus-one — Beta ka roop,",
+      "symmetric sundar — bhajan ki dhoop."
+    ],
+    "lyrics_mr": [
+      "Euler cha pahila integral, zero te one,",
+      "B m n barobar integral zero to one, x to m minus one, one minus x to n minus one.",
+      "symmetric soulful, B m n barobar B n m,",
+      "integrals cha R and B, vahta gem!"
+    ],
+    "lyrics_gu": [
+      "Euler no pahelo integral, zero thi one,",
+      "B m n barabar integral zero to one, x to m minus one, one minus x to n minus one.",
+      "symmetric soulful, B m n barabar B n m,",
+      "integrals no R and B, vehto gem!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, zero to one, Euler-kripayaa,",
+      "x power m-minus-one, one-minus-x chhaayaa,",
+      "power n-minus-one — Beta roopam,",
+      "symmetric sundaram — bhajana-deepam."
+    ]
+  },
+  {
+    "unit": "Unit 3",
+    "topic": "Gamma Function",
+    "mood": "Calm",
+    "formula": "Γ(n)=∫₀^∞ x^{n−1}e^{−x}dx ; Γ(n)=(n−1)!",
+    "concept": "The factorial extended to all reals, with Γ(n+1)=nΓ(n) and Γ(½)=√π.",
+    "style_en": "Epic Cinematic / Orchestral",
+    "style_hi": "Bollywood Cinematic Score",
+    "ref_en": "OneRepublic – ‘Counting Stars’",
+    "ref_hi": "Shankar-Ehsaan-Loy – ‘Zinda’",
+    "lyrics_en": [
+      "Factorials continuous, crown of the reals,",
+      "Gamma n equals integral zero to infinity, x to n minus one, e to minus x.",
+      "Gamma n equals n minus one factorial the recurrence sings,",
+      "and Gamma half equals root pi — the secret it brings."
+    ],
+    "lyrics_hi": [
+      "factorial continuous, reals ka taaj,",
+      "Gamma n barabar integral zero to infinity, x to n minus one, e to minus x.",
+      "Gamma n barabar n minus one factorial recurrence gaaye,",
+      "aur Gamma half barabar root pi raaz sunaaye."
+    ],
+    "lyrics_bhajan": [
+      "Factorial failaaye har sankhya par,",
+      "Gamma ka integral — e power minus x bhar,",
+      "Gamma n barabar n-minus-one factorial,",
+      "Gamma half root pi — gyaan anmol."
+    ],
+    "lyrics_mr": [
+      "factorial continuous, reals cha taaj,",
+      "Gamma n barobar integral zero to infinity, x to n minus one, e to minus x.",
+      "Gamma n barobar n minus one factorial recurrence gaate,",
+      "ani Gamma half barobar root pi rahasya sangte."
+    ],
+    "lyrics_gu": [
+      "factorial continuous, reals no taaj,",
+      "Gamma n barabar integral zero to infinity, x to n minus one, e to minus x.",
+      "Gamma n barabar n minus one factorial recurrence gaay,",
+      "ane Gamma half barabar root pi rahasya kahevaay."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, factorial vistaarya sarva-sankhyaasu,",
+      "Gamma integral — e power minus x tanusu,",
+      "Gamma n samaanam n-minus-one factorial,",
+      "Gamma half root pi — jnaanam amrtam, nirmal."
+    ]
+  },
+  {
+    "unit": "Unit 4",
+    "topic": "Double Integral",
+    "mood": "Upbeat",
+    "formula": "∬_R f(x,y) dA = ∫∫ f dy dx",
+    "concept": "Integrate over a 2D region for the volume under a surface (Fubini).",
+    "style_en": "Bubblegum Pop / Synth-Pop",
+    "style_hi": "Bollywood Commercial Pop",
+    "ref_en": "Harry Styles – ‘As It Was’",
+    "ref_hi": "Badshah & Neha Kakkar – ‘Kar Gayi Chull’",
+    "lyrics_en": [
+      "Layer upon layer across the plane,",
+      "bouncy little pop tune, do it again.",
+      "Double integral over R, f of x y, d A, Fubini's delight,",
+      "inner then outer, integrate it right."
+    ],
+    "lyrics_hi": [
+      "plane pe layer pe layer chadhe,",
+      "halki si pop dhun, phir se badhe.",
+      "Double integral over R, f of x y, d A, Fubini pyaar,",
+      "inner phir outer — integrate, yaar!"
+    ],
+    "lyrics_bhajan": [
+      "Do dishaon mein jodo, region ke paar,",
+      "double integral f — Fubini aadhaar,",
+      "dy phir dx, ya dx phir dy,",
+      "surface ke neeche volume — prabhu ji."
+    ],
+    "lyrics_mr": [
+      "plane var layer var layer chadhe,",
+      "halki pop dhun, punha vadhe.",
+      "Double integral over R, f of x y, d A, Fubini prem,",
+      "inner mag outer — integrate, friend!"
+    ],
+    "lyrics_gu": [
+      "plane par layer par layer chadhe,",
+      "halki pop dhun, farithi vadhe.",
+      "Double integral over R, f of x y, d A, Fubini prem,",
+      "inner pachhi outer — integrate, friend!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, dvi-dishi yojaya region parito,",
+      "double integral f — Fubini aadhaarato,",
+      "dy atha dx, athava dx atha dy,",
+      "surface adhaha volume — vande prabho, jaya."
+    ]
+  },
+  {
+    "unit": "Unit 4",
+    "topic": "Change of Order of Integration",
+    "mood": "Smooth",
+    "formula": "∫∫ f dy dx  ⇄  ∫∫ f dx dy",
+    "concept": "Sketch the region and swap inner/outer limits to the opposite strips.",
+    "style_en": "Funk-Pop / Dance",
+    "style_hi": "Bollywood Retro Funk",
+    "ref_en": "Mark Ronson ft. Bruno Mars – ‘Uptown Funk’",
+    "ref_hi": "Benny Dayal – ‘Badtameez Dil’",
+    "lyrics_en": [
+      "Sketch the region, feel the funky bass,",
+      "vertical strips to horizontal, change the space.",
+      "Swap d y d x to d x d y, re-bound the floor,",
+      "change of order groove makes the hard one score."
+    ],
+    "lyrics_hi": [
+      "region ko sketch karo, funky bass,",
+      "vertical se horizontal, badlo space.",
+      "d y d x ko d x d y mein lao,",
+      "change of order groove — easy banao."
+    ],
+    "lyrics_bhajan": [
+      "Region ko kheencho, man mein dhyaan dharo,",
+      "andar-baahar ki seema aaps mein badlo,",
+      "dy dx se dx dy ban jaaye,",
+      "change of order — ganit muskaaye."
+    ],
+    "lyrics_mr": [
+      "region sketch kara, funky bass,",
+      "vertical te horizontal, badla space.",
+      "d y d x la d x d y madhe aana,",
+      "change of order groove — sopa bana na."
+    ],
+    "lyrics_gu": [
+      "region sketch karo, funky bass,",
+      "vertical thi horizontal, badlo space.",
+      "d y d x ne d x d y ma laavo,",
+      "change of order groove — saral banaavo."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, region aakarshaya, dhyaanam dhaaraya,",
+      "antar-bahya seema parasparam badalaya,",
+      "dy dx to dx dy bhavati,",
+      "change of order — ganitam smerati."
+    ]
+  },
+  {
+    "unit": "Unit 4",
+    "topic": "Change of Variables & Jacobian",
+    "mood": "Rap",
+    "formula": "∬ f dx dy = ∬ f |J| du dv ; polar J=r",
+    "concept": "Transform coordinates and rescale area by the Jacobian determinant |J|.",
+    "style_en": "Fast Trap / EDM",
+    "style_hi": "Punjabi Bhangra Fusion",
+    "ref_en": "Travis Scott – ‘SICKO MODE’",
+    "ref_hi": "Raftaar – ‘Swag Se Swagat’",
+    "lyrics_en": [
+      "New coordinates dropping, don't lose the ground,",
+      "scale the area by the Jacobian J, spin it around.",
+      "Polar gives J equals r, d A equals r d r d theta,",
+      "Jacobian in the bass, transform and go!"
+    ],
+    "lyrics_hi": [
+      "naye coordinates, zameen na chhoote,",
+      "area ko Jacobian J se scale karo, loot le.",
+      "polar mein J barabar r, d A barabar r d r d theta,",
+      "Jacobian bass mein — transform, chalo!"
+    ],
+    "lyrics_bhajan": [
+      "Coordinate badlo, nayi drishti paao,",
+      "Jacobian determinant se area tolo,",
+      "polar mein J barabar r — yaad rakho,",
+      "change of variables — prabhu naam japo."
+    ],
+    "lyrics_mr": [
+      "nave coordinates, jameen na sute,",
+      "area la Jacobian J ne scale kara, lute.",
+      "polar madhe J barobar r, d A barobar r d r d theta,",
+      "Jacobian bass madhe — transform, chala!"
+    ],
+    "lyrics_gu": [
+      "nava coordinates, jameen na chhute,",
+      "area ne Jacobian J thi scale karo, lute.",
+      "polar ma J barabar r, d A barabar r d r d theta,",
+      "Jacobian bass ma — transform, chalo!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, coordinate badalaya, nava drshtim,",
+      "Jacobian determinant — area tolaya nityam,",
+      "polar madhye J samaanam r — smaraama,",
+      "change of variables — prabhu-naama japaama."
+    ]
+  },
+  {
+    "unit": "Unit 4",
+    "topic": "Double Integral to Find Area",
+    "mood": "Smooth",
+    "formula": "Area(R) = ∬_R dA = ∬_R dx dy",
+    "concept": "Set the integrand to 1 and the double integral returns plain area.",
+    "style_en": "Indie Folk / Acoustic Pop",
+    "style_hi": "Pahadi Melody / Folk",
+    "ref_en": "Ed Sheeran – ‘Photograph’",
+    "ref_hi": "Jubin Nautiyal – ‘Raataan Lambiyan’",
+    "lyrics_en": [
+      "Set the function to one, nothing more to add,",
+      "melodic folk computes the area, not bad.",
+      "Area of R equals double integral d A, the region's embrace,",
+      "integrate the plane and you've measured the space."
+    ],
+    "lyrics_hi": [
+      "function ko one karo, aur kuch nahi,",
+      "folk ki dhun area naap le wahi.",
+      "Area of R barabar double integral d A, region sang,",
+      "plane integrate karke naapa rang."
+    ],
+    "lyrics_bhajan": [
+      "Integrand ek rakho — saral upaay,",
+      "double integral dA — area aa jaaye,",
+      "region ka kshetrafal seedha mile,",
+      "ganit-dev ki kripa — kamal khile."
+    ],
+    "lyrics_mr": [
+      "function la one kara, aani kahi nahi,",
+      "folk dhun area mojun ghete tehi.",
+      "Area of R barobar double integral d A, region sang,",
+      "plane integrate karun mojla rang."
+    ],
+    "lyrics_gu": [
+      "function ne one karo, biju kai nahi,",
+      "folk dhun area maapi le ahi.",
+      "Area of R barabar double integral d A, region sang,",
+      "plane integrate kari maapyo rang."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, integrand ekam — saralam upaayam,",
+      "double integral dA — area aayaati sadayam,",
+      "region kshetram — rjuhu labhyate,",
+      "ganita-deva kripaa — kamalam phullate."
+    ]
+  },
+  {
+    "unit": "Unit 4",
+    "topic": "Triple Integral",
+    "mood": "Upbeat",
+    "formula": "∭_V f(x,y,z) dV = ∫∫∫ f dz dy dx",
+    "concept": "Integrate over a 3D solid for mass, centre of mass, moments.",
+    "style_en": "Dance-Pop / EDM",
+    "style_hi": "Filmi Dance Beat",
+    "ref_en": "David Guetta ft. Sia – ‘Titanium’",
+    "ref_hi": "Arijit/Pritam – ‘Ilahi (Remix)’",
+    "lyrics_en": [
+      "Slice the solid across all three,",
+      "dance-pop dynamic as far as you see.",
+      "Triple integral over V, f of x y z, d V, layer the night,",
+      "triple integral spinning the 3D light."
+    ],
+    "lyrics_hi": [
+      "solid ko kaato teeno dimension,",
+      "dance-pop dynamic, poori attention.",
+      "Triple integral over V, f of x y z, d V, raat saja,",
+      "triple integral — 3D jaga!"
+    ],
+    "lyrics_bhajan": [
+      "Teen dishaon mein, solid ke andar,",
+      "triple integral f — dz dy dx bhar,",
+      "mass ya centre, moment nikal aaye,",
+      "teen-guna integral — bhakt gun gaaye."
+    ],
+    "lyrics_mr": [
+      "solid la kaapa teen dimension,",
+      "dance-pop dynamic, poori attention.",
+      "Triple integral over V, f of x y z, d V, raat saja,",
+      "triple integral — 3D jaga!"
+    ],
+    "lyrics_gu": [
+      "solid ne kaapo tran dimension,",
+      "dance-pop dynamic, poori attention.",
+      "Triple integral over V, f of x y z, d V, raat saja,",
+      "triple integral — 3D jaga!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, tri-dishi, solid antare,",
+      "triple integral f — dz dy dx bhare,",
+      "mass athava centre, moment labhyate,",
+      "tri-guna integral — bhaktaha gaayate."
+    ]
+  },
+  {
+    "unit": "Unit 4",
+    "topic": "Spherical Coordinates",
+    "mood": "Calm",
+    "formula": "dV = ρ² sinφ dρ dθ dφ",
+    "concept": "For spherical symmetry, convert to (ρ,θ,φ) with volume element ρ²sinφ.",
+    "style_en": "Epic Synthwave / Cinematic",
+    "style_hi": "Bollywood Fusion",
+    "ref_en": "Imagine Dragons – ‘Believer’",
+    "ref_hi": "A.R. Rahman – ‘Jai Ho’",
+    "lyrics_en": [
+      "Cartesian to spherical, cosmic and wide,",
+      "synthwave carries the grid as your guide.",
+      "d V equals rho squared sine phi, d rho d theta d phi,",
+      "radial and angular, drifting high."
+    ],
+    "lyrics_hi": [
+      "Cartesian se spherical, cosmic si raah,",
+      "synthwave le chale grid ko, wah.",
+      "d V barabar rho squared sine phi, d rho d theta d phi,",
+      "radial angular — bahta sukoon, aah."
+    ],
+    "lyrics_bhajan": [
+      "Gol symmetry ho to rho theta phi laao,",
+      "dV barabar rho square sin phi — gaao,",
+      "rho se phi tak seema sajaao,",
+      "spherical ka marm — mann mein basaao."
+    ],
+    "lyrics_mr": [
+      "Cartesian te spherical, cosmic vaat,",
+      "synthwave nete grid la, kay baat.",
+      "d V barobar rho squared sine phi, d rho d theta d phi,",
+      "radial angular — vahta shanti, aah."
+    ],
+    "lyrics_gu": [
+      "Cartesian thi spherical, cosmic raah,",
+      "synthwave lai jaay grid ne, waah.",
+      "d V barabar rho squared sine phi, d rho d theta d phi,",
+      "radial angular — vehti shanti, aah."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, gola-symmetri — rho theta phi,",
+      "dV samaanam rho square sin phi — gaami hi,",
+      "rho to phi seema sajaya shubham,",
+      "spherical marma — manasi dhaaraya param."
+    ]
+  },
+  {
+    "unit": "Unit 4",
+    "topic": "Cylindrical Coordinates",
+    "mood": "Upbeat",
+    "formula": "dV = r dr dθ dz",
+    "concept": "For axial symmetry, polar in the plane plus height z.",
+    "style_en": "Electro-Swing / Pop",
+    "style_hi": "Desi Beats",
+    "ref_en": "Avicii – ‘Wake Me Up’",
+    "ref_hi": "Badshah – ‘DJ Waley Babu’",
+    "lyrics_en": [
+      "Round the axis symmetry spins the swing,",
+      "polar plus a height, let the cylinder sing.",
+      "d V equals r, d r d theta d z, the groove's in gear,",
+      "cylindrical coordinates, loud and clear."
+    ],
+    "lyrics_hi": [
+      "axis ke gird symmetry ka swing,",
+      "polar plus height, cylinder sing.",
+      "d V barabar r, d r d theta d z, gear mein groove,",
+      "cylindrical coordinates — loud move!"
+    ],
+    "lyrics_bhajan": [
+      "Axis ke chaaro polar, oopar z buland,",
+      "dV barabar r — dr dtheta dz chhand,",
+      "cylinder jaisa solid saral ho jaaye,",
+      "cylindrical coordinate — sukh barsaaye."
+    ],
+    "lyrics_mr": [
+      "axis chya bhovti symmetry cha swing,",
+      "polar plus height, cylinder sing.",
+      "d V barobar r, d r d theta d z, gear madhe groove,",
+      "cylindrical coordinates — loud move!"
+    ],
+    "lyrics_gu": [
+      "axis ni aaspaas symmetry no swing,",
+      "polar plus height, cylinder sing.",
+      "d V barabar r, d r d theta d z, gear ma groove,",
+      "cylindrical coordinates — loud move!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, axis parito polar, upari z,",
+      "dV samaanam r — dr dtheta dz chhandaha prajaa,",
+      "cylinder sadrsha solid saralam bhavati,",
+      "cylindrical coordinate — sukham varshati."
+    ]
+  },
+  {
+    "unit": "Unit 4",
+    "topic": "Triple Integral to Find Volume",
+    "mood": "Rap",
+    "formula": "Volume(V) = ∭_V dV",
+    "concept": "Set the integrand to 1 over a 3D region for the enclosed volume.",
+    "style_en": "High-Energy Rap / Trap",
+    "style_hi": "Gully Rap",
+    "ref_en": "Travis Scott – ‘SICKO MODE’",
+    "ref_hi": "Divine & Naezy – ‘Mere Gully Mein’",
+    "lyrics_en": [
+      "Sum the tiny blocks d V in the frame,",
+      "fast-paced bars computing, that's the game.",
+      "Volume of V equals triple integral d V, stack them high,",
+      "complete 3D structure reaching for the sky."
+    ],
+    "lyrics_hi": [
+      "chhote blocks d V ko jodo frame,",
+      "fast bars compute karein, yahi game.",
+      "Volume of V barabar triple integral d V, high jama,",
+      "poora 3D structure — aasmaan chhuaa!"
+    ],
+    "lyrics_bhajan": [
+      "Integrand ek rakho solid ke beech,",
+      "triple integral dV — volume ki seekh,",
+      "andar ka sampoorn sthaan mil jaaye,",
+      "ghanphal ka vardaan — bhakt paaye."
+    ],
+    "lyrics_mr": [
+      "lahan blocks d V la joda frame,",
+      "fast bars compute kartat, hach game.",
+      "Volume of V barobar triple integral d V, high jama,",
+      "poora 3D structure — aakash chhuala!"
+    ],
+    "lyrics_gu": [
+      "nana blocks d V ne jodo frame,",
+      "fast bars compute kare, aaj game.",
+      "Volume of V barabar triple integral d V, high jama,",
+      "poora 3D structure — aakash chhu ja!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, integrand ekam — solid madhye,",
+      "triple integral dV — volume vidye,",
+      "antaram sampoornam sthaanam labhyate,",
+      "ghana-phalam varam — bhaktaha labhate."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Gradient of a Scalar Field",
+    "mood": "Upbeat",
+    "formula": "∇φ = (∂φ/∂x)i+(∂φ/∂y)j+(∂φ/∂z)k",
+    "concept": "Points in the direction of maximum increase, normal to level surfaces.",
+    "style_en": "Upbeat Synth-Pop",
+    "style_hi": "Bollywood Pop",
+    "ref_en": "Dua Lipa – ‘Levitating’",
+    "ref_hi": "Badshah & Neha Kakkar – ‘Kar Gayi Chull’",
+    "lyrics_en": [
+      "Point to the steepest, that's the vow,",
+      "grad phi shows the fastest climb right now.",
+      "Magnitude the max rate, normal to the shell,",
+      "gradient's the synth-pop that leads you well."
+    ],
+    "lyrics_hi": [
+      "sabse steep ki ore ishaara,",
+      "grad phi dikhaaye chadhaav saara.",
+      "magnitude max rate, surface pe normal,",
+      "gradient synth-pop — raasta formal!"
+    ],
+    "lyrics_bhajan": [
+      "Scalar field phi ka grad banaao,",
+      "phi_x i, phi_y j, phi_z k sajaao,",
+      "sabse tez badhti disha wahi bataaye,",
+      "gradient normal level pe — gun gaaye."
+    ],
+    "lyrics_mr": [
+      "sarvat steep kade ishaara,",
+      "grad phi dakhavte chadhav saara.",
+      "magnitude max rate, surface var normal,",
+      "gradient synth-pop — vaat formal!"
+    ],
+    "lyrics_gu": [
+      "sauthi steep taraf ishaaro,",
+      "grad phi batave chadhaav saaro.",
+      "magnitude max rate, surface par normal,",
+      "gradient synth-pop — rasto formal!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, scalar phi — grad karomi,",
+      "phi_x i, phi_y j, phi_z k namaami,",
+      "tiivratamaa vardhana-dishaa darshayati,",
+      "gradient normal level — sarve gaayati."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Directional Derivative",
+    "mood": "Smooth",
+    "formula": "D_u φ = ∇φ · û = |∇φ| cosθ",
+    "concept": "Rate of change in a chosen direction, from the gradient dotted with it.",
+    "style_en": "Neo-Soul / R&B",
+    "style_hi": "Soft Hindi Acoustic",
+    "ref_en": "Bruno Mars – ‘Treasure’",
+    "ref_hi": "Vishal Dadlani – ‘Desi Girl’",
+    "lyrics_en": [
+      "Any direction you want to know,",
+      "smooth soul groove tells you how it'll flow.",
+      "D u phi equals grad phi dot u hat, the dot does its part,",
+      "directional derivative straight from the heart."
+    ],
+    "lyrics_hi": [
+      "jis direction chaho rate jaano,",
+      "smooth soul groove, flow pehchaano.",
+      "D u phi barabar grad phi dot u hat, dot ka khel,",
+      "directional derivative — dil se mel!"
+    ],
+    "lyrics_bhajan": [
+      "Chuni hui disha mein badlaav naapo,",
+      "grad phi dot u-hat — prabhu naam japo,",
+      "mod grad phi cos theta — uttar aaye,",
+      "directional derivative — man harshaaye."
+    ],
+    "lyrics_mr": [
+      "jya direction havi rate jana,",
+      "smooth soul groove, flow olakhana.",
+      "D u phi barobar grad phi dot u hat, dot cha khel,",
+      "directional derivative — manane mel!"
+    ],
+    "lyrics_gu": [
+      "je direction jooie rate jaano,",
+      "smooth soul groove, flow pichhaano.",
+      "D u phi barabar grad phi dot u hat, dot no khel,",
+      "directional derivative — man thi mel!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, ichchhita-dishi parivartana maapaya,",
+      "grad phi dot u-hat — prabhu-naama japaya,",
+      "mod grad phi cos theta — uttaram aayaati,",
+      "directional derivative — manas tushyati."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Divergence of a Vector Field",
+    "mood": "Upbeat",
+    "formula": "∇·F = ∂F₁/∂x + ∂F₂/∂y + ∂F₃/∂z",
+    "concept": "Net outward flux per unit volume — source, sink, or solenoidal.",
+    "style_en": "EDM / Trap",
+    "style_hi": "Desi Hip-Hop",
+    "ref_en": "Travis Scott – ‘SICKO MODE’",
+    "ref_hi": "Raftaar – ‘Swag Se Swagat’",
+    "lyrics_en": [
+      "Source or a sink, feel the flow,",
+      "div F, grad dot F tells you where it'll go.",
+      "Pumping EDM, flux pouring out the frame,",
+      "positive divergence — the source is the name."
+    ],
+    "lyrics_hi": [
+      "source ya sink, flow ko mehsoos,",
+      "div F, grad dot F bataaye rukh.",
+      "pumping EDM, flux bahe frame se,",
+      "positive divergence — source ke naam se!"
+    ],
+    "lyrics_bhajan": [
+      "Field F ka divergence — flux ki baat,",
+      "F-one x, F-two y, F-three z saath,",
+      "source ya sink ya solenoidal ho jaaye,",
+      "div F ka gyaan — bhakt samjhaaye."
+    ],
+    "lyrics_mr": [
+      "source ki sink, flow la jaanva,",
+      "div F, grad dot F sangte dhanva.",
+      "pumping EDM, flux vahto frame madhun,",
+      "positive divergence — source chya naavane!"
+    ],
+    "lyrics_gu": [
+      "source ke sink, flow ne anubhavo,",
+      "div F, grad dot F batave bhaavo.",
+      "pumping EDM, flux vahe frame thi,",
+      "positive divergence — source na naam thi!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, field F — divergence flux-vaartaa,",
+      "F-one x, F-two y, F-three z sahita,",
+      "source athava sink, solenoidal bhavati,",
+      "div F jnaanam — bhaktaha vyaakhyaati."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Curl of a Vector Field",
+    "mood": "Smooth",
+    "formula": "∇×F  (=0 ⇒ irrotational)",
+    "concept": "Local rotational circulation; zero curl means irrotational / conservative.",
+    "style_en": "Electro-Swing / Funk",
+    "style_hi": "Bollywood Retro Funk",
+    "ref_en": "Mark Ronson ft. Bruno Mars – ‘Uptown Funk’",
+    "ref_hi": "Benny Dayal – ‘Badtameez Dil’",
+    "lyrics_en": [
+      "Spin it, swirl it, round it goes,",
+      "curl F, grad cross F — the rotation knows.",
+      "Electro-swing circulation, feel the twist,",
+      "zero curl means irrotational — can't resist."
+    ],
+    "lyrics_hi": [
+      "ghumao, bhanwar, round yeh jaaye,",
+      "curl F, grad cross F rotation samjhaaye.",
+      "electro-swing circulation, twist ka maza,",
+      "zero curl toh irrotational — adaa!"
+    ],
+    "lyrics_bhajan": [
+      "Ghumaav naapo, curl ko jaano,",
+      "grad cross F — chakra pehchaano,",
+      "curl zero ho to irrotational kahaaye,",
+      "conservative field — sant samjhaaye."
+    ],
+    "lyrics_mr": [
+      "firva, bhovra, round ha jato,",
+      "curl F, grad cross F rotation sangto.",
+      "electro-swing circulation, twist chi maja,",
+      "zero curl tar irrotational — adaa!"
+    ],
+    "lyrics_gu": [
+      "ghumaavo, vamal, round aa jaay,",
+      "curl F, grad cross F rotation samjaay.",
+      "electro-swing circulation, twist ni maja,",
+      "zero curl to irrotational — adaa!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, bhramanam maapaya, curl jaanaami,",
+      "grad cross F — chakram pratyabhijaanaami,",
+      "curl shunyam to irrotational uchyate,",
+      "conservative field — santaha bodhyate."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Scalar Potential",
+    "mood": "Calm",
+    "formula": "∇×F=0 ⇒ F=∇φ ; ∫F·dr=φ(B)−φ(A)",
+    "concept": "Irrotational fields have a scalar potential; line integrals are path-independent.",
+    "style_en": "Ambient Lo-Fi / Chill",
+    "style_hi": "Sufi Pop",
+    "ref_en": "Lofi Girl – ‘Chillhop Beats’",
+    "ref_hi": "Anuv Jain – ‘Baarishein’",
+    "lyrics_en": [
+      "Irrotational calm, a potential found,",
+      "lo-fi settles soft on steady ground.",
+      "F equals grad phi, the path won't matter,",
+      "line integral equals phi B minus phi A, nothing to shatter."
+    ],
+    "lyrics_hi": [
+      "irrotational shaant, potential mile,",
+      "lo-fi settle ho steady zameen pe chale.",
+      "F barabar grad phi, raah na fark pade,",
+      "line integral barabar phi B minus phi A — kuch na bigde."
+    ],
+    "lyrics_bhajan": [
+      "Curl zero ho to potential mile,",
+      "F barabar grad phi — rahasya khile,",
+      "line integral phi-B minus phi-A,",
+      "path se nirbhar nahi — gun gaaye."
+    ],
+    "lyrics_mr": [
+      "irrotational shaant, potential milto,",
+      "lo-fi settle hoto steady bhuvar chalto.",
+      "F barobar grad phi, vaat farak padat nahi,",
+      "line integral barobar phi B minus phi A — kahi bighadat nahi."
+    ],
+    "lyrics_gu": [
+      "irrotational shaant, potential male,",
+      "lo-fi settle thaay steady bhoomi par chale.",
+      "F barabar grad phi, raste farak na pade,",
+      "line integral barabar phi B minus phi A — kai na bagade."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, curl shunyam — potential labhyate,",
+      "F samaanam grad phi — rahasyam uchyate,",
+      "line integral phi-B minus phi-A,",
+      "maargaat nirapeksham — gaayate, jaya."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Harmonic Function",
+    "mood": "Calm",
+    "formula": "∇²φ = ∂²φ/∂x²+∂²φ/∂y²+∂²φ/∂z² = 0",
+    "concept": "Satisfies Laplace's equation — steady-state, source-free equilibrium.",
+    "style_en": "Acoustic Guitar / Piano",
+    "style_hi": "Semi-Classical Lo-Fi",
+    "ref_en": "Post Malone & Swae Lee – ‘Sunflower’",
+    "ref_hi": "Mohit Chauhan – ‘Tum Se Hi (Lo-Fi)’",
+    "lyrics_en": [
+      "Steady state calm, no source inside,",
+      "acoustic harmony as the fields subside.",
+      "Laplacian of phi equals zero, Laplace as the guide,",
+      "harmonic and even, equilibrium's pride."
+    ],
+    "lyrics_hi": [
+      "steady state shaant, andar na source,",
+      "acoustic harmony, fields ka course.",
+      "Laplacian of phi barabar zero, Laplace guide,",
+      "harmonic even — equilibrium pride."
+    ],
+    "lyrics_bhajan": [
+      "Dusra partial sabka jodo saath,",
+      "phi_xx phi_yy phi_zz — Laplace ki baat,",
+      "yog barabar zero to harmonic kahaaye,",
+      "sthir santulan — prabhu samjhaaye."
+    ],
+    "lyrics_mr": [
+      "steady state shaant, aat na source,",
+      "acoustic harmony, fields cha course.",
+      "Laplacian of phi barobar zero, Laplace guide,",
+      "harmonic even — equilibrium pride."
+    ],
+    "lyrics_gu": [
+      "steady state shaant, andar na source,",
+      "acoustic harmony, fields no course.",
+      "Laplacian of phi barabar zero, Laplace guide,",
+      "harmonic even — equilibrium pride."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, dvitiya partial sarvam yojaya,",
+      "phi_xx phi_yy phi_zz — Laplace vadaya,",
+      "yogaha samaanam shunyam — harmonic uchyate,",
+      "sthira-santulanam — prabhuhu bodhyate."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Line Integral",
+    "mood": "Smooth",
+    "formula": "∫_C F·dr = ∫ (F₁dx+F₂dy+F₃dz)",
+    "concept": "Tangential component along a curve — the work done along the path.",
+    "style_en": "Country Pop / Indie Folk",
+    "style_hi": "Desi Pop",
+    "ref_en": "Coldplay – ‘The Scientist’",
+    "ref_hi": "Jubin Nautiyal – ‘Raataan Lambiyan’",
+    "lyrics_en": [
+      "Trace the path, the field does its pay,",
+      "indie folk journey along the way.",
+      "Line integral over C, F dot d r, the work is found,",
+      "tangential components summing all around."
+    ],
+    "lyrics_hi": [
+      "raah ko trace karo, field de daam,",
+      "indie folk safar, chalta kaam.",
+      "Line integral over C, F dot d r, work mil jaaye,",
+      "tangential components jud ke aaye."
+    ],
+    "lyrics_bhajan": [
+      "Curve C ke sang F dot dr chalo,",
+      "F-one dx, F-two dy, F-three dz jodo,",
+      "raah par kiya gaya kaam mil jaaye,",
+      "line integral — bhakt sukh paaye."
+    ],
+    "lyrics_mr": [
+      "vaat trace kara, field deto daam,",
+      "indie folk pravas, chalte kaam.",
+      "Line integral over C, F dot d r, work milel,",
+      "tangential components judun yetil."
+    ],
+    "lyrics_gu": [
+      "raste trace karo, field aape daam,",
+      "indie folk safar, chaalu kaam.",
+      "Line integral over C, F dot d r, work male,",
+      "tangential components judai ne aave."
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, curve C saha F dot dr chara,",
+      "F-one dx, F-two dy, F-three dz dhara,",
+      "maarge krtam karma labhyate,",
+      "line integral — bhaktaha sukham labhate."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Surface Integral",
+    "mood": "Upbeat",
+    "formula": "Flux = ∬_S F · n̂ dS",
+    "concept": "Normal component across a surface — the total flux through it.",
+    "style_en": "Dance-Pop / EDM",
+    "style_hi": "Filmi Dance Beat",
+    "ref_en": "David Guetta ft. Sia – ‘Titanium’",
+    "ref_hi": "Arijit/Pritam – ‘Ilahi (Remix)’",
+    "lyrics_en": [
+      "Flux through the surface, components add,",
+      "dance-pop energy, never sad.",
+      "Double integral over S, F dot n hat, d S, the flow goes through,",
+      "surface integral counting it for you."
+    ],
+    "lyrics_hi": [
+      "surface se flux, components add,",
+      "dance-pop energy, kabhi na sad.",
+      "Double integral over S, F dot n hat, d S, flow guzre,",
+      "surface integral — gin le saare!"
+    ],
+    "lyrics_bhajan": [
+      "Surface S ke paar F dot n-hat laao,",
+      "double integral dS — flux ko paao,",
+      "normal disha ka pravaah mil jaaye,",
+      "surface integral — man muskaaye."
+    ],
+    "lyrics_mr": [
+      "surface madhun flux, components add,",
+      "dance-pop energy, kadhi na sad.",
+      "Double integral over S, F dot n hat, d S, flow jaato,",
+      "surface integral — mojun ghe to!"
+    ],
+    "lyrics_gu": [
+      "surface thi flux, components add,",
+      "dance-pop energy, kyarey na sad.",
+      "Double integral over S, F dot n hat, d S, flow jaay,",
+      "surface integral — gani le aay!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, surface S paaram F dot n-hat,",
+      "double integral dS — flux labhyate drdham sat,",
+      "normala-dishi pravaaham labhyate,",
+      "surface integral — manas smerate."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Green's Theorem in a Plane",
+    "mood": "Rap",
+    "formula": "∮(M dx+N dy)=∬(∂N/∂x−∂M/∂y)dA",
+    "concept": "Links a closed line integral in the plane to a double integral of circulation.",
+    "style_en": "Fast-Paced Rap / Trap",
+    "style_hi": "Gully Rap",
+    "ref_en": "Eminem – ‘Lose Yourself’",
+    "ref_hi": "Divine & Naezy – ‘Mere Gully Mein’",
+    "lyrics_en": [
+      "Close the loop in the plane, link the two,",
+      "rapid-fire bars connecting the view.",
+      "Closed integral M d x plus N d y equals double integral N x minus M y,",
+      "Green's theorem flipping the boundary high."
+    ],
+    "lyrics_hi": [
+      "plane mein loop band, dono jodo,",
+      "rapid bars se view ko modo.",
+      "Closed integral M d x plus N d y barabar double integral N x minus M y,",
+      "Green's theorem — boundary set right, chalo!"
+    ],
+    "lyrics_bhajan": [
+      "Band loop plane mein — Green ki daya,",
+      "M dx N dy — ghoomo har disha,",
+      "barabar double integral N_x minus M_y,",
+      "circulation ka bhed — prabhu ji."
+    ],
+    "lyrics_mr": [
+      "plane madhe loop band, doghe joda,",
+      "rapid bars ne view la moda.",
+      "Closed integral M d x plus N d y barobar double integral N x minus M y,",
+      "Green's theorem — boundary set right, chala!"
+    ],
+    "lyrics_gu": [
+      "plane ma loop band, banne jodo,",
+      "rapid bars thi view ne modo.",
+      "Closed integral M d x plus N d y barabar double integral N x minus M y,",
+      "Green's theorem — boundary set right, chalo!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, baddha loop plane madhye, Green-kripaa,",
+      "M dx N dy — bhramaya sarva-dishaa,",
+      "samaanam double integral N_x minus M_y,",
+      "circulation rahasyam — vande, jaya."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Stokes' Theorem",
+    "mood": "Calm",
+    "formula": "∮_C F·dr = ∬_S (∇×F)·n̂ dS",
+    "concept": "Generalises Green to 3D: boundary line integral equals surface integral of curl.",
+    "style_en": "Epic Cinematic / Synthwave",
+    "style_hi": "Bollywood Cinematic Score",
+    "ref_en": "Imagine Dragons – ‘Believer’",
+    "ref_hi": "Shankar-Ehsaan-Loy – ‘Zinda’",
+    "lyrics_en": [
+      "Boundary line to the curl on the sheet,",
+      "cinematic swell makes the theorem complete.",
+      "Closed integral F dot d r equals double integral curl F dot n hat d S,",
+      "Stokes unites the edge and the sheet."
+    ],
+    "lyrics_hi": [
+      "boundary line se curl ki sheet,",
+      "cinematic swell — theorem complete.",
+      "Closed integral F dot d r barabar double integral curl F dot n hat d S,",
+      "Stokes jode edge aur sheet, neat!"
+    ],
+    "lyrics_bhajan": [
+      "Boundary line se curl ki sair,",
+      "loop F dot dr — koi nahi gair,",
+      "barabar surface integral curl dot n-hat,",
+      "Stokes ki mahima — teenon lok saath."
+    ],
+    "lyrics_mr": [
+      "boundary line ne curl chi sheet,",
+      "cinematic swell — theorem complete.",
+      "Closed integral F dot d r barobar double integral curl F dot n hat d S,",
+      "Stokes jodto edge ani sheet, neat!"
+    ],
+    "lyrics_gu": [
+      "boundary line thi curl ni sheet,",
+      "cinematic swell — theorem complete.",
+      "Closed integral F dot d r barabar double integral curl F dot n hat d S,",
+      "Stokes jode edge ane sheet, neat!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, boundary line to curl bhramanam,",
+      "loop F dot dr — na ko api param,",
+      "samaanam surface integral curl dot n-hat,",
+      "Stokes-mahimaa — tri-lokam saha sat."
+    ]
+  },
+  {
+    "unit": "Unit 5",
+    "topic": "Gauss Divergence Theorem",
+    "mood": "Upbeat",
+    "formula": "∯_S F·n̂ dS = ∭_V (∇·F) dV",
+    "concept": "Outward flux through a closed surface equals the volume integral of divergence.",
+    "style_en": "Electro-Dance (EDM) / Pop",
+    "style_hi": "High-Energy Bollywood Beat",
+    "ref_en": "David Guetta ft. Sia – ‘Titanium’",
+    "ref_hi": "Badshah – ‘DJ Waley Babu’",
+    "lyrics_en": [
+      "Flux across the surface, divergence in the core,",
+      "what flows out the boundary is what the volume store.",
+      "Closed surface F dot n hat d S equals triple integral div F d V,",
+      "Gauss's law of the volumes, the balance you adore."
+    ],
+    "lyrics_hi": [
+      "surface se flux, core mein divergence,",
+      "jo bahe boundary, wahi volume ki essence.",
+      "Closed surface F dot n hat d S barabar triple integral div F d V,",
+      "Gauss ka law — balance ki existence!"
+    ],
+    "lyrics_bhajan": [
+      "Band surface ka flux baahar jaaye,",
+      "barabar volume integral div F laaye,",
+      "andar ka source, bahar ka pravaah,",
+      "Gauss ka theorem — mann mein utsaah."
+    ],
+    "lyrics_mr": [
+      "surface madhun flux, core madhe divergence,",
+      "je vahte boundary, techi volume chi essence.",
+      "Closed surface F dot n hat d S barobar triple integral div F d V,",
+      "Gauss cha law — balance chi existence!"
+    ],
+    "lyrics_gu": [
+      "surface thi flux, core ma divergence,",
+      "je vahe boundary, teaj volume ni essence.",
+      "Closed surface F dot n hat d S barabar triple integral div F d V,",
+      "Gauss no law — balance ni existence!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, baddha surface flux bahihi yaati,",
+      "samaanam volume integral div F aayaati,",
+      "antaha source, bahiha pravaahaha,",
+      "Gauss-prameya — manasi utsaahaha."
+    ]
+  },
+  {
+    "unit": "Biology",
+    "subject": "Biology",
+    "topic": "Photosynthesis",
+    "mood": "Cheerful",
+    "formula": "6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂  (light energy + chlorophyll)",
+    "concept": "Green plants use light energy, caught by chlorophyll in the chloroplasts, to turn carbon dioxide and water into glucose (food), giving out oxygen.",
+    "style_en": "Cheerful kids pop / Christmas jingle",
+    "style_hi": "Bollywood kids pop",
+    "ref_en": "Jingle Bells (public domain)",
+    "ref_hi": "Jingle Bells (public domain)",
+    "lyrics_en": [
+      "Sunlight, water, CO₂ enter the leaf,",
+      "Photosynthesis in the chloroplast, chlorophyll grabs light!",
+      "Out come sugar, glucose, and some oxygen,",
+      "Light energy becomes the food, stored as chemical, hey!"
+    ],
+    "lyrics_hi": [
+      "dhoop, paani, CO₂, patti mein jaaye,",
+      "chloroplast ke andar, chlorophyll roshni pakde,",
+      "banti glucose, aur nikle oxygen,",
+      "yeh hai photosynthesis, paudhe ka pyaara khaana!"
+    ],
+    "distractors": [
+      "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + energy",
+      "6CO₂ + 6O₂ → C₆H₁₂O₆ + 6H₂O",
+      "6H₂O + 6O₂ → C₆H₁₂O₆ + 6CO₂"
+    ],
+    "lyrics_bhajan": [
+      "Hariyali mein basa prabhu ka prakash,",
+      "chhah CO2, chhah paani — leela ka vikaas,",
+      "chlorophyll se bane glucose ka bhog,",
+      "chhah oxygen prasaad — jeevan ka yog."
+    ],
+    "lyrics_mr": [
+      "soorya, paani, CO2, paanaat jaate,",
+      "chloroplast madhe, chlorophyll prakash dharte,",
+      "banto glucose, ani nighto oxygen,",
+      "he aahe photosynthesis, jhaadache aavadte khaane!"
+    ],
+    "lyrics_gu": [
+      "tadko, paani, CO2, paan ma jaay,",
+      "chloroplast ma, chlorophyll prakash jhile,",
+      "bane glucose, ane nikle oxygen,",
+      "aa chhe photosynthesis, chhod nu bhavtu khaanu!"
+    ],
+    "lyrics_bhajan_sa": [
+      "Om, harite vasati prabhoho prakaashaha,",
+      "shat CO2, shat jala — leelaa-vikaasaha,",
+      "chlorophyll-ena glucose nirmiyate,",
+      "shat oxygen prasaadaha — jeevanam jaayate."
+    ]
+  }
+]
