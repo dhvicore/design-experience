@@ -58,7 +58,7 @@ networking and a production-hosted backend are not configured.
   the lyrics to the model's cover endpoint. The Rolle/Raghupati demo uses a curated
   six-phrase Hindi educational verse in Devanagari with a devotional invocation. Other topics use estimated metrical reflow,
   not semantic AI rewriting or precise phoneme-to-note alignment.
-- Generated recordings are normalized to approximately -16 LUFS with a -1.5 dB
+- Generated recordings are normalized to approximately -14 LUFS with a -1.5 dB
   true-peak target. Cached server recordings are normalized on reuse, without another
   GPU job. The player shows device media volume and offers an increase-volume button;
   the activity routes hardware volume keys to music. Already downloaded app files

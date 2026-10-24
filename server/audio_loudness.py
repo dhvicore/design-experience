@@ -7,12 +7,12 @@ from pathlib import Path
 
 import imageio_ffmpeg
 
-VERSION = 1
+VERSION = 2
 
 
 def measure(path):
     command = [imageio_ffmpeg.get_ffmpeg_exe(), '-nostdin', '-hide_banner', '-i', str(path),
-               '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-']
+               '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-']
     result = subprocess.run(command, capture_output=True, text=True, timeout=120, check=True)
     matches = re.findall(r'\{\s*"input_i".*?\}', result.stderr, re.S)
     if not matches:
@@ -26,7 +26,7 @@ def normalize(path):
     if not math.isfinite(float(before['input_i'])):
         raise ValueError('The recording is silent; volume adjustment cannot recover missing vocals.')
     settings = ':'.join([
-        'loudnorm=I=-16:TP=-1.5:LRA=11',
+        'loudnorm=I=-14:TP=-1.5:LRA=11',
         'measured_I=' + before['input_i'], 'measured_TP=' + before['input_tp'],
         'measured_LRA=' + before['input_lra'], 'measured_thresh=' + before['input_thresh'],
         'offset=' + before['target_offset'], 'linear=true',

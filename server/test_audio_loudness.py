@@ -24,7 +24,7 @@ class LoudnessTest(unittest.TestCase):
             self.recording(path)
             report = normalize(path)
             self.assertGreater(report['after_lufs'] - report['before_lufs'], 20)
-            self.assertAlmostEqual(-16, report['after_lufs'], delta=1)
+            self.assertAlmostEqual(-14, report['after_lufs'], delta=1)
             self.assertLess(report['true_peak_db'], -0.1)
             decoded = Path(directory) / 'decoded.wav'
             subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), '-nostdin', '-loglevel', 'error', '-i', str(path),
