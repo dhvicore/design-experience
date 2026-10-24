@@ -239,3 +239,15 @@ process when rerun. Existing notebook tabs need the updated cell 4 code after a
 GitHub update. The Mac bridge reads `.env` on requests; no APK rebuild is needed.
 Never share the API key. A working bridge health check alone does not prove Colab
 is reachable. The UI now gives recovery instructions instead of a raw DNS error.
+
+### Colab float16 NaN recovery
+
+If the server traceback reports `NaN or Inf latents` with `dtype=torch.float16`,
+use `notebooks/Repair_Colab_Precision.py` in the existing Colab session. It patches
+only the pinned loader's precision override, stops only an ACE-Step listener on
+port 8001, retains its current API key, and relaunches with float32, LLM disabled,
+Agg plotting and CPU offload for support models. The main DiT remains on GPU,
+matching the previously working float32 demo configuration. It reuses downloaded
+weights. Wait for MODEL READY, rerun cell 3, then cell 4 and refresh `server/.env`.
+The helper's loader patch was checked locally; the repaired GPU run still needs
+verification in the user's Colab session.
