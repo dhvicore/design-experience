@@ -16,9 +16,12 @@ import androidx.compose.ui.unit.dp
 import com.nmims.songstudio.data.Curriculum
 import com.nmims.songstudio.auth.Student
 import com.nmims.songstudio.generation.LyricPrompts
+import com.nmims.songstudio.playback.AudioFiles
+import com.nmims.songstudio.playback.SongPlayer
 
 @Composable
-fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
+fun SongStudio(student: Student, onLogout: () -> Unit, importRevision: Int = 0,
+    importBusy: Boolean = false, importError: String = "", onImportAudio: (String) -> Unit = {}) = StudioTheme {
     val context = LocalContext.current
     val data = remember { Curriculum(context) }
     var page by rememberSaveable { mutableIntStateOf(1) }
@@ -115,12 +118,18 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
                     Panel(Lavender) {
                         Text("YOUR SONG", style = MaterialTheme.typography.labelSmall)
                         Text(topic.title, style = MaterialTheme.typography.titleLarge)
-                        Text("Melody: ${reference.title} — ${reference.artist}")
+                        Text("Requested melody: ${reference.title} — ${reference.artist}")
                         Text("${data.languages[language]} · ${style.name} · $tempo")
-                        Text("Your educational lyrics are ready. Audio generation needs a connected singing service and an authorized melody source.")
+                        Text("Import your finished educational song to listen here. Automatic music generation is not connected yet.")
                     }
-                    Button(onClick = {}, enabled = false, modifier = Modifier.fillMaxWidth()) { Text("Synthesize song — connection required") }
-                    Text("No song has been synthesized yet. Play becomes available after a successful audio result.", style = MaterialTheme.typography.bodySmall)
+                    val audioKey = listOf(student.id, topic.id, language, collection, style.id, reference.title, tempo, focus, lyrics).joinToString("\u0000")
+                    val audioFile = remember(audioKey, importRevision) { AudioFiles.file(context, audioKey) }
+                    if (audioFile.exists()) SongPlayer(audioFile, importRevision)
+                    Button(onClick = { onImportAudio(audioKey) }, enabled = !importBusy, modifier = Modifier.fillMaxWidth()) {
+                        Text(if (importBusy) "Importing song…" else if (audioFile.exists()) "Replace audio file" else "Import song audio")
+                    }
+                    Text("Choose a downloaded MP3, WAV or M4A of your educational song. It stays on this device and can be played offline.", style = MaterialTheme.typography.bodySmall)
+                    if (importError.isNotBlank()) Text(importError, color = MaterialTheme.colorScheme.error)
                     OutlinedButton(onClick = { notice = ""; page = 3 }, modifier = Modifier.fillMaxWidth()) { Text("Edit lyrics") }
                     OutlinedButton(onClick = { notice = ""; page = 1 }, modifier = Modifier.fillMaxWidth()) { Text("Choose another topic") }
                 }

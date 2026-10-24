@@ -10,4 +10,9 @@ class SessionViewModel : ViewModel() {
         private set
     fun signIn(value: Student) { student = value }
     fun signOut() { student = null }
+    var audioPickerOpen = false
+    var pendingAudioKey: String? = null
+    var importRevision by mutableStateOf(0)
+    var importBusy by mutableStateOf(false)
+    var importError by mutableStateOf("")
 }

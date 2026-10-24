@@ -11,7 +11,8 @@ Open this folder in Android Studio, sync Gradle, choose `app` and Run.
   unique-account validation and salted PBKDF2-HMAC-SHA256 password hashes.
 - Signup returns to login. Passwords and login tokens are not saved in UI state.
 - The session ends when the app backgrounds; reopening requires login. Rotation
-  preserves an active session. Logout is available in the header.
+  and the explicitly launched system audio picker preserve the current session.
+  Logout is available in the header.
 - Calculus: all 38 topics across five units (9 / 5 / 5 / 8 / 11), with concepts,
   formulas and existing multilingual lyric drafts from the prototype.
 - Independent lyric-language and music-collection choices: Hollywood/English,
@@ -20,6 +21,15 @@ Open this folder in Android Studio, sync Gradle, choose `app` and Run.
   and regional styles; an added lo-fi style uses the collection's reference list.
 - Multiple reference songs per style, student learning focus and tempo selection.
 - Editable local syllabus-based lyric drafts. This is not a live LLM response.
+
+## Working audio import and playback
+
+On the song screen choose **Import song audio**, select a finished MP3/WAV/M4A,
+then press **Play song**. Playback supports pause, seek and replay. Files are
+validated before import, copied to app-private storage (50 MB maximum), and kept
+for the current user/topic/music choices and lyric version. Reopening the same
+selection can play the imported recording offline. Importing does not generate or
+verify the recording's melody/lyrics. No example recordings are bundled.
 
 ## Audio generation is not connected
 
@@ -34,8 +44,8 @@ singing provider that supports that conditioning. A song title, YouTube listing 
 style prompt does not itself create an exact-melody adaptation. Provider access,
 capabilities and permitted inputs need verification before connecting synthesis.
 
-Remaining features: real provider-backed lyrics and audio generation, playback of
-successful generated output, saved library, cloud accounts if desired, and verified
+Remaining features: real provider-backed lyrics and audio generation, saved
+library browsing, cloud accounts if desired, and verified
 branch/year/semester mappings. SAP portal authentication is excluded for now.
 Device-local accounts do not verify NMIMS affiliation or sync between devices.
 
@@ -60,7 +70,7 @@ Kotlin source root: `app/src/main/java/com/nmims/songstudio/`.
 | Suraj | Real lyric/singing provider integration and request state: `generation/` |
 | Aditri | Login/profile/session: `auth/`, authentication part of `MainActivity.kt` |
 | Krishhma | Academic selection and curriculum database: `data/`, assets, academic screens |
-| Aman | Generated audio player, library/history and storage; add `playback/` and `library/` |
+| Aman | `playback/`: working file import and player; extend with library/history and provider outputs |
 
 All five supply and validate their own subject data, keywords/formulas, song
 selections and topic mappings. Integration, tests, screenshots and documentation
@@ -90,7 +100,9 @@ The first sync may need internet for dependencies.
 
 Emulator tests cover persistent account login, wrong/unknown passwords, duplicate
 accounts, invalid signup inputs, logout on backgrounding, session preservation on
-rotation, all five Calculus units and multiple music choices. Test accounts use a
+rotation, all five Calculus units and multiple music choices. Audio tests verify
+import persistence, invalid-file rejection, playback progress, pause and seek using
+a generated test signal (not an educational song). Test accounts use a
 separate temporary test database and do not modify the real account database.
 
 ## References
