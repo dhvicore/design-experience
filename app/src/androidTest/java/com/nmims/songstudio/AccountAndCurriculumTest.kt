@@ -32,6 +32,33 @@ class AccountAndCurriculumTest {
         } finally { context.deleteDatabase(db) }
     }
 
+    @Test fun emailSurvivesStoreRecreationAndFailedLoginsDoNotReplaceIt() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val db = "test_remembered_email_${UUID.randomUUID()}.db"
+        try {
+            AccountStore(context, db).use { store ->
+                assertEquals("", store.rememberedEmail())
+                store.signUp("Test Student", " FIRST@example.test ", "test-password-123")
+            }
+            AccountStore(context, db).use { store ->
+                assertEquals("first@example.test", store.rememberedEmail())
+                store.signUp("Other Student", "second@example.test", "another-password")
+                store.login("FIRST@example.test", "test-password-123")
+            }
+            AccountStore(context, db).use { store ->
+                assertEquals("first@example.test", store.rememberedEmail())
+                assertThrows(IllegalArgumentException::class.java) { store.login("second@example.test", "wrong-password") }
+                assertEquals("first@example.test", store.rememberedEmail())
+            }
+            // Upgrade path: existing account databases predate the remembered-email preference.
+            context.getSharedPreferences("${db}_login", android.content.Context.MODE_PRIVATE).edit().clear().commit()
+            AccountStore(context, db).use { assertEquals("second@example.test", it.rememberedEmail()) }
+        } finally {
+            context.deleteDatabase(db)
+            context.getSharedPreferences("${db}_login", android.content.Context.MODE_PRIVATE).edit().clear().commit()
+        }
+    }
+
     @Test fun backgroundingClearsLoginWhileRotationKeepsIt() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         ActivityScenario.launch(MainActivity::class.java).use { scenario ->

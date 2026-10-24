@@ -15,6 +15,16 @@ data class Student(val id: Long, val name: String, val email: String)
 
 /** Device-local accounts. No SAP/portal authentication or persisted sign-in token. */
 class AccountStore(context: Context, databaseName: String = "student_accounts.db") : SQLiteOpenHelper(context, databaseName, null, 1) {
+    private val preferences = context.applicationContext.getSharedPreferences("${databaseName}_login", Context.MODE_PRIVATE)
+
+    fun rememberedEmail(): String = preferences.getString("email", null) ?: readableDatabase.query(
+        "accounts", arrayOf("email"), null, null, null, null, "id DESC", "1"
+    ).use { rows -> if (rows.moveToFirst()) rows.getString(0) else "" }
+
+    private fun rememberEmail(email: String) {
+        preferences.edit().putString("email", email).commit()
+    }
+
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("CREATE TABLE accounts (id INTEGER PRIMARY KEY, name TEXT NOT NULL, email TEXT NOT NULL UNIQUE, salt TEXT NOT NULL, password_hash TEXT NOT NULL)")
     }
@@ -33,6 +43,7 @@ class AccountStore(context: Context, databaseName: String = "student_accounts.db
         }
         try { writableDatabase.insertOrThrow("accounts", null, values) }
         catch (_: SQLiteConstraintException) { throw IllegalArgumentException("An account already exists with this email. Please log in.") }
+        rememberEmail(normalized)
     }
 
     fun login(email: String, password: String): Student {
@@ -43,6 +54,7 @@ class AccountStore(context: Context, databaseName: String = "student_accounts.db
             val expected = if (exists) Base64.decode(rows.getString(rows.getColumnIndexOrThrow("password_hash")), Base64.NO_WRAP) else ByteArray(32)
             val valid = MessageDigest.isEqual(hash(password, salt), expected)
             require(exists && valid) { "Email or password is incorrect." }
+            rememberEmail(normalized)
             return Student(rows.getLong(rows.getColumnIndexOrThrow("id")),
                 rows.getString(rows.getColumnIndexOrThrow("name")), rows.getString(rows.getColumnIndexOrThrow("email")))
         }

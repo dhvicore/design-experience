@@ -27,7 +27,7 @@ fun AuthScreen(onLogin: (Student) -> Unit) {
     val scope = rememberCoroutineScope()
     var signup by rememberSaveable { mutableStateOf(false) }
     var name by rememberSaveable { mutableStateOf("") }
-    var email by rememberSaveable { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf(store.rememberedEmail()) }
     // Passwords intentionally never enter saved instance state.
     var password by remember { mutableStateOf("") }
     var confirmation by remember { mutableStateOf("") }
@@ -67,7 +67,7 @@ fun AuthScreen(onLogin: (Student) -> Unit) {
                         try {
                             if (signup) {
                                 withContext(Dispatchers.IO) { store.signUp(name, email, password) }
-                                signup = false; password = ""; confirmation = ""
+                                signup = false; email = store.rememberedEmail(); password = ""; confirmation = ""
                                 message = "Account created. Log in to continue."
                             } else {
                                 val student = withContext(Dispatchers.IO) { store.login(email, password) }
@@ -83,7 +83,7 @@ fun AuthScreen(onLogin: (Student) -> Unit) {
                 Text("CALCULUS IS READY", style = MaterialTheme.typography.labelSmall)
                 Text("5 units · 38 topics · your choice of music")
             }
-            Text("Accounts are saved on this device. Log in again when you return. College SAP portal verification is not connected.", style = MaterialTheme.typography.bodySmall)
+            Text("Accounts and your last email are saved on this device. Enter your password when you return. College SAP portal verification is not connected.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }

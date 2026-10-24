@@ -14,6 +14,7 @@ from pathlib import Path
 from uuid import uuid4
 import melody_library
 from lyric_alignment import fit, repeats_for
+from audio_loudness import normalize, ensure_normalized
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "generated"
@@ -51,7 +52,9 @@ def generate(job_id, request):
             mode = render(request, melody, target, lambda message: job.update(message=message))
             if not target.is_file() or target.stat().st_size < 1000:
                 raise RuntimeError("The singing model returned no playable audio.")
-            metadata = {"mode": mode, "topic": request["topic"], "song": request["song"], "lyrics": request["lyrics"], "reference_sha256": profile["audio_sha256"] if profile else None}
+            job.update(message="Adjusting recording loudness…")
+            loudness = normalize(target)
+            metadata = {"loudness": loudness, "mode": mode, "topic": request["topic"], "song": request["song"], "lyrics": request["lyrics"], "reference_sha256": profile["audio_sha256"] if profile else None}
             target.with_suffix(".json").write_text(json.dumps(metadata, ensure_ascii=False))
             job.update(status="ready", message="Your song is ready.", audio_path=f"/audio/{target.name}", mode=mode)
     except Exception as exc:
@@ -142,6 +145,7 @@ class Handler(BaseHTTPRequestHandler):
                 job = {"signature": signature, "status": "queued", "message": "Waiting for the singing model…"}
                 audio = OUTPUT / (signature + ".mp3")
                 if audio.exists() and audio.with_suffix(".json").exists():
+                    ensure_normalized(audio)
                     mode = json.loads(audio.with_suffix(".json").read_text())["mode"]
                     job.update(status="ready", audio_path=f"/audio/{audio.name}", mode=mode, message="Your saved generation is ready.")
                 JOBS[job_id] = job
@@ -150,6 +154,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json(202, {"job_id": job_id})
         except (ValueError, json.JSONDecodeError) as exc:
             self.send_json(400, {"message": str(exc)})
+        except Exception:
+            self.send_json(500, {"message": "Could not prepare the saved recording. Please retry."})
 
     def log_message(self, fmt, *args):
         print(time.strftime("%H:%M:%S"), fmt % args, flush=True)

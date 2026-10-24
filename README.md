@@ -36,7 +36,9 @@ networking and a production-hosted backend are not configured.
 ## What is implemented
 
 - Persistent device-local signup/login with salted PBKDF2 password hashes, email
-  validation and duplicate-account checks. Backgrounding ends the session; rotation
+  validation and duplicate-account checks. The last successful signup/login email is
+  prefilled after relaunch; existing account databases also supply a prefill on upgrade.
+  Passwords must be entered again. Backgrounding ends the session; rotation
   preserves it. There is no SAP/portal authentication or cross-device account sync.
 - **Calculus Units 1–5: 38 topics**, distributed 9 / 5 / 5 / 8 / 11, using the source
   explanations, formulas and multilingual lyric content from the Python prototype.
@@ -56,6 +58,11 @@ networking and a production-hosted backend are not configured.
   the lyrics to the model's cover endpoint. The Rolle/Raghupati demo uses a curated
   six-phrase Hindi educational verse. Other topics use estimated metrical reflow,
   not semantic AI rewriting or precise phoneme-to-note alignment.
+- Generated recordings are normalized to approximately -16 LUFS with a -1.5 dB
+  true-peak target. Cached server recordings are normalized on reuse, without another
+  GPU job. The player shows device media volume and offers an increase-volume button;
+  the activity routes hardware volume keys to music. Already downloaded app files
+  receive the normalized server copy when Generate song is pressed again.
 - The app submits real generation jobs, polls progress, downloads completed audio,
   and plays it with pause/seek/replay. Failure is shown as failure, not fake success.
 - The old import screen, prompt-copy controls, Twinkle recordings and example-song

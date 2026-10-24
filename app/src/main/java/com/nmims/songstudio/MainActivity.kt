@@ -13,6 +13,7 @@ class MainActivity : ComponentActivity() {
     private val session by lazy { ViewModelProvider(this)[SessionViewModel::class.java] }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        volumeControlStream = android.media.AudioManager.STREAM_MUSIC
         setContent {
             StudioTheme {
                 val student = session.student
