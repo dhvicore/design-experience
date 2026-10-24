@@ -1,121 +1,99 @@
 # Syllabus Song Studio — Android
 
-Native Kotlin / Jetpack Compose starter built from the existing Calculus Python
-prototype. Open **this folder** in Android Studio, sync Gradle, select `app`, and Run.
+Kotlin / Jetpack Compose app based on the original Calculus prototype.
+Shared repository: https://github.com/dhvicore/design-experience
 
-## What works in this version
+Open this folder in Android Studio, sync Gradle, choose `app` and Run.
 
-- Explicit demo entry with name and optional unverified SAP ID. This is not authentication.
-- Calculus: all **38 topics across five units**, with source concepts and formulas.
-- Five language options and the existing language-specific genre/reference-song catalog.
-- Music style, reference song, tempo and learning-focus controls.
-- Loading and editing the original topic lyrics, plus copying a grounded AI lyric prompt.
-- Manual Suno handoff: copy approved lyrics and style, then open Suno.
-- Existing English Rolle's Theorem Suno example opens in a browser.
-- Offline English/Hindi Rolle's Theorem **computer-voice recordings**, with play,
-  pause, seek and replay. These fixed previews do not reflect new preferences or edits.
-- Selection and draft state survive ordinary activity recreation.
+## Current functionality
 
-Branch/year/semester data, real login, live lyric generation, automated synthesis,
-song imports and saved library are still team tasks. No credentials or provider API
-keys are included. Missing academic mappings are stated rather than invented.
+- Signup and login with device-local SQLite accounts, normalized email addresses,
+  unique-account validation and salted PBKDF2-HMAC-SHA256 password hashes.
+- Signup returns to login. Passwords and login tokens are not saved in UI state.
+- The session ends when the app backgrounds; reopening requires login. Rotation
+  preserves an active session. Logout is available in the header.
+- Calculus: all 38 topics across five units (9 / 5 / 5 / 8 / 11), with concepts,
+  formulas and existing multilingual lyric drafts from the prototype.
+- Independent lyric-language and music-collection choices: Hollywood/English,
+  Bollywood/Hindi, Marathi, Gujarati and Sanskrit/devotional.
+- Existing genre and song catalog, including pop, rock, hip-hop, romantic, bhajan
+  and regional styles; an added lo-fi style uses the collection's reference list.
+- Multiple reference songs per style, student learning focus and tempo selection.
+- Editable local syllabus-based lyric drafts. This is not a live LLM response.
 
-## Reused prototype material
+## Audio generation is not connected
 
-| Original | Android location |
-|---|---|
-| `../prototype/studio/topics.json` | `app/src/main/assets/topics.json` |
-| `../prototype/studio/catalog.json` | `app/src/main/assets/song_catalog.json` |
-| `../prototype/demo_songs/Rolle_s_Theorem_EN_twinkle.wav` | `app/src/main/res/raw/rolle_en.wav` |
-| Hindi version of the same preview | `app/src/main/res/raw/rolle_hi.wav` |
-| Rolle's Suno registry entry | Browser link on the synthesis screen |
+The user currently has a Suno website account, with no configured API connection.
+There is no working automatic singing service in this app yet. The synthesis screen
+states this; it must not present prepared recordings as newly generated songs.
+The old Twinkle-based recordings and external example playback have been removed
+at the user's request. There are no prompt-copy or manual-Suno handoff buttons.
 
-The asset file retains the Biology example, but the app explicitly filters the 38
-Calculus topics. Original data is preserved. Existing translations and facts need
-subject-owner review. The English Rolle's lyric draft adds the missing continuity
-and differentiability assumptions without changing the source dataset.
+Requested exact-song adaptations require a usable authorized melody source and a
+singing provider that supports that conditioning. A song title, YouTube listing or
+style prompt does not itself create an exact-melody adaptation. Provider access,
+capabilities and permitted inputs need verification before connecting synthesis.
 
-Run `python3 tools/import_prototype.py` from this folder to refresh imported assets
-when the prototype content changes. This requires the sibling prototype folder;
-it is not needed to build the Android app after cloning the repository.
+Remaining features: real provider-backed lyrics and audio generation, playback of
+successful generated output, saved library, cloud accounts if desired, and verified
+branch/year/semester mappings. SAP portal authentication is excluded for now.
+Device-local accounts do not verify NMIMS affiliation or sync between devices.
 
-The Python singing engine depends on macOS `say` and Praat, so it cannot simply run
-inside Android. Its existing recordings are reused; natural singing requires a
-provider integration or a manual production workflow.
+## Reused data
 
-## Files and ownership
+- `../prototype/studio/topics.json` → `app/src/main/assets/topics.json`
+- `../prototype/studio/catalog.json` → `app/src/main/assets/song_catalog.json`
+- Android filters the dataset to the 38 Calculus topics. No other subject syllabus
+  is invented. Original Biology example remains in the source asset only.
+- `python3 tools/import_prototype.py` refreshes and validates these assets from the
+  sibling prototype folder. It does not import any sample audio.
+- The English Rolle's draft explicitly adds continuity on the closed interval and
+  differentiability inside it. All source translations/content need subject review.
+
+## Team ownership
 
 Kotlin source root: `app/src/main/java/com/nmims/songstudio/`.
 
-| Person | Starting files / responsibility |
+| Person | Responsibility / starting files |
 |---|---|
-| Dhvani | `ui/Theme.kt`, `ui/SongStudio.kt`, `generation/LyricPrompts.kt`: shared design, customization, draft editor and content-to-lyrics prompts |
-| Suraj | `generation/`: lyric provider and singing provider adapters, request state, failures; work with Dhvani on generation UI |
-| Aditri | Add `auth/` and `ui/auth/`: real app login/profile, sessions and stored preferences; replace demo entry |
-| Krishhma | `data/Curriculum.kt`, assets; add `ui/academic/`: verified branch/year/semester mapping, curriculum import and selection |
-| Aman | `ui/PreviewPlayer.kt`; add `library/` and `ui/library/`: playback, audio storage and saved-song records |
+| Dhvani | UI/UX, customization and lyrics: `ui/`, `generation/LyricPrompts.kt` |
+| Suraj | Real lyric/singing provider integration and request state: `generation/` |
+| Aditri | Login/profile/session: `auth/`, authentication part of `MainActivity.kt` |
+| Krishhma | Academic selection and curriculum database: `data/`, assets, academic screens |
+| Aman | Generated audio player, library/history and storage; add `playback/` and `library/` |
 
-Each owner should extract their screens into their feature folder. Coordinate
-changes to `ui/SongStudio.kt`, the initial navigation shell, before merging.
-The current in-memory demo state should become shared lifecycle-aware state when
-real async provider calls are introduced.
+All five supply and validate their own subject data, keywords/formulas, song
+selections and topic mappings. Integration, tests, screenshots and documentation
+are shared responsibilities. Coordinate changes to the initial `ui/SongStudio.kt`
+navigation shell; extract feature screens into separate files as work proceeds.
 
-**All five** supply their own subject data, keywords/formulas, song selections and
-topic-to-style mappings. Each reviews their subject's lyrics/audio and tests their
-module's integration. Integration and screenshots are shared responsibilities.
+## GitHub workflow
 
-## Provider integration contract
-
-`Topic` supplies curriculum facts. `SongPreferences` supplies language, style,
-reference metadata, tempo and learning focus. `LyricPrompts.educational(...)`
-builds a backend-ready prompt; `LyricPrompts.music(...)` builds the style prompt.
-The stored lyric draft is not an AI-generated response and its contents do not
-change with tempo/focus. Those preferences enter the exported prompts.
-
-Suraj should add generation states such as Idle / Loading / Ready / Failed and an
-output containing provider job ID, reviewed lyrics, audio location and provenance.
-Use a backend for secret keys. Aman consumes the output's audio location and stores
-its metadata. Never present prepared audio as a newly generated response.
-
-## Team GitHub workflow
-
-1. Push this Android folder as the repository root. Include `gradlew`, `gradlew.bat`,
-   `gradle/wrapper/`, source, assets and documentation.
-2. Invite all four teammates. Everyone clones the **same** project.
-3. Create feature branches: `feature/ui-lyrics`, `feature/song-synthesis`,
+1. Invite all four teammates. Everyone clones the same repository.
+2. Branch from the latest `main`: `feature/ui-lyrics`, `feature/song-synthesis`,
    `feature/login-profile`, `feature/academic-data`, `feature/player-library`.
-4. Pull the latest `main`, make a small change, build it, commit, push and open a PR.
-5. A teammate reviews; merge only compiling changes. Update feature branches from
-   `main` regularly. Do not overwrite each other's shared navigation work.
+3. Make small changes, build/test, commit and push your branch, then open a PR.
+4. A teammate reviews before merging. Update your branch from `main` regularly.
 
-Shared repository: https://github.com/dhvicore/design-experience
+Do not upload API keys, personal account databases or machine configuration.
+`.gitignore` excludes build outputs, IDE metadata, local SDK paths and credentials.
 
-`.gitignore` excludes machine paths, caches, IDE metadata and builds.
-Do not upload the Python account database or API keys.
+## Build and verification
 
-## Build
+Use Android Studio's bundled JDK and SDK 36, with the included Gradle wrapper.
+The first sync may need internet for dependencies.
 
-Use Android Studio's bundled JDK 17+ (the installed Studio JDK works), SDK 36 and
-the included Gradle wrapper. Run `./gradlew :app:assembleDebug :app:lintDebug`.
-The first build needs internet for dependencies. An ignored `local.properties`
-holds the local SDK path; Android Studio creates its own on teammates' machines.
+```sh
+./gradlew :app:assembleDebug :app:lintDebug
+./gradlew :app:connectedDebugAndroidTest
+```
 
-## Manual acceptance checks
-
-1. Enter a demo name; open all five units and verify the topic counts 9 / 5 / 5 / 8 / 11.
-2. Change language/style; confirm valid reference-song choices reset correctly.
-3. Load a draft, edit it, navigate back and forward, and rotate the screen.
-4. Copy the lyric prompt; check topic, focus, language and genre match selections.
-5. Open Suno with the copied style and edited lyrics; identify this as manual.
-6. For Rolle's Theorem in English/Hindi, play/pause/seek/replay the fixed preview.
-7. Background and reopen the app; confirm the preview releases and can play again.
-8. Choose another topic or language: it must not play the unrelated Rolle recording.
-9. Test no-browser and no-network behavior for the external Suno step.
+Emulator tests cover persistent account login, wrong/unknown passwords, duplicate
+accounts, invalid signup inputs, logout on backgrounding, session preservation on
+rotation, all five Calculus units and multiple music choices. Test accounts use a
+separate temporary test database and do not modify the real account database.
 
 ## References
 
-- Compose: https://developer.android.com/develop/ui/compose/documentation
-- Player lifecycle: https://developer.android.com/media/platform/mediaplayer/state-resources
-- Provider access: https://platform.suno.com/
-- Provider download allowances: https://help.suno.com/en/articles/13614785
-
+- https://developer.android.com/develop/ui/compose/documentation
+- https://platform.suno.com/

@@ -37,12 +37,14 @@ class Curriculum(context: Context) {
     }
     val languages = linkedMapOf("en" to "English", "hi" to "Hindi", "mr" to "Marathi",
         "gu" to "Gujarati", "sa" to "Sanskrit")
+    val collections = linkedMapOf("en" to "Hollywood / English", "hi" to "Bollywood / Hindi",
+        "mr" to "Marathi", "gu" to "Gujarati", "sa" to "Sanskrit / Devotional")
     val units = linkedMapOf("Unit 1" to "Differential Calculus", "Unit 2" to "Partial Differentiation",
         "Unit 3" to "Integral Calculus", "Unit 4" to "Multiple Integrals", "Unit 5" to "Vector Calculus")
 
     fun styles(language: String): List<MusicStyle> {
         val genres = catalog.getJSONObject("genres").getJSONObject(language)
-        return genres.keys().asSequence().map { key ->
+        val existing = genres.keys().asSequence().map { key ->
             val g = genres.getJSONObject(key)
             val songs = g.getJSONArray("songs")
             MusicStyle(key, g.getString("name"), g.getString("instruments"), g.getString("suno"),
@@ -51,5 +53,7 @@ class Curriculum(context: Context) {
                     ReferenceSong(s.getString("title"), s.getString("artist"), s.optInt("bpm", 90), s.optString("mood"))
                 })
         }.toList()
+        return existing + MusicStyle("lofi", "Lo-fi", "soft keys, relaxed drums, warm ambient textures",
+            "gentle lo-fi educational song", existing.flatMap { it.songs }.distinctBy { it.title })
     }
 }

@@ -25,11 +25,7 @@ for language, genres in catalog["genres"].items():
             assert all(key in song for key in ("title", "artist", "bpm", "mood"))
 
 assets = project / "app/src/main/assets"
-raw = project / "app/src/main/res/raw"
 assets.mkdir(parents=True, exist_ok=True)
-raw.mkdir(parents=True, exist_ok=True)
 shutil.copy2(source / "studio/topics.json", assets / "topics.json")
 shutil.copy2(source / "studio/catalog.json", assets / "song_catalog.json")
-for lang in ("en", "hi"):
-    shutil.copy2(source / f"demo_songs/Rolle_s_Theorem_{lang.upper()}_twinkle.wav", raw / f"rolle_{lang}.wav")
-print("Imported and validated 38 Calculus topics, song catalog, and two fixed voice previews.")
+print("Imported and validated 38 Calculus topics and song catalog. No sample audio imported.")

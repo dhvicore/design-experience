@@ -11,6 +11,7 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "0.1-demo"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true }
     compileOptions {
@@ -23,4 +24,6 @@ dependencies {
     implementation("androidx.compose.ui:ui-android:1.10.4")
     implementation("androidx.compose.foundation:foundation-android:1.10.4")
     implementation("androidx.compose.material3:material3-android:1.4.0")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
 }
