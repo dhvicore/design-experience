@@ -184,3 +184,33 @@ of GitHub. Generated files, `.env`, virtual environments and build outputs are i
 - https://github.com/ace-step/ACE-Step-1.5/blob/main/docs/en/INSTALL.md
 - https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/
 - https://developer.android.com/develop/ui/compose/documentation
+
+## First Bollywood melody test: Rolle’s Theorem
+
+Choose Calculus → Unit 1 → Rolle’s Theorem → Hindi → Kala Chashma.
+The prepared Hindi draft states continuity on the closed interval, differentiability
+inside, equal endpoint values, and the existence of an interior zero derivative.
+This is educational source text, not a verified fit to the Kala Chashma chorus.
+The English category continues to use English lyrics and English song choices.
+
+The missing input is the actual chorus melody. Once a suitable melody/hummed audio
+file is supplied, prepare it on the Mac using the existing server environment:
+
+```sh
+server/.venv/bin/python tools/register_melody.py /absolute/path/to/chorus.wav \
+  --song-id kala-chashma --title "Kala Chashma" --bpm 112 \
+  --start 0 --seconds 30
+```
+
+Choose the correct chorus start/length and measure BPM for your supplied recording;
+112 is catalog metadata, not a measurement of your file. Add `--phrase-syllables`
+with comma-separated measured counts to enable approximate lyric phrase fitting.
+The tool trims and converts the supplied audio to PCM WAV and records real duration.
+It stores the reference under ignored `server/melodies/`; no source audio is committed.
+It does not scrape websites, train a model, or generate a placeholder melody.
+
+Reopen the app so its melody list refreshes, select **Follow melody**, then regenerate
+and review the lyrics before generating the song. Colab uses the source audio for
+cover conditioning. Listening and revision are required to check melody and words;
+this is not a guarantee of exact chorus matching. An existing Suno Rolle song can
+be a separate quality baseline, but it is not Kala Chashma unless its melody matches.

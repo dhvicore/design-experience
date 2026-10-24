@@ -24,6 +24,18 @@ class MusicChoicesTest {
         assertTrue(allHindi.any { it.song.title == "Chammak Challo" })
     }
 
+    @Test fun rolleBollywoodDemoUsesHindiAndKeepsEveryTheoremCondition() {
+        val data = Curriculum(InstrumentationRegistry.getInstrumentation().targetContext)
+        val topic = data.topics.first { it.title == "Rolle's Theorem" }
+        val choice = MusicChoices.options(data, topic, "Hindi").first()
+        assertEquals("kala-chashma", choice.id)
+        val draft = LyricPrompts.draft(topic, "Hindi", choice)
+        listOf("बंद अंतराल", "सतत", "खुले अंतराल", "अवकलज मौजूद", "मान बराबर", "कम से कम एक सी", "अवकलज शून्य").forEach {
+            assertTrue("Missing theorem condition: $it", draft.contains(it))
+        }
+        assertFalse(MusicChoices.options(data, topic, "English", true).any { it.id == "kala-chashma" })
+    }
+
     @Test fun lyricDraftsDependOnCategoryAndSongAndPreserveRolleConditions() {
         val data = Curriculum(InstrumentationRegistry.getInstrumentation().targetContext)
         val topic = data.topics.first()

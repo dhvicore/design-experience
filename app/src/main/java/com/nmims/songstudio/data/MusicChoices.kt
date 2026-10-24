@@ -26,7 +26,9 @@ object MusicChoices {
         }.distinctBy { it.song.title }
         if (all) return pool
         val preferred = topic.reference[language].orEmpty()
-        val mapped = pool.firstOrNull { preferred.contains(it.song.title, ignoreCase = true) }
+        val mapped = if (topic.title == "Rolle's Theorem" && category == "Hindi")
+            pool.firstOrNull { it.id == "kala-chashma" }
+        else pool.firstOrNull { preferred.contains(it.song.title, ignoreCase = true) }
         val recommended = pool.shuffled(kotlin.random.Random(topic.id * 1009 + category.hashCode()))
         val ready = if (category == "Bhajan") pool.firstOrNull { it.id == listOf("raghupati-raghav-raja-ram", "om-jai-jagdish-hare", "vaishnav-jan-to")[topic.id % 3] } else null
         return (listOfNotNull(ready, mapped) + recommended).distinctBy { it.song.title }.take(4)

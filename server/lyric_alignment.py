@@ -16,6 +16,10 @@ ROLLE_RAGHUPATI = [
 
 
 def syllables(word, language="en"):
+    if re.search(r"[\u0900-\u097f]", word):
+        # Akshara estimate only; Hindi schwa deletion and melisma still need listening review.
+        vowels_or_consonants = len(re.findall(r"[अ-औक-हक़-य़]", word))
+        return max(1, vowels_or_consonants - word.count("्"))
     word = re.sub(r"[^a-z]", "", word.lower())
     if not word:
         return 1
