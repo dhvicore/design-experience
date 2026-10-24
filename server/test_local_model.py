@@ -3,6 +3,7 @@ import io
 import json
 import tempfile
 import unittest
+import wave
 from pathlib import Path
 from unittest.mock import patch
 
@@ -37,6 +38,24 @@ class LocalModelTest(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError, "GPU unavailable"):
                     local_model.render(self.request(), Path(directory) / "missing.wav", target, lambda _: None)
             self.assertFalse(target.exists())
+
+    def test_cover_uses_source_duration_and_does_not_force_a_new_key(self):
+        with tempfile.TemporaryDirectory() as directory:
+            melody = Path(directory) / "melody.wav"
+            with wave.open(str(melody), "wb") as audio:
+                audio.setnchannels(1); audio.setsampwidth(2); audio.setframerate(8000)
+                audio.writeframes(b"\x00\x00" * 16000)
+            ready = {"data": [{"status": 1, "result": json.dumps([{"file": "/v1/audio?path=cover.mp3"}])}]}
+            with patch.object(local_model, "call", side_effect=[{"data": {"task_id": "cover"}}, ready]) as call, \
+                 patch.object(local_model, "settings", return_value=("https://model.example", {})), \
+                 patch.object(local_model, "open_request", return_value=io.BytesIO(b"test-audio")):
+                self.assertEqual("reference_cover", local_model.render(self.request(), melody, Path(directory) / "song.mp3", lambda _: None))
+                body = call.call_args_list[0].args[1]
+                self.assertEqual("cover", body["task_type"])
+                self.assertEqual(2, body["audio_duration"])
+                self.assertEqual(1.0, body["audio_cover_strength"])
+                self.assertNotIn("key_scale", body)
+                self.assertEqual(melody, call.call_args_list[0].args[2])
 
     def test_reference_melody_is_uploaded_for_cover(self):
         with tempfile.TemporaryDirectory() as directory:

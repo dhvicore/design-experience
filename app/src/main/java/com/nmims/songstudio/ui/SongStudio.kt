@@ -20,6 +20,7 @@ import com.nmims.songstudio.playback.AudioFiles
 import com.nmims.songstudio.playback.SongPlayer
 import com.nmims.songstudio.data.MusicChoices
 import com.nmims.songstudio.generation.SingingClient
+import com.nmims.songstudio.generation.MelodyReference
 import kotlinx.coroutines.launch
 
 @Composable
@@ -37,6 +38,14 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
     var generationError by remember { mutableStateOf("") }
     var audioRevision by remember { mutableIntStateOf(0) }
     val scope = rememberCoroutineScope()
+    var melodyReferences by remember { mutableStateOf<Map<String, MelodyReference>>(emptyMap()) }
+    var melodyError by remember { mutableStateOf("") }
+    var preferReference by rememberSaveable { mutableStateOf(true) }
+    suspend fun loadMelodies() {
+        try { melodyReferences = SingingClient.melodies(); melodyError = "" }
+        catch (_: Exception) { melodyError = "Music Server is unavailable. Start it on your Mac, then reconnect." }
+    }
+    LaunchedEffect(Unit) { loadMelodies() }
     var focus by rememberSaveable { mutableStateOf("Understand the concept and remember the formula") }
     var tempo by rememberSaveable { mutableStateOf("Moderate") }
     var lyrics by rememberSaveable { mutableStateOf("") }
@@ -46,6 +55,8 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
     val choice = choices.firstOrNull { it.id == selectedSongId } ?: choices.first()
     val reference = choice.song
     val style = choice.style
+    val melody = melodyReferences[choice.id]
+    val useReference = preferReference && melody != null
     val language = if (category in listOf("Hindi", "Bhajan")) "hi" else "en"
     val titles = listOf("Welcome", "Your classroom", "Make it yours", "Write the words", "Bring it to life")
     BackHandler(page > 1) { if (!busy) { page--; notice = "" } }
@@ -107,7 +118,21 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
                         Text(style.instruments)
                         Text("${if (category == "Bhajan") "Hindi / Sanskrit devotional lyrics" else data.languages[language]} · ${style.name}")
                     }
-                    Select("Tempo", tempo, listOf("Slow", "Moderate", "Upbeat")) { tempo = it }
+                    if (melody != null) {
+                        Text("Melody reference available · ${melody.bpm} BPM", style = MaterialTheme.typography.bodySmall)
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            FilterChip(selected = preferReference, onClick = { preferReference = true; lyrics = "" }, label = { Text("Follow melody") })
+                            FilterChip(selected = !preferReference, onClick = { preferReference = false; lyrics = "" }, label = { Text("Original style") })
+                        }
+                        if (useReference) Text("Uses the supplied instrumental melody guide and its tempo. Timing is approximate; listen to the generated result.", style = MaterialTheme.typography.bodySmall)
+                    } else {
+                        Text("Original music in this style. This song's melody reference has not been added.", style = MaterialTheme.typography.bodySmall)
+                    }
+                    if (melodyError.isNotBlank()) {
+                        Text(melodyError, color = MaterialTheme.colorScheme.error)
+                        TextButton(onClick = { scope.launch { loadMelodies() } }) { Text("Reconnect Music Server") }
+                    }
+                    if (!useReference) Select("Tempo", tempo, listOf("Slow", "Moderate", "Upbeat")) { tempo = it }
                     OutlinedTextField(focus, { focus = it }, label = { Text("What do you want to learn?") }, minLines = 2, modifier = Modifier.fillMaxWidth())
                     Button(onClick = { notice = ""; page = 3 }, modifier = Modifier.fillMaxWidth()) { Text("Continue to lyrics →") }
                 }
@@ -115,26 +140,41 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
                     Text("Make the lesson\nlyrical.", style = MaterialTheme.typography.headlineLarge)
                     Text("${topic.title} / ${data.languages[language]} / $category / ${reference.title}")
                     Panel(Lime) {
-                        Text("START WITH YOUR EXISTING WORK", style = MaterialTheme.typography.labelSmall)
-                        Text("Create an original draft from the topic facts, with phrasing and a refrain for your selected music. Hindi and Bhajan produce different language and lyric forms.")
+                        Text(if (useReference) "FIT WORDS TO MUSICAL PHRASES" else "YOUR EDUCATIONAL LYRICS", style = MaterialTheme.typography.labelSmall)
+                        Text(if (useReference) "Fit the topic lyrics to the supplied melody’s phrase lengths, then review and edit before singing." else "Create a draft from the topic facts in your selected language and musical style.")
                     }
-                    Button(onClick = { lyrics = LyricPrompts.draft(topic, category, choice); notice = "Lyric draft adapted for ${reference.title}. Review the academic meaning before singing." }, modifier = Modifier.fillMaxWidth()) {
-                        Text(if (lyrics.isBlank()) "Generate lyric draft" else "Regenerate lyric draft")
+                    Button(enabled = !busy, onClick = {
+                        busy = true; notice = ""; generationError = ""
+                        scope.launch {
+                            try {
+                                val draft = LyricPrompts.draft(topic, category, choice)
+                                if (useReference) {
+                                    val adapted = SingingClient.adapt(topic, category, choice, draft, true)
+                                    lyrics = adapted.lyrics; notice = adapted.note
+                                } else {
+                                    lyrics = draft; notice = "Draft ready. Review the academic meaning before singing."
+                                }
+                            } catch (e: Exception) { generationError = e.message ?: "Could not prepare lyrics. Check the Music Server." }
+                            finally { busy = false }
+                        }
+                    }, modifier = Modifier.fillMaxWidth()) {
+                        Text(if (busy) "Fitting lyric phrases…" else if (lyrics.isBlank()) "Generate lyric draft" else "Regenerate lyric draft")
                     }
-                    OutlinedTextField(lyrics, { lyrics = it }, label = { Text("Your lyrics — editable") }, minLines = 10, modifier = Modifier.fillMaxWidth())
+                    if (generationError.isNotBlank()) Text(generationError, color = MaterialTheme.colorScheme.error)
+                    OutlinedTextField(lyrics, { lyrics = it }, enabled = !busy, label = { Text("Your lyrics — editable") }, minLines = 10, modifier = Modifier.fillMaxWidth())
                     Text("Check formulas, theorem conditions and pronunciation. Translations in the original prototype still need subject review.", style = MaterialTheme.typography.bodySmall)
-                    Button(onClick = { notice = ""; page = 4 }, enabled = lyrics.isNotBlank(), modifier = Modifier.fillMaxWidth()) { Text("Continue to song →") }
+                    Button(onClick = { notice = ""; page = 4 }, enabled = lyrics.isNotBlank() && !busy, modifier = Modifier.fillMaxWidth()) { Text("Continue to song →") }
                 }
                 4 -> {
                     Text("From words\nto a study song.", style = MaterialTheme.typography.headlineLarge)
                     Panel(Lavender) {
                         Text("YOUR SONG", style = MaterialTheme.typography.labelSmall)
                         Text(topic.title, style = MaterialTheme.typography.titleLarge)
-                        Text("Requested melody: ${reference.title} — ${reference.artist}")
-                        Text("${data.languages[language]} · ${style.name} · $tempo")
+                        Text("${if (useReference) "Melody guide" else "Style reference"}: ${reference.title} — ${reference.artist}")
+                        Text("${data.languages[language]} · ${style.name} · ${if (useReference) "${melody?.bpm} BPM" else tempo}")
                         Text("Generate vocals and music here, then listen in the app.")
                     }
-                    val audioKey = listOf(student.id, topic.id, category, reference.title, tempo, focus, lyrics).joinToString("\u0000")
+                    val audioKey = listOf(student.id, topic.id, category, reference.title, tempo, focus, lyrics, useReference, if (useReference) melody?.sha else "original-v3").joinToString("\u0000")
                     val audioFile = remember(audioKey, audioRevision) { AudioFiles.file(context, audioKey) }
                     if (audioFile.exists()) {
                         val mode = runCatching { audioFile.resolveSibling(audioFile.name + ".mode").readText() }.getOrDefault("original_melody")
@@ -149,13 +189,13 @@ fun SongStudio(student: Student, onLogout: () -> Unit) = StudioTheme {
                         busy = true; generationError = ""; generationStatus = "Connecting to the singing model…"
                         scope.launch {
                             try {
-                                SingingClient.generate(context.applicationContext, audioKey, topic, category, choice, lyrics, tempo) { generationStatus = it }
+                                SingingClient.generate(context.applicationContext, audioKey, topic, category, choice, lyrics, tempo, useReference) { generationStatus = it }
                                 audioRevision++; generationStatus = "Your song is ready. Press Play song."
                             } catch (e: Exception) { generationError = e.message ?: "Could not generate the song. Please retry." }
                             finally { busy = false }
                         }
                     }, modifier = Modifier.fillMaxWidth()) { Text(if (busy) "Creating your song…" else "Generate song") }
-                    Text("Exact tune matching needs the selected song's melody dataset. Until supplied, generation creates an original melody in that musical style.", style = MaterialTheme.typography.bodySmall)
+                    Text(if (useReference) "The singing model receives the melody audio and your fitted lyrics. Melody fidelity and pronunciation can vary." else "An original melody will be composed. To follow a specific tune, its melody reference must be in the library.", style = MaterialTheme.typography.bodySmall)
                     if (generationError.isNotBlank()) Text(generationError, color = MaterialTheme.colorScheme.error)
                     OutlinedButton(enabled = !busy, onClick = { notice = ""; page = 3 }, modifier = Modifier.fillMaxWidth()) { Text("Edit lyrics") }
                     OutlinedButton(enabled = !busy, onClick = { notice = ""; page = 1 }, modifier = Modifier.fillMaxWidth()) { Text("Choose another topic") }

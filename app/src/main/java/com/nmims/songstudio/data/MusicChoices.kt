@@ -14,7 +14,7 @@ object MusicChoices {
             style.songs.map { SongChoice(it, style) }
         }
         pool = when (category) {
-            "Bhajan" -> pool.filter { it.style.id == "bhajan" } + data.styles("sa").filter { it.id != "lofi" }.flatMap { style -> style.songs.map { SongChoice(it, style) } }
+            "Bhajan" -> listOf(SongChoice(ReferenceSong("Vaishnav Jan To", "Traditional bhajan", 70, "devotional"), data.styles("hi").first { it.id == "bhajan" })) + pool.filter { it.style.id == "bhajan" } + data.styles("sa").filter { it.id != "lofi" }.flatMap { style -> style.songs.map { SongChoice(it, style) } }
             "Hindi" -> pool.filter { it.style.id != "bhajan" } + listOf(
                 SongChoice(ReferenceSong("Chikni Chameli", "Bollywood dance reference", 120, "energetic"), data.styles("hi").first { it.id == "party" }),
                 SongChoice(ReferenceSong("Chammak Challo", "Bollywood dance reference", 110, "rhythmic"), data.styles("hi").first { it.id == "party" })
@@ -28,6 +28,7 @@ object MusicChoices {
         val preferred = topic.reference[language].orEmpty()
         val mapped = pool.firstOrNull { preferred.contains(it.song.title, ignoreCase = true) }
         val recommended = pool.shuffled(kotlin.random.Random(topic.id * 1009 + category.hashCode()))
-        return (listOfNotNull(mapped) + recommended).distinctBy { it.song.title }.take(4)
+        val ready = if (category == "Bhajan") pool.firstOrNull { it.id == listOf("raghupati-raghav-raja-ram", "om-jai-jagdish-hare", "vaishnav-jan-to")[topic.id % 3] } else null
+        return (listOfNotNull(ready, mapped) + recommended).distinctBy { it.song.title }.take(4)
     }
 }

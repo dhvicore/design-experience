@@ -8,6 +8,7 @@ import urllib.request
 import ssl
 from uuid import uuid4
 from pathlib import Path
+import wave
 
 def settings():
     values = {}
@@ -68,6 +69,11 @@ def render(request, melody: Path, destination: Path, status):
         "key_scale": "C Major", "time_signature": "4", "audio_format": "mp3",
         "task_type": "cover" if cover else "text2music",
     }
+    if cover:
+        with wave.open(str(melody)) as audio:
+            body["audio_duration"] = audio.getnframes() / audio.getframerate()
+        body["audio_cover_strength"] = 1.0
+        body.pop("key_scale", None)
     task_id = call("/release_task", body, melody if cover else None)["data"]["task_id"]
     for _ in range(360):
         rows = call("/query_result", {"task_id_list": [task_id]})["data"]
@@ -86,6 +92,6 @@ def render(request, melody: Path, destination: Path, status):
                 with open_request(urllib.request.Request(url, headers=headers), timeout=60) as response, destination.open("wb") as target:
                     shutil.copyfileobj(response, target)
                 return "reference_cover" if cover else "original_melody"
-        status("Creating vocals and music on your Mac…")
+        status("Creating vocals and music on the connected GPU…")
         time.sleep(2)
     raise TimeoutError("The local model did not finish within 12 minutes.")

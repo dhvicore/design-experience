@@ -20,6 +20,9 @@ Repository: https://github.com/dhvicore/design-experience
    and the Colab runtime open. The bridge binds only to the Mac's loopback address.
 7. Run the Android app on the emulator. Log in, select a topic, choose music,
    create/review lyrics and press **Generate song**. After completion, press Play.
+   For the tested melody demo: **Unit 1 → Rolle’s Theorem → Bhajan →
+   Raghupati Raghav Raja Ram → Follow melody → Generate lyric draft →
+   Continue to song → Generate song → Play song**. Use Browse all if needed.
 
 The bridge reads `.env` on requests, so a new Colab endpoint can be configured
 without rebuilding the APK. The endpoint changes when the temporary tunnel is
@@ -44,6 +47,15 @@ networking and a production-hosted backend are not configured.
   song selection. They are locally assembled from syllabus lyrics, not a live LLM.
   Bhajan uses devotional Hindi with a Sanskrit invocation. Subject owners still
   need to review source translations and mathematical assumptions.
+- Three built-in instrumental melody guides: Raghupati Raghav Raja Ram,
+  Om Jai Jagdish Hare and Vaishnav Jan To. Bhajan recommendations include a guide.
+  These are newly rendered notation guides, with approximate reconstructed rhythm,
+  rather than the prototype's finished example recordings.
+- With **Follow melody**, the bridge fits lyric phrase boundaries to syllable budgets,
+  repeats the musical cycle for longer lessons, and sends actual guide audio with
+  the lyrics to the model's cover endpoint. The Rolle/Raghupati demo uses a curated
+  six-phrase Hindi educational verse. Other topics use estimated metrical reflow,
+  not semantic AI rewriting or precise phoneme-to-note alignment.
 - The app submits real generation jobs, polls progress, downloads completed audio,
   and plays it with pause/seek/replay. Failure is shown as failure, not fake success.
 - The old import screen, prompt-copy controls, Twinkle recordings and example-song
@@ -59,15 +71,38 @@ and alignment checks before it can be described as faithful to a selected tune.
 
 To add a melody dataset, place an authorized reference WAV in `server/melodies/`
 using the song ID filename, e.g. `chikni-chameli.wav`. This is developer setup,
-not a student import step. The adapter uploads it as source audio for cover mode.
+not a student import step. The app discovers available references through `/melodies`; **Follow melody** uses
+that audio for cover mode, while **Original style** explicitly composes a new tune.
+A request for an unavailable melody fails instead of silently switching modes.
+Cover mode preserves the guide's BPM. Cache keys include the reference audio hash.
+
+An optional matching `chikni-chameli.json` sidecar supplies phrase information:
+
+```json
+{
+  "title": "Chikni Chameli",
+  "bpm": 120,
+  "duration_seconds": 35.0,
+  "phrase_syllables": [12, 12, 10, 12]
+}
+```
+
+The numbers above illustrate the schema; measure the real melody before using them.
+Use mono/stereo PCM WAV with a clear melody and no original vocal lyrics. Phrase
+counts must describe the full guide in order. Refresh the app's music choices after
+adding references. Without phrase counts, audio conditioning is supported but the
+lyrics are left unchanged and the app reports missing timing metadata.
 MIDI/hummed references must first be rendered/prepared as an appropriate WAV.
 Do not upload arbitrary YouTube recordings or train on music without the needed rights.
 
 The model is ACE-Step 1.5, run from its official source. This project uses pretrained
 inference; it does not train a new singing model. The public hosted demos failed
 with GPU/quota errors during our checks; the Colab notebook is the selected route.
-The notebook was syntax-checked locally. Live Colab model startup, generation quality
-and the final app-to-Colab audio round trip require the user's active GPU runtime.
+On 25 October 2026, a live Colab cover job returned a 35.72-second MP3. The Android
+instrumentation test also completed the emulator → Mac → Colab → download round trip,
+then verified MediaPlayer playback, pause and seek. This verifies functioning audio,
+not perfect melody reproduction, lyric intelligibility or academic correctness;
+those still require listening and subject review. Keep Colab running for new jobs.
 
 ## Source and ownership
 
@@ -101,7 +136,7 @@ JDK work with the included Gradle wrapper.
 ./gradlew :app:assembleDebug :app:lintDebug
 ./gradlew :app:connectedDebugAndroidTest
 cd server
-python3 -m unittest test_local_model -v
+python3 -m unittest discover -v
 ```
 
 Emulator tests cover persistent accounts, invalid login/signup, background logout,
@@ -109,7 +144,18 @@ rotation, all Calculus units, music recommendations, lyric variations and native
 playback. Audio playback tests use a generated test signal, not a produced song.
 Python adapter tests mock the GPU service to check authentication headers, job
 polling, error handling and reference uploads. These are not proof of live model
-output or exact melody fidelity; the Colab singing test supplies that evidence.
+output or exact melody fidelity.
+
+The optional real-GPU integration test consumes a generation and checks returned
+mode, fitted Rolle conditions, MP3 duration and native playback:
+
+```sh
+./gradlew :app:connectedDebugAndroidTest \
+  -Pandroid.testInstrumentationRunnerArguments.class=com.nmims.songstudio.LiveSingingTest \
+  -Pandroid.testInstrumentationRunnerArguments.liveSingingTest=true
+```
+
+It is skipped by default. Melody similarity is not asserted by this test.
 
 ## GitHub workflow
 

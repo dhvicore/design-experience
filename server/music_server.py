@@ -5,13 +5,15 @@ website scraping, imported finished songs or speech-only substitution is used.
 """
 import hashlib
 import json
-import os
+import wave
 import shutil
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from uuid import uuid4
+import melody_library
+from lyric_alignment import fit, repeats_for
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "generated"
@@ -27,13 +29,29 @@ def generate(job_id, request):
     try:
         with GPU_LOCK:
             job.update(status="running", message="The singing model is creating vocals and music…")
-            melody = ROOT / "melodies" / (request["song_id"] + ".wav")
+            profile = melody_library.lookup(request["song_id"]) if request["melody_mode"] == "reference" else None
+            if request["melody_mode"] == "reference" and not profile:
+                raise ValueError("The selected melody reference was removed. Refresh the music choices.")
+            melody = profile["path"] if profile else ROOT / "missing-reference.wav"
+            if profile:
+                request = {**request, "bpm": profile.get("bpm", request["bpm"])}
+            if profile:
+                repeats = repeats_for(request["lyrics"], profile, request["language"])
+                if repeats > 1:
+                    repeated = OUTPUT / (job["signature"] + "-reference.wav")
+                    with wave.open(str(melody), "rb") as source:
+                        params = source.getparams()
+                        frames = source.readframes(source.getnframes())
+                    with wave.open(str(repeated), "wb") as output:
+                        output.setparams(params)
+                        output.writeframes(frames * repeats)
+                    melody = repeated
             target = OUTPUT / (job["signature"] + ".mp3")
             from local_model import render
             mode = render(request, melody, target, lambda message: job.update(message=message))
             if not target.is_file() or target.stat().st_size < 1000:
                 raise RuntimeError("The singing model returned no playable audio.")
-            metadata = {"mode": mode, "topic": request["topic"], "song": request["song"], "lyrics": request["lyrics"]}
+            metadata = {"mode": mode, "topic": request["topic"], "song": request["song"], "lyrics": request["lyrics"], "reference_sha256": profile["audio_sha256"] if profile else None}
             target.with_suffix(".json").write_text(json.dumps(metadata, ensure_ascii=False))
             job.update(status="ready", message="Your song is ready.", audio_path=f"/audio/{target.name}", mode=mode)
     except Exception as exc:
@@ -42,6 +60,8 @@ def generate(job_id, request):
 
 
 def validate(body):
+    if not isinstance(body, dict):
+        raise ValueError("Expected a JSON object.")
     for key in ("topic", "song", "song_id", "lyrics", "style_prompt", "language"):
         if not isinstance(body.get(key), str) or not body[key].strip():
             raise ValueError(f"Missing {key}.")
@@ -54,7 +74,19 @@ def validate(body):
         raise ValueError("Invalid tempo.")
     if body["language"] not in ("en", "hi", "sa"):
         raise ValueError("Unsupported lyric language.")
+    mode = body.get("melody_mode", "original")
+    if mode not in ("reference", "original"):
+        raise ValueError("Invalid melody mode.")
+    if mode == "reference" and not melody_library.lookup(body["song_id"]):
+        raise ValueError("This song's melody reference has not been added yet. Choose an available reference or original music.")
+    body["melody_mode"] = mode
     return body
+
+
+def signature_for(body):
+    profile = melody_library.lookup(body["song_id"]) if body["melody_mode"] == "reference" else None
+    contract = {**body, "pipeline_version": 3, "reference_sha256": profile["audio_sha256"] if profile else None}
+    return hashlib.sha256(json.dumps(contract, sort_keys=True).encode()).hexdigest()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -67,6 +99,8 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(data)
 
     def do_GET(self):
+        if self.path == "/melodies":
+            return self.send_json(200, {"melodies": melody_library.available()})
         if self.path == "/health":
             return self.send_json(200, {"ok": True, "provider": SPACE})
         if self.path.startswith("/jobs/"):
@@ -87,14 +121,19 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(404, {"message": "Not found."})
 
     def do_POST(self):
-        if self.path != "/generate":
+        if self.path not in ("/generate", "/adapt-lyrics"):
             return self.send_json(404, {"message": "Not found."})
         try:
             length = int(self.headers.get("Content-Length", "0"))
             if not 0 < length <= 24000:
                 raise ValueError("Invalid request size.")
             body = validate(json.loads(self.rfile.read(length)))
-            signature = hashlib.sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()
+            if self.path == "/adapt-lyrics":
+                profile = melody_library.lookup(body["song_id"]) if body["melody_mode"] == "reference" else None
+                if not profile:
+                    return self.send_json(200, {"lyrics": body["lyrics"], "method": "style_draft", "note": "Original music will be composed around this draft."})
+                return self.send_json(200, fit(body["lyrics"], profile, body["topic"], body.get("category", ""), body["language"]))
+            signature = signature_for(body)
             with LOCK:
                 for job_id, job in JOBS.items():
                     if job["signature"] == signature and job["status"] != "failed":
