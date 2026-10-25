@@ -1,0 +1,109 @@
+{
+  "publisher": "GTSinger/GTSinger",
+  "purpose": "Four English singing examples from two songs, for dataset ingestion and song-disjoint split checks; insufficient for voice training.",
+  "license_source": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/dataset_license.md",
+  "files": [
+    {
+      "path": "datasets/raw/gtsinger/dataset_license.md",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/dataset_license.md",
+      "bytes": 1463,
+      "sha256": "3f230608aebb15ce29762809690142e6284940924e9e34b938c5afb7ea4806f0"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/let it go/Control_Group/0000.wav",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/let%20it%20go/Control_Group/0000.wav",
+      "bytes": 1216988,
+      "sha256": "46684859a2161eff23b3b872ef17399858d8085d6c32a59eebe1421c625ae29e"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/let it go/Control_Group/0000.json",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/let%20it%20go/Control_Group/0000.json",
+      "bytes": 18646,
+      "sha256": "3e8a07afc33181a2c1bc26d5c311503c97c7ee0db5c7e200c6672280a287ecce"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/let it go/Control_Group/0000.musicxml",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/let%20it%20go/Control_Group/0000.musicxml",
+      "bytes": 10502,
+      "sha256": "814cd34242cc090165da540c72dbcae2a3ddb92633642b4480dea495cb0f4230"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/let it go/Control_Group/0000.TextGrid",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/let%20it%20go/Control_Group/0000.TextGrid",
+      "bytes": 24404,
+      "sha256": "08dc63538248d6d6a2f4ea52f0cd8e71148cfb90c2c9bcfecf3a78d0afd2ea76"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/let it go/Control_Group/0001.wav",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/let%20it%20go/Control_Group/0001.wav",
+      "bytes": 1961756,
+      "sha256": "bf84eb022c6b86ccf6570742c99eb6804af25533fc7ee0c5845441d0a1233622"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/let it go/Control_Group/0001.json",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/let%20it%20go/Control_Group/0001.json",
+      "bytes": 26944,
+      "sha256": "acc4d575c0dab81e64bd5198b48a7dce019755e4727662e0563a248d67c64f15"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/let it go/Control_Group/0001.musicxml",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/let%20it%20go/Control_Group/0001.musicxml",
+      "bytes": 15345,
+      "sha256": "b8dbc5e133dfb6be09a16267f672bf69d9b049cdd5c997f8a81617f4858a813e"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/let it go/Control_Group/0001.TextGrid",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/let%20it%20go/Control_Group/0001.TextGrid",
+      "bytes": 36623,
+      "sha256": "d46804364d0ae1516ca7ea70ff3e2e76db92bfd42a96dd4f351fba5f2fcccbd5"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/all is found/Control_Group/0000.wav",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/all%20is%20found/Control_Group/0000.wav",
+      "bytes": 1290572,
+      "sha256": "d1b5ffcb84064e16733a2aa69bff8cfbde33925f975f6fd79654a89031609a47"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/all is found/Control_Group/0000.json",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/all%20is%20found/Control_Group/0000.json",
+      "bytes": 10929,
+      "sha256": "10bf0f8227b0457849d184b15c7bfe4aab4609895ee15e5c5faae03568ed4036"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/all is found/Control_Group/0000.musicxml",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/all%20is%20found/Control_Group/0000.musicxml",
+      "bytes": 6184,
+      "sha256": "e8627aaec8dceb80812dcbc2cf284a0718b58631f48f8e4a1cc048a5a9d59aa9"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/all is found/Control_Group/0000.TextGrid",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/all%20is%20found/Control_Group/0000.TextGrid",
+      "bytes": 13636,
+      "sha256": "d3d995721761814ae7a309f575f6d93ab197ff24f1ca612c8012f5844005066a"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/all is found/Control_Group/0001.wav",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/all%20is%20found/Control_Group/0001.wav",
+      "bytes": 1597580,
+      "sha256": "03ce614004c1c2432ea61341fa08cb614f6b5f4becd8971818096d3991301e8c"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/all is found/Control_Group/0001.json",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/all%20is%20found/Control_Group/0001.json",
+      "bytes": 17735,
+      "sha256": "fcd3f2e00f7fb2a4d330a9ae0699373ee93030110749e65bde71b017c647d9f8"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/all is found/Control_Group/0001.musicxml",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/all%20is%20found/Control_Group/0001.musicxml",
+      "bytes": 9269,
+      "sha256": "21e3bc2a4ab1810d1552fc324e1ccf09cbc0b10b4fb486be8eae717a59e6d731"
+    },
+    {
+      "path": "datasets/raw/gtsinger/English/EN-Alto-1/Breathy/all is found/Control_Group/0001.TextGrid",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger/resolve/main/English/EN-Alto-1/Breathy/all%20is%20found/Control_Group/0001.TextGrid",
+      "bytes": 23043,
+      "sha256": "415baf9fe65382e76719dd3e6a82b026c6e60cc39caaab76ce7a073aaad62c67"
+    }
+  ]
+}

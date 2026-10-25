@@ -1,0 +1,46 @@
+{
+  "id": "calculus-unit1-rolle",
+  "subject": "Calculus",
+  "unit": "Unit 1",
+  "topic": "Rolle's Theorem",
+  "assume": "a < b; real-valued function on [a,b]",
+  "required_facts": {
+    "closed_interval_continuity": "f is continuous on [a,b]",
+    "open_interval_differentiability": "f is differentiable on (a,b)",
+    "equal_endpoints": "f(a)=f(b)",
+    "conclusion": "There exists at least one c in (a,b) such that f′(c)=0."
+  },
+  "interpretation": "At least one interior tangent is horizontal. The point need not be unique.",
+  "categories": {
+    "Bollywood": {
+      "lyric_language": "hi",
+      "style": "rhythmic Hindi; retain all theorem conditions"
+    },
+    "Hollywood": {
+      "lyric_language": "en",
+      "style": "English; retain all theorem conditions"
+    },
+    "Bhajan": {
+      "lyric_language": "hi",
+      "style": "devotional Hindi with optional Sanskrit invocation; retain mathematical meaning"
+    },
+    "Lo-fi": {
+      "lyric_language": "en",
+      "style": "gentle phrasing; same note/lyric constraints when a specific melody is selected"
+    }
+  },
+  "musical_constraints": [
+    "Use reviewed chorus score with note pitches, onsets, offsets and phrase boundaries.",
+    "Assign new syllables to notes; permit slurs and score rests, not arbitrary gaps.",
+    "Do not present word-chunking or syllable-count estimates as verified alignment."
+  ],
+  "evaluation_requirements": [
+    "All required mathematical facts present and correct.",
+    "Every prepared line is sung and intelligible to a listener.",
+    "Target melody verified by a listener and pitch/timing comparison.",
+    "Breaths and phrase transitions follow the score.",
+    "No clipping; vocal level clear above accompaniment."
+  ],
+  "training_status": "not_started",
+  "render_status": "not_approved"
+}

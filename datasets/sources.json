@@ -1,0 +1,76 @@
+{
+  "checked_date": "2026-10-25",
+  "sources": [
+    {
+      "id": "gtsinger",
+      "kind": "aligned_singing_corpus",
+      "source_url": "https://huggingface.co/datasets/GTSinger/GTSinger",
+      "documentation": "https://github.com/liangsw20/GTSinger",
+      "license_url": "https://huggingface.co/datasets/GTSinger/GTSinger/blob/main/dataset_license.md",
+      "license_label": "CC-BY-NC-SA-4.0 plus publisher terms",
+      "languages": [
+        "zh",
+        "en",
+        "fr",
+        "ja",
+        "ko",
+        "es",
+        "de",
+        "ru",
+        "it"
+      ],
+      "collected_samples": 4,
+      "status": "small_ingestion_pilot_collected",
+      "role": "Recorded singing + music scores + phone/word timing. Hindi absent."
+    },
+    {
+      "id": "lakh",
+      "kind": "midi_reference_collection",
+      "source_url": "https://colinraffel.com/projects/lmd/",
+      "license_label": "Publisher states CC-BY-4.0 for dataset; individual MIDI attribution is inconsistent. Underlying composition status not established by this catalog.",
+      "status": "documentation_verified_download_not_available_during_check",
+      "collected_samples": 0,
+      "role": "Candidate symbolic scores; lead melody, chorus location and transcription accuracy still need verification. Modern requested songs are not assumed present."
+    },
+    {
+      "id": "saraga",
+      "kind": "indian_art_music",
+      "source_url": "https://github.com/MTG/saraga",
+      "download_page": "https://zenodo.org/records/4301737",
+      "license_url": "https://github.com/MTG/saraga/blob/master/LICENSE.md",
+      "license_label": "Audio and annotations CC-BY-NC-4.0; code AGPL-3.0",
+      "status": "source_verified_not_downloaded",
+      "collected_samples": 0,
+      "role": "Indian melody/rhythm annotations; not a ready Bollywood Hindi lyric-synthesis corpus."
+    },
+    {
+      "id": "dali",
+      "kind": "aligned_song_annotations",
+      "source_url": "https://github.com/gabolsgabs/DALI",
+      "status": "documentation_verified_not_downloaded",
+      "collected_samples": 0,
+      "role": "Word/line/vocal-note alignment reference. Audio linked separately; not assumed bundled or cleared by annotation access."
+    },
+    {
+      "id": "laps-diff",
+      "kind": "hindi_singing_research",
+      "source_url": "https://www.ee.iitb.ac.in/course/~daplab/publications/2025/LAPS_Diff.pdf",
+      "paper": "https://arxiv.org/abs/2507.04966",
+      "status": "paper_verified_data_and_checkpoint_access_unverified",
+      "collected_samples": 0,
+      "role": "Hindi Bollywood SVS research; paper linked dataset short URL was unreachable during check. No ready Hindi checkpoint obtained."
+    },
+    {
+      "id": "techsinger",
+      "kind": "score_conditioned_model",
+      "source_url": "https://github.com/gwx314/TechSinger",
+      "checkpoint_url": "https://huggingface.co/verstar/TechSinger/tree/main",
+      "status": "documentation_verified_not_installed",
+      "released_checkpoint_languages": [
+        "zh",
+        "en"
+      ],
+      "role": "Candidate for a phoneme/note/duration-controlled English pilot. No Hindi support is claimed."
+    }
+  ]
+}

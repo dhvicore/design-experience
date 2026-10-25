@@ -1,0 +1,18 @@
+{
+  "samples": 4,
+  "seconds": 42.13,
+  "languages": [
+    "en"
+  ],
+  "song_disjoint_split": true,
+  "train_samples": 2,
+  "validation_samples": 2,
+  "test_samples": 0,
+  "model_trained": false,
+  "limitations": [
+    "Tiny data-ingestion pilot, not sufficient for singer training.",
+    "No Hindi aligned singing samples have been collected.",
+    "No educational-lyrics-to-famous-melody example is approved yet.",
+    "Model-specific phoneme mapping and feature extraction remain required."
+  ]
+}

@@ -251,3 +251,12 @@ matching the previously working float32 demo configuration. It reuses downloaded
 weights. Wait for MODEL READY, rerun cell 3, then cell 4 and refresh `server/.env`.
 The helper's loader patch was checked locally; the repaired GPU run still needs
 verification in the user's Colab session.
+
+## Score-conditioned singing dataset work
+
+See [datasets/README.md](datasets/README.md) for the checked source registry, four
+collected/validated English singing examples (42.13 seconds), local-data fetch and
+preparation scripts, and the Rolle lesson specification. This is an ingestion
+pilot, not completed training. No aligned Hindi singing corpus or verified exact
+famous-song educational render has been obtained. The existing ACE-Step bridge
+has not been replaced by a score-controlled singing model in this change.
