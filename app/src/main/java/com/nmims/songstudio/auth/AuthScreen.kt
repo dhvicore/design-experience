@@ -80,8 +80,9 @@ fun AuthScreen(onLogin: (Student) -> Unit) {
                 }
             }) { Text(if (busy) "Please wait…" else if (signup) "Create account" else "Log in →") }
             Panel(Lime) {
-                Text("CALCULUS IS READY", style = MaterialTheme.typography.labelSmall)
-                Text("5 units · 38 topics · your choice of music")
+                Text("CALCULUS & CHEMISTRY ARE READY", style = MaterialTheme.typography.labelSmall)
+                Text("Calculus: 5 units · 38 topics · your choice of music")
+                Text("Chemistry: 11 units · 60 topics · English, Hindi & Marathi")
             }
             Text("Accounts and your last email are saved on this device. Enter your password when you return. College SAP portal verification is not connected.", style = MaterialTheme.typography.bodySmall)
         }

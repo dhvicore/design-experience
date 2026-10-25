@@ -17,8 +17,19 @@ data class AdaptedLyrics(val lyrics: String, val note: String)
 
 data class GeneratedSong(val audio: File, val mode: String)
 
+data class ServerHealth(val ok: Boolean, val provider: String = "", val error: String = "")
+
 object SingingClient {
     private const val SERVER = "http://10.0.2.2:8787"
+
+    suspend fun checkHealth(): ServerHealth = withContext(Dispatchers.IO) {
+        try {
+            val res = json("/health")
+            ServerHealth(ok = res.optBoolean("ok", false), provider = res.optString("provider", ""))
+        } catch (e: Exception) {
+            ServerHealth(ok = false, error = e.message ?: "Connection failed")
+        }
+    }
 
     private fun json(path: String, body: JSONObject? = null): JSONObject {
         val connection = URL(SERVER + path).openConnection() as HttpURLConnection
@@ -63,7 +74,7 @@ object SingingClient {
         choice: SongChoice, lyrics: String, tempo: String, reference: Boolean, onStatus: (String) -> Unit): GeneratedSong {
         val request = request(topic, category, choice, lyrics, tempo, reference)
         val id = try { withContext(Dispatchers.IO) { json("/generate", request).getString("job_id") } }
-        catch (e: java.io.IOException) { throw IllegalStateException("Start the Music Server on your Mac, keep it running, then retry. ${e.message.orEmpty().take(80)}") }
+        catch (e: java.io.IOException) { throw IllegalStateException("Music server is unavailable. Ensure the local music bridge is started separately on your development computer, then retry. ${e.message.orEmpty().take(80)}") }
         repeat(300) {
             val result = withContext(Dispatchers.IO) { json("/jobs/$id") }
             onStatus(result.optString("message"))
