@@ -79,6 +79,7 @@ fun LoginScreen(accounts: AccountStore, onSignedIn: (name: String, email: String
             is AccountStore.Result.Error -> error = when (result.reason) {
                 AccountStore.Reason.BAD_EMAIL -> "Enter a valid email address."
                 AccountStore.Reason.SHORT_PASSWORD -> "Use at least 6 characters for the password."
+                AccountStore.Reason.MISSING_PASSWORD -> "Enter your password."
                 AccountStore.Reason.MISSING_NAME -> "Tell us your name."
                 AccountStore.Reason.EXISTS -> "An account with this email already exists. Log in instead."
                 AccountStore.Reason.NOT_FOUND -> "No account with this email on this phone. Create one first."

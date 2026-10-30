@@ -1,6 +1,9 @@
 package com.example.designex.economics.ui
 
+import android.content.Context
+import android.media.AudioManager
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -79,6 +82,9 @@ fun StudioScreen(deps: AppDeps, topicId: String, back: () -> Unit) {
     val active = player.activeTopicId == topicId
     val busy = active && player.status != null
     val listState = rememberLazyListState()
+    val context = LocalContext.current
+    var lowVolume by remember { mutableStateOf(false) }
+    LaunchedEffect(active, player.playing) { if (active && player.playing) lowVolume = mediaVolume(context) < 0.5f }
 
     val lineItemIndex = remember(lyrics) {
         var item = ITEMS_BEFORE_LYRICS
@@ -273,6 +279,32 @@ fun StudioScreen(deps: AppDeps, topicId: String, back: () -> Unit) {
                             color = TextLo,
                             fontSize = 13.sp,
                         )
+                        lyrics.lines.getOrNull(player.currentLine)?.takeIf { player.engineUsed == Engine.PHONE }?.let { line ->
+                            Spacer(Modifier.height(10.dp))
+                            Column(
+                                Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(16.dp))
+                                    .background(DeepNavy.copy(alpha = 0.6f))
+                                    .border(1.dp, Accent.copy(alpha = 0.6f), RoundedCornerShape(16.dp))
+                                    .padding(14.dp)
+                            ) {
+                                Text(Copy.nowSinging.of(lang).uppercase(), color = Accent, fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.2.sp)
+                                Spacer(Modifier.height(4.dp))
+                                Text(line, color = TextHi, fontSize = 18.sp, fontWeight = FontWeight.SemiBold, lineHeight = 24.sp)
+                            }
+                        }
+                        if (lowVolume) {
+                            Spacer(Modifier.height(10.dp))
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(Copy.volumeLow.of(lang), color = Gold, fontSize = 13.sp, modifier = Modifier.weight(1f), lineHeight = 18.sp)
+                                Spacer(Modifier.width(10.dp))
+                                GhostButton(Copy.turnUp.of(lang), color = Gold) {
+                                    raiseMediaVolume(context)
+                                    lowVolume = mediaVolume(context) < 0.5f
+                                }
+                            }
+                        }
                     }
                     player.notice?.let {
                         Spacer(Modifier.height(10.dp))
@@ -400,18 +432,31 @@ private fun StepChip(n: Int, label: String, done: Boolean) {
 
 @Composable
 private fun LyricLine(text: String, active: Boolean, color: Color) {
-    val bg by animateColorAsState(if (active) color.copy(alpha = 0.18f) else Color.Transparent, label = "lyricBg")
+    val bg by animateColorAsState(if (active) color else Color.Transparent, label = "lyricBg")
     Text(
-        text,
+        if (active) "♪  $text" else text,
         modifier = Modifier
             .padding(horizontal = 18.dp)
             .fillMaxWidth()
             .clip(RoundedCornerShape(14.dp))
             .background(bg)
-            .padding(horizontal = 12.dp, vertical = 6.dp),
-        color = if (active) color else TextHi.copy(alpha = 0.88f),
-        fontSize = if (active) 19.sp else 16.sp,
+            .padding(horizontal = 14.dp, vertical = if (active) 12.dp else 6.dp),
+        color = if (active) DeepNavy else TextHi.copy(alpha = 0.75f),
+        fontSize = if (active) 20.sp else 16.sp,
         fontWeight = if (active) FontWeight.Bold else FontWeight.Normal,
-        lineHeight = 25.sp,
+        lineHeight = 26.sp,
     )
+}
+
+/** Media volume as a 0..1 fraction, and a way to raise it. */
+private fun mediaVolume(context: Context): Float {
+    val am = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+    val max = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC).coerceAtLeast(1)
+    return am.getStreamVolume(AudioManager.STREAM_MUSIC) / max.toFloat()
+}
+
+private fun raiseMediaVolume(context: Context) {
+    val am = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+    val max = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+    am.setStreamVolume(AudioManager.STREAM_MUSIC, (max * 0.85f).toInt().coerceAtLeast(1), AudioManager.FLAG_SHOW_UI)
 }

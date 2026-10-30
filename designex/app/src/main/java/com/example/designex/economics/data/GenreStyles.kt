@@ -10,13 +10,15 @@ object GenreStyles {
         BALLAD(BeatStyle.LOFI, intArrayOf(1, 2, -1, -1, 1, 0, -2, 1)),
         DANCE(BeatStyle.UPBEAT, intArrayOf(2, -1, 1, 1, -2, 1, -1, 0)),
         DEVOTIONAL(BeatStyle.RAGA, intArrayOf(0, 1, 0, -1, 1, 1, -1, -1)),
+        BOLLYWOOD(BeatStyle.BOLLY, intArrayOf(1, 1, -2, 1, 2, -1, -2, 0)),
     }
 
     private val families = mapOf(
         "hiphop" to Family.RAP, "desirap" to Family.RAP,
-        "pop" to Family.POP, "bollypop" to Family.POP, "film" to Family.POP,
-        "dance" to Family.DANCE, "party" to Family.DANCE, "rock" to Family.DANCE,
-        "lavani" to Family.DANCE, "koli" to Family.DANCE,
+        "pop" to Family.POP,
+        "bollypop" to Family.BOLLYWOOD, "film" to Family.BOLLYWOOD, "party" to Family.BOLLYWOOD,
+        "lavani" to Family.BOLLYWOOD, "koli" to Family.BOLLYWOOD,
+        "dance" to Family.DANCE, "rock" to Family.DANCE,
         "rnb" to Family.BALLAD, "acoustic" to Family.BALLAD, "romantic" to Family.BALLAD, "bhavgeet" to Family.BALLAD,
         "sufi" to Family.DEVOTIONAL, "bhajan" to Family.DEVOTIONAL, "abhang" to Family.DEVOTIONAL,
     )

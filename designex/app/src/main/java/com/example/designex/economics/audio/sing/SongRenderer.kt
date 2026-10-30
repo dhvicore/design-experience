@@ -88,9 +88,10 @@ object SongRenderer {
         normalize(vocal, 1f)
 
         val loop = BeatComposer.compose(style, seed, mood.bpm)
-        val mix = FloatArray(total) { i -> loop[i % loop.size] / 32768f * 0.42f + vocal[i] * 0.85f }
+        com.example.designex.economics.audio.Loudness.master(vocal, RATE, targetRms = 0.24f)
+        val mix = FloatArray(total) { i -> loop[i % loop.size] / 32768f * 0.34f + vocal[i] * 0.8f }
+        com.example.designex.economics.audio.Loudness.master(mix, RATE, targetRms = 0.3f)
         for (i in 0 until bar) mix[total - 1 - i] *= i.toFloat() / bar
-        normalize(mix, 0.92f)
         return RenderedSong(ShortArray(total) { (mix[it] * Short.MAX_VALUE).toInt().toShort() }, lineStarts)
     }
 

@@ -111,7 +111,7 @@ class SingingTest {
     fun chosenSongSetsBeatTempoAndMelodyShape() {
         val party = mood("party", 122)
         assertTrue(!party.verseMotif(3).contentEquals(party.chorusMotif(3)))
-        assertEquals(BeatStyle.UPBEAT, party.style)
+        assertEquals(BeatStyle.BOLLY, party.style)
         assertEquals(122, party.bpm)
         assertEquals(BeatStyle.RAGA, mood("bhajan", 78).style)
         assertEquals(BeatStyle.LOFI, mood("desirap", 95).style)
