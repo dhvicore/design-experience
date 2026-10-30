@@ -59,6 +59,20 @@ class EconomicsAudioAndLyricsTest {
     }
 
     @Test
+    fun masteringMakesQuietAudioLoudWithoutClipping() {
+        val rate = BeatComposer.SAMPLE_RATE
+        val x = FloatArray(rate * 2) { i ->
+            val spike = if (i % 5000 < 40) 0.9f else 0f
+            (kotlin.math.sin(2 * Math.PI * 220 * i / rate) * 0.05).toFloat() + spike
+        }
+        val before = com.example.designex.economics.audio.Loudness.rms(x)
+        com.example.designex.economics.audio.Loudness.master(x, rate, targetRms = 0.3f)
+        val after = com.example.designex.economics.audio.Loudness.rms(x)
+        assertTrue("louder: $before -> $after", after > before * 3 && after > 0.2f)
+        assertTrue("no clipping", x.all { kotlin.math.abs(it) <= 1f })
+    }
+
+    @Test
     fun differentTopicsGetDifferentMelodies() {
         val a = BeatComposer.compose(BeatStyle.POP, "eco-1-1".hashCode())
         val b = BeatComposer.compose(BeatStyle.POP, "chem-6".hashCode())

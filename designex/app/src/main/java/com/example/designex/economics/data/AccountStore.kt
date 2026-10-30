@@ -16,7 +16,7 @@ class AccountStore(context: Context) {
         data class Error(val reason: Reason) : Result
     }
 
-    enum class Reason { BAD_EMAIL, SHORT_PASSWORD, MISSING_NAME, EXISTS, NOT_FOUND, WRONG_PASSWORD }
+    enum class Reason { BAD_EMAIL, SHORT_PASSWORD, MISSING_PASSWORD, MISSING_NAME, EXISTS, NOT_FOUND, WRONG_PASSWORD }
 
     val lastEmail: String get() = prefs.getString(KEY_LAST, "").orEmpty()
 
@@ -40,6 +40,7 @@ class AccountStore(context: Context) {
     fun logIn(email: String, password: String): Result {
         val e = email.trim().lowercase()
         if (!EMAIL.matches(e)) return Result.Error(Reason.BAD_EMAIL)
+        if (password.isEmpty()) return Result.Error(Reason.MISSING_PASSWORD)
         val record = prefs.getString(key(e), null)?.let(::JSONObject) ?: return Result.Error(Reason.NOT_FOUND)
         val salt = Base64.decode(record.getString("salt"), Base64.NO_WRAP)
         val expected = Base64.decode(record.getString("hash"), Base64.NO_WRAP)

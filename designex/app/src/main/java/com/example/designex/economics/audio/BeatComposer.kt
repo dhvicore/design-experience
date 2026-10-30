@@ -15,6 +15,7 @@ enum class BeatStyle(val label: String, val bpm: Int) {
     POP("Pop", 104),
     RAGA("Raga", 90),
     UPBEAT("Upbeat", 124),
+    BOLLY("Bollywood", 110),
 }
 
 /**
@@ -73,6 +74,12 @@ object BeatComposer {
             scale = intArrayOf(67, 69, 71, 74, 76, 79),
             voice = Voice.SQUARE, restChance = 0.15f, noteDecay = 6.0,
         )
+        // A minor: Am – F – G – Em, the minor-key loop common in Bollywood dance tracks.
+        BeatStyle.BOLLY -> Spec(
+            chords = listOf(intArrayOf(57, 60, 64), intArrayOf(53, 57, 60), intArrayOf(55, 59, 62), intArrayOf(52, 55, 59)),
+            scale = intArrayOf(69, 71, 72, 74, 76, 77, 79, 81),
+            voice = Voice.PLUCK, restChance = 0.18f, noteDecay = 5.5,
+        )
     }
 
     fun compose(style: BeatStyle, seed: Int, bpm: Int = style.bpm): ShortArray {
@@ -128,6 +135,16 @@ object BeatComposer {
                     if (inBar % 2 == 0) kick(mix, at)
                     if (inBar == 2 || inBar == 6) snare(mix, at, 0.32f)
                     if (inBar % 2 == 1) hat(mix, at, 0.13f, open = true)
+                }
+                // Dhol "chaal": low strokes on 1, the "and" of 2 and 4; sharp slaps on 2 and 4; claps on the backbeat.
+                BeatStyle.BOLLY -> {
+                    when (inBar) {
+                        0, 3, 6 -> { kick(mix, at); dhol(mix, at, low = true) }
+                        2, 4 -> dhol(mix, at, low = false)
+                        7 -> dhol(mix, at, low = false, gain = 0.18f)
+                    }
+                    if (inBar == 2 || inBar == 6) clap(mix, at)
+                    hat(mix, at, 0.06f)
                 }
                 BeatStyle.RAGA -> when (inBar) {
                     0, 4 -> { tablaBass(mix, at); tablaTreble(mix, at, 0.22f, ring = 10.0) }
@@ -235,6 +252,29 @@ object BeatComposer {
         }
     }
 
+    /** Dhol stroke: a pitched membrane thump (low side) or a tight crack (high side). */
+    private fun dhol(mix: FloatArray, start: Int, low: Boolean, gain: Float = 0.3f) {
+        var phase = 0.0
+        val base = if (low) 72.0 else 260.0
+        val decay = if (low) 9.0 else 26.0
+        for (i in 0 until (0.35 * SAMPLE_RATE).toInt()) {
+            val t = i.toDouble() / SAMPLE_RATE
+            phase += 2 * PI * (base + base * 0.8 * exp(-t * 40)) / SAMPLE_RATE
+            val skin = if (low) 0.0 else noise.nextDouble(-1.0, 1.0) * exp(-t * 70) * 0.4
+            add(mix, start + i, ((sin(phase) + skin) * exp(-t * decay) * gain * (if (low) 1.6f else 1f)).toFloat())
+        }
+    }
+
+    private fun clap(mix: FloatArray, start: Int) {
+        for (burst in 0 until 3) {
+            val s = start + burst * (0.012 * SAMPLE_RATE).toInt()
+            for (i in 0 until (0.12 * SAMPLE_RATE).toInt()) {
+                val t = i.toDouble() / SAMPLE_RATE
+                add(mix, s + i, (noise.nextDouble(-1.0, 1.0) * exp(-t * (if (burst == 2) 25 else 90)) * 0.16).toFloat())
+            }
+        }
+    }
+
     private fun tablaBass(mix: FloatArray, start: Int, gain: Float = 0.5f) {
         var phase = 0.0
         for (i in 0 until (0.45 * SAMPLE_RATE).toInt()) {
@@ -271,8 +311,7 @@ object BeatComposer {
     }
 
     private fun toPcm(mix: FloatArray): ShortArray {
-        val peak = mix.maxOf { abs(it) }.coerceAtLeast(1e-6f)
-        val scale = 0.85f / peak
-        return ShortArray(mix.size) { (mix[it] * scale * Short.MAX_VALUE).toInt().toShort() }
+        Loudness.master(mix, SAMPLE_RATE, targetRms = 0.26f)
+        return ShortArray(mix.size) { (mix[it] * Short.MAX_VALUE).toInt().toShort() }
     }
 }
