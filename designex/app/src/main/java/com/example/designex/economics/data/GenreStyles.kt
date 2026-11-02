@@ -16,18 +16,17 @@ object GenreStyles {
     private val families = mapOf(
         "hiphop" to Family.RAP, "desirap" to Family.RAP,
         "pop" to Family.POP,
-        "bollypop" to Family.BOLLYWOOD, "film" to Family.BOLLYWOOD, "party" to Family.BOLLYWOOD,
-        "lavani" to Family.BOLLYWOOD, "koli" to Family.BOLLYWOOD,
+        "bollypop" to Family.BOLLYWOOD, "party" to Family.BOLLYWOOD,
         "dance" to Family.DANCE, "rock" to Family.DANCE,
-        "rnb" to Family.BALLAD, "acoustic" to Family.BALLAD, "romantic" to Family.BALLAD, "bhavgeet" to Family.BALLAD,
-        "sufi" to Family.DEVOTIONAL, "bhajan" to Family.DEVOTIONAL, "abhang" to Family.DEVOTIONAL,
+        "rnb" to Family.BALLAD, "acoustic" to Family.BALLAD, "romantic" to Family.BALLAD,
+        "sufi" to Family.DEVOTIONAL, "bhajan" to Family.DEVOTIONAL,
     )
 
     private val bpm = mapOf(
-        "hiphop" to 92, "desirap" to 95, "pop" to 105, "bollypop" to 105, "film" to 104,
-        "dance" to 124, "party" to 122, "rock" to 120, "lavani" to 130, "koli" to 115,
-        "rnb" to 85, "acoustic" to 90, "romantic" to 80, "bhavgeet" to 78,
-        "sufi" to 85, "bhajan" to 78, "abhang" to 90,
+        "hiphop" to 92, "desirap" to 95, "pop" to 105, "bollypop" to 105,
+        "dance" to 124, "party" to 122, "rock" to 120,
+        "rnb" to 85, "acoustic" to 90, "romantic" to 80,
+        "sufi" to 85, "bhajan" to 78,
     )
 
     private fun family(genreId: String) = families[genreId] ?: Family.POP
@@ -45,9 +44,9 @@ object GenreStyles {
     /** Maps the research song list's genres onto the catalog styles of a language. */
     fun catalogIdFor(libraryGenre: String?, lang: Lang): String? = when (libraryGenre?.lowercase()) {
         null -> null
-        "hip hop" -> if (lang == Lang.EN) "hiphop" else if (lang == Lang.HI) "desirap" else "film"
-        "romantic" -> when (lang) { Lang.EN -> "rnb"; Lang.HI -> "romantic"; Lang.MR -> "bhavgeet" }
-        "chill" -> when (lang) { Lang.EN -> "acoustic"; Lang.HI -> "sufi"; Lang.MR -> "bhavgeet" }
-        else -> when (lang) { Lang.EN -> "pop"; Lang.HI -> "bollypop"; Lang.MR -> "film" }
+        "hip hop" -> when (lang) { Lang.EN -> "hiphop"; Lang.HI -> "desirap" }
+        "romantic" -> when (lang) { Lang.EN -> "rnb"; Lang.HI -> "romantic" }
+        "chill" -> when (lang) { Lang.EN -> "acoustic"; Lang.HI -> "sufi" }
+        else -> when (lang) { Lang.EN -> "pop"; Lang.HI -> "bollypop" }
     }
 }

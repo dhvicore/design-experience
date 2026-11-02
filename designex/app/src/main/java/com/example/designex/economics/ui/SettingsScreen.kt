@@ -194,7 +194,7 @@ fun SettingsScreen(deps: AppDeps, onLogOut: () -> Unit) {
                     Spacer8()
                     MutedText(
                         "The on-phone singer uses your phone's text-to-speech voices. English works offline on most phones. " +
-                            "For offline Hindi and Marathi, open Settings › Text-to-speech › Google › Install voice data and download them."
+                            "For offline Hindi, open Settings › Text-to-speech › Google › Install voice data and download it."
                     )
                 }
             }

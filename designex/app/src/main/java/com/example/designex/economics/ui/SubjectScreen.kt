@@ -114,7 +114,7 @@ fun LanguageScreen(deps: AppDeps, back: () -> Unit, onContinue: () -> Unit) {
             onContinue()
         },
     ) {
-        listOf(Lang.EN to "Aa", Lang.HI to "अ", Lang.MR to "म").forEach { (l, glyph) ->
+        listOf(Lang.EN to "Aa", Lang.HI to "अ").forEach { (l, glyph) ->
             OptionPill(glyph, l.label, l == chosen) {
                 deps.fx.play(SoundFx.Fx.TAP)
                 chosen = l

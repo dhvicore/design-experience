@@ -3,22 +3,19 @@ package com.example.designex.economics.data
 enum class Lang(val label: String, val localeTag: String, val code: String) {
     EN("English", "en-IN", "en"),
     HI("हिंदी", "hi-IN", "hi"),
-    MR("मराठी", "mr-IN", "mr"),
 }
 
-data class Localized(val en: String, val hi: String, val mr: String) {
+data class Localized(val en: String, val hi: String) {
     operator fun get(lang: Lang): String = when (lang) {
         Lang.EN -> en
         Lang.HI -> hi
-        Lang.MR -> mr
     }
 }
 
-data class LocalizedList(val en: List<String>, val hi: List<String>, val mr: List<String>) {
+data class LocalizedList(val en: List<String>, val hi: List<String>) {
     operator fun get(lang: Lang): List<String> = when (lang) {
         Lang.EN -> en
         Lang.HI -> hi
-        Lang.MR -> mr
     }
 }
 

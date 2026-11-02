@@ -99,7 +99,7 @@ fun StudioScreen(deps: AppDeps, topicId: String, back: () -> Unit) {
 
     fun generate() {
         val genre = catalog.genre(lang, song.genreId)
-        val vocals = when (lang) { Lang.EN -> "English vocals"; Lang.HI -> "Hindi vocals"; Lang.MR -> "Marathi vocals" }
+        val vocals = when (lang) { Lang.EN -> "English vocals"; Lang.HI -> "Hindi vocals" }
         val style = listOfNotNull(genre?.sunoTags, song.mood.ifBlank { null }, "${song.bpm} bpm", vocals, genre?.instruments, "clear educational vocals")
             .filter { it.isNotBlank() }
             .joinToString(", ")

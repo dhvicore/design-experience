@@ -93,11 +93,10 @@ object StudyRepository {
 
     private fun JSONArray.strings(): List<String> = (0 until length()).map { getString(it) }
 
-    private fun JSONObject.localized() = Localized(getString("en"), getString("hi"), getString("mr"))
+    private fun JSONObject.localized() = Localized(getString("en"), getString("hi"))
 
     private fun JSONObject.localizedList() = LocalizedList(
         optJSONArray("en")?.strings().orEmpty(),
         optJSONArray("hi")?.strings().orEmpty(),
-        optJSONArray("mr")?.strings().orEmpty(),
     )
 }

@@ -12,15 +12,15 @@ data class SubjectLook(val color: Color, val badge: String, val sceneKey: String
         fun of(subjectId: String) = when (subjectId) {
             "chemistry" -> SubjectLook(
                 SkyBlue, "H₂O", "aurora-chem",
-                Localized("Atoms, gases, water and materials", "परमाणु, गैस, जल और सामग्री", "अणू, वायू, पाणी आणि साहित्य"),
+                Localized("Atoms, gases, water and materials", "परमाणु, गैस, जल और सामग्री"),
             )
             "calculus" -> SubjectLook(
                 Rose, "∫dx", "dusk-calc",
-                Localized("Derivatives, integrals and vectors", "अवकलज, समाकल और सदिश", "विकलज, संकलन आणि सदिश"),
+                Localized("Derivatives, integrals and vectors", "अवकलज, समाकल और सदिश"),
             )
             else -> SubjectLook(
                 Lavender, "₹", "lake-econ",
-                Localized("Markets, money and management", "बाज़ार, धन और प्रबंधन", "बाजार, पैसा आणि व्यवस्थापन"),
+                Localized("Markets, money and management", "बाज़ार, धन और प्रबंधन"),
             )
         }
     }
